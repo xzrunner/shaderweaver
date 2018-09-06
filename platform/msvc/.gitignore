@@ -1,0 +1,8 @@
+shaderweaver/
+shaderweaver_test/
+projects/*
+
+!projects/shaderweaver.vcxproj
+!projects/shaderweaver.vcxproj.filters
+!projects/shaderweaver_test.vcxproj
+!projects/shaderweaver_test.vcxproj.filters
