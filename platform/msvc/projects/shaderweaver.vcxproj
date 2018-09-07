@@ -15,8 +15,15 @@
     <ClInclude Include="..\..\..\include\sw\Node.h" />
     <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h" />
     <ClInclude Include="..\..\..\include\sw\node\Add.h" />
+    <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
-    <ClInclude Include="..\..\..\include\sw\node\Varying.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Input.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Output.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Uniform.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Vector4.h" />
+    <ClInclude Include="..\..\..\include\sw\predef.h" />
+    <ClInclude Include="..\..\..\include\sw\ShaderType.h" />
     <ClInclude Include="..\..\..\include\sw\typedef.h" />
     <ClInclude Include="..\..\..\include\sw\Variable.h" />
     <ClInclude Include="..\..\..\include\sw\VariableType.h" />

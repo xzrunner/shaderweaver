@@ -16,12 +16,13 @@ public:
 	auto& Type() const { return m_type; }
 	auto& Name() const { return m_name; }
 
-private:
-	void FixName();
+	void  SetRealName(const std::string& name) { m_real_name = name; }
+	auto& GetRealName() const { return m_real_name; }
 
 private:
 	VariableType m_type;
 	std::string  m_name;
+	std::string  m_real_name;
 
 }; // Variable
 

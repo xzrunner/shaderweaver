@@ -14,16 +14,24 @@ public:
 	PositionTrans()
 		: Node("PositionTrans")
 	{
-		AddVariable(Variable(t_vec4 | t_unif | t_in, "projection"));
-		AddVariable(Variable(t_vec4 | t_unif | t_in, "modelview"));
-		AddVariable(Variable(t_vec4 | t_attr | t_in, "position"));
-		AddVariable(Variable(t_vec4 | t_out, "pos"));
+		AddVariable(Variable(t_mat4 | t_in, "proj"));
+		AddVariable(Variable(t_mat4 | t_in, "modelview"));
+		AddVariable(Variable(t_pos4 | t_in, "pos"));
+
+		AddVariable(Variable(t_pos4 | t_out, "pos_trans"));
 	}
+
+	enum ImportIdx
+	{
+		IN_PROJ = 0,
+		IN_MODELVIEW,
+		IN_POS,
+	};
 
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "pos = u_projection * u_modelview * position;\n";
+		return "(pos_trans) = (proj) * (modelview) * (pos);\n";
 	}
 
 }; // PositionTrans

@@ -1,9 +1,15 @@
 #define CATCH_CONFIG_MAIN
 
 #include <unirender/gl/RenderContext.h>
-#include <sw/node/PositionTrans.h>
-#include <sw/node/Varying.h>
 #include <sw/Evaluator.h>
+
+#include <sw/node/Uniform.h>
+#include <sw/node/Input.h>
+#include <sw/node/Output.h>
+#include <sw/node/PositionTrans.h>
+#include <sw/node/Tex2DSample.h>
+#include <sw/node/ColorAddMul.h>
+#include <sw/node/Vector4.h>
 
 #include <catch/catch.hpp>
 #include <gl/glew.h>
@@ -61,18 +67,18 @@ void init()
 	}
 }
 
-int create_shader(const sw::Evaluator& eval)
+int create_shader(const sw::Evaluator& vert, const sw::Evaluator& frag)
 {
 	std::vector<std::string> textures;
-	return RC->CreateShader(eval.GetVert().c_str(), eval.GetFrag().c_str(), textures);
+	return RC->CreateShader(vert.GetShaderStr().c_str(), frag.GetShaderStr().c_str(), textures);
 }
 
-void debug_print(const sw::Evaluator& eval)
+void debug_print(const sw::Evaluator& vert, const sw::Evaluator& frag)
 {
 	printf("//////////////////////////////////////////////////////////////////////////\n");
-	printf("%s\n", eval.GetVert().c_str());
+	printf("%s\n", vert.GetShaderStr().c_str());
 	printf("//////////////////////////////////////////////////////////////////////////\n");
-	printf("%s\n", eval.GetFrag().c_str());
+	printf("%s\n", frag.GetShaderStr().c_str());
 	printf("//////////////////////////////////////////////////////////////////////////\n");
 }
 
@@ -82,23 +88,78 @@ TEST_CASE("shape2d") {
 	init();
 
 	// layout
+
 	std::vector<ur::VertexAttrib> va_list;
-	const int position_sz = 2;	// 2d
-	int sz = position_sz * sizeof(float) + 4;
-	va_list.push_back(ur::VertexAttrib("position", position_sz, sizeof(float), sz, 0));
-	va_list.push_back(ur::VertexAttrib("color", 4, sizeof(uint8_t), sz, position_sz * sizeof(float)));
+	const int sz = 12;
+	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
+	va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 8));
 
 	auto layout_id = RC->CreateVertexLayout(va_list);
 	RC->BindVertexLayout(layout_id);
-	////
 
-	auto pos_trans = std::make_shared<sw::node::PositionTrans>();
-	auto pass_color = std::make_shared<sw::node::Varying>("color", sw::t_vec4);
+	// vert
 
-	sw::Evaluator eva(pos_trans, pass_color);
+	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
+	auto modelview  = std::make_shared<sw::node::Uniform>("u_modelview",  sw::t_mat4);
+	auto position   = std::make_shared<sw::node::Input>  ("position",     sw::t_flt4);
+	auto pos_trans  = std::make_shared<sw::node::PositionTrans>();
+	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTrans::IN_PROJ });
+	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTrans::IN_MODELVIEW });
+	sw::make_connecting({ position,   0 }, { pos_trans, sw::node::PositionTrans::IN_POS });
 
-	//debug_print(eva);
-	int shader = create_shader(eva);
+	auto vert_in_col = std::make_shared<sw::node::Input>    ("color",   sw::t_col4);
+	auto vert_out_color = std::make_shared<sw::node::Output>("v_color", sw::t_col4);
+	sw::make_connecting({ vert_in_col, 0 }, { vert_out_color, 0 });
+
+	// frag
+
+	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+
+	// end
+
+	sw::Evaluator vert({ pos_trans, vert_out_color }, sw::ST_VERT);
+	sw::Evaluator frag({ frag_in_col }, sw::ST_FRAG);
+
+	debug_print(vert, frag);
+	int shader = create_shader(vert, frag);
 
 	REQUIRE(shader != 0);
 }
+
+//TEST_CASE("sprite") {
+//	init();
+//
+//	// layout
+//	std::vector<ur::VertexAttrib> va_list;
+//	const int sz = 24;
+//	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
+//	va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float),   sz, 8));
+//	va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 16));
+//	va_list.push_back(ur::VertexAttrib("additive", 4, sizeof(uint8_t), sz, 20));
+//
+//	auto layout_id = RC->CreateVertexLayout(va_list);
+//	RC->BindVertexLayout(layout_id);
+//	////
+//
+//	auto pos_trans = std::make_shared<sw::node::PositionTrans>();
+//	auto set_uv = std::make_shared<sw::node::VaryingSet>("texcoord", sw::t_uv);
+//	auto set_mul = std::make_shared<sw::node::VaryingSet>("color", sw::t_col4);
+//	auto set_add = std::make_shared<sw::node::VaryingSet>("additive", sw::t_col4);
+//
+//	auto get_uv = std::make_shared<sw::node::VaryingGet>("texcoord", sw::t_uv);
+//	auto get_mul = std::make_shared<sw::node::VaryingGet>("color", sw::t_col4);
+//	auto get_add = std::make_shared<sw::node::VaryingGet>("additive", sw::t_col4);
+//
+//	auto tex_sample = std::make_shared<sw::node::Tex2DSample>();
+//	tex_sample->AddInput(get_uv);
+//	auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
+//	col_add_mul->AddInput(tex_sample);
+//	col_add_mul->AddInput(get_mul);
+//	col_add_mul->AddInput(get_add);
+//	sw::Evaluator eva({ pos_trans, set_uv, set_mul, set_add }, col_add_mul);
+//
+//	debug_print(eva);
+//	int shader = create_shader(eva);
+//
+//	REQUIRE(shader != 0);
+//}

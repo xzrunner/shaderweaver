@@ -1,7 +1,6 @@
 #include "sw/Evaluator.h"
 #include "sw/Node.h"
 #include "sw/VariableType.h"
-#include "sw/node/Varying.h"
 
 #include <cpputil/StringHelper.h>
 
@@ -19,83 +18,106 @@ const int SHADER_MAX_STR_LEN = 1024;
 namespace sw
 {
 
-Evaluator::Evaluator(const NodePtr& vert, const NodePtr& frag)
+Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
+	: m_st(st)
 {
-	Flatten ft_frag(frag);
-	Flatten ft_vert(vert);
-	for (auto& node : ft_frag.nodes) {
-		if (std::dynamic_pointer_cast<node::Varying>(node) != nullptr) {
-			ft_vert.Insert(node);
-		}
-	}
-
-	VariablesRename rn_vert(ft_vert);
-	EvalDeclareOutside(m_vert, rn_vert, true);
-	EvalBody(m_vert, rn_vert, ft_vert, true);
-
-	VariablesRename rn_frag(ft_frag);
-	EvalDeclareOutside(m_frag, rn_frag, false);
-	EvalBody(m_frag, rn_frag, ft_frag, false);
+	InitNodes(nodes);
+	Rename();
+	EvalDeclareOutside();
+	EvalBody();
 }
 
-void Evaluator::EvalDeclareOutside(std::string& dst, const VariablesRename& src, bool is_vert)
+void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 {
-	auto& vars = src.GetRenamedVars();
-	for (auto& var : vars)
+	for (auto& node : nodes) {
+		InsertNodeRecursive(node, m_nodes);
+	}
+}
+
+void Evaluator::Rename()
+{
+	for (auto& node : m_nodes)
 	{
-		auto& type = var.Type();
-		if (type.qualifier == VT_TEMP) {
+//		Node::PortAddr addr(node, -1);
+//		int idx = 0;
+		for (auto& port : node->GetImports()) {
+			InsertVar(*node, port.var);
+//			addr.idx = idx++;
+		}
+//		idx = 0;
+		for (auto& port : node->GetExports()) {
+			InsertVar(*node, port.var);
+//			addr.idx = idx++;
+		}
+	}
+}
+
+void Evaluator::EvalDeclareOutside()
+{
+	for (auto& itr : m_vars_name2type)
+	{
+		if (itr.second.qualifier == VT_TEMP) {
 			continue;
 		}
-		if (!is_vert && type.qualifier == VT_ATTRIBUTE) {
-			continue;
-		}
-		dst += cpputil::StringHelper::Format(
-			"%s %s;\n", type.ToGLSL().c_str(), var.Name().c_str()
+		m_shader += cpputil::StringHelper::Format(
+			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
 		);
 	}
 }
 
-void Evaluator::EvalDeclareInside(std::string& dst, const VariablesRename& src)
+void Evaluator::EvalDeclareInside(std::string& dst)
 {
-	auto& vars = src.GetRenamedVars();
-	for (auto& var : vars)
+	for (auto& itr : m_vars_name2type)
 	{
-		auto& type = var.Type();
-		if (type.qualifier != VT_TEMP) {
+		if (itr.second.qualifier != VT_TEMP) {
 			continue;
 		}
 		dst += cpputil::StringHelper::Format(
-			"%s %s;\n", type.ToGLSL().c_str(), var.Name().c_str()
+			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
 		);
 	}
 }
 
-void Evaluator::EvalBody(std::string& dst, const VariablesRename& src_names,
-	                     const Flatten& src, bool is_vert)
+void Evaluator::EvalBody()
 {
 	std::string body;
 
-	EvalDeclareInside(body, src_names);
+	EvalDeclareInside(body);
 
-	for (auto& itr = src.nodes.rbegin(); itr != src.nodes.rend(); ++itr) {
-		if (!is_vert && std::dynamic_pointer_cast<node::Varying>(*itr) != nullptr) {
-			continue;
+	body += "\n";
+	for (auto& itr = m_nodes.rbegin(); itr != m_nodes.rend(); ++itr)
+	{
+		auto str = (*itr)->ToString();
+		if (!str.empty())
+		{
+			// rename vars
+			for (auto& p : (*itr)->GetImports()) {
+				auto old = cpputil::StringHelper::Format("(%s)", p.var.Name().c_str());
+				cpputil::StringHelper::ReplaceAll(str, old, p.var.GetRealName());
+			}
+			for (auto& p : (*itr)->GetExports()) {
+				auto old = cpputil::StringHelper::Format("(%s)", p.var.Name().c_str());
+				cpputil::StringHelper::ReplaceAll(str, old, p.var.GetRealName());
+			}
+			body += str +"\n";
 		}
-		body += "\n" + (*itr)->ToString() + "\n";
 	}
 
 	// final assign
-	assert(!src.nodes.empty());
-	auto& returns = src.nodes[0]->GetReturn();
-	assert(returns.size() == 1 && returns[0].Type().dim == VT_4);
-	if (is_vert) {
-		body += cpputil::StringHelper::Format("gl_Position = %s;\n", returns[0].Name().c_str());
-	} else {
-		body += cpputil::StringHelper::Format("gl_FragColor = %s;\n", returns[0].Name().c_str());
+	assert(!m_nodes.empty());
+	auto& exports = m_nodes[0]->GetExports();
+	assert(exports.size() == 1 && exports[0].var.Type().dim == VT_4);
+	switch (m_st)
+	{
+	case ST_VERT:
+		body += cpputil::StringHelper::Format("gl_Position = %s;\n", exports[0].var.Name().c_str());
+		break;
+	case ST_FRAG:
+		body += cpputil::StringHelper::Format("gl_FragColor = %s;\n", exports[0].var.Name().c_str());
+		break;
 	}
 
-	dst += cpputil::StringHelper::Format(R"(
+	m_shader += cpputil::StringHelper::Format(R"(
 void main()
 {
 %s
@@ -103,73 +125,35 @@ void main()
 	)", body.c_str());
 }
 
-//////////////////////////////////////////////////////////////////////////
-// class Evaluator::Flatten
-//////////////////////////////////////////////////////////////////////////
-
-Evaluator::Flatten::Flatten(const NodePtr& node)
+void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array)
 {
-	Insert(node);
-}
-
-void Evaluator::Flatten::Insert(const NodePtr& node)
-{
-	size_t node_idx = nodes.size();
-	size_t var_idx = vars.size();
-	nodes.push_back(node);
-	node2vars.insert({ node->GetID(), var_idx });
-
-	for (auto& var : node->GetParams()) {
-		vars.push_back({ var, node_idx });
-	}
-	for (auto& var : node->GetReturn()) {
-		vars.push_back({ var, node_idx });
-	}
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class Evaluator::VariablesRename
-//////////////////////////////////////////////////////////////////////////
-
-Evaluator::VariablesRename::VariablesRename(const Flatten& ft)
-	: m_src(ft)
-{
-	Rename();
-}
-
-void Evaluator::VariablesRename::Rename()
-{
-	if (m_src.vars.empty()) {
-		return;
-	}
-
-	m_src2dst.resize(m_src.vars.size());
-
-	std::map<std::string, size_t> name2var;
-	for (size_t i = 0, n = m_src.vars.size(); i < n; ++i)
+	array.push_back(node);
+	for (auto& port : node->GetImports())
 	{
-		auto& src = m_src.vars[i];
-		auto itr = name2var.find(src.first.Name());
-		if (itr == name2var.end())
-		{
-			size_t dst_idx = m_dst.size();
-			m_src2dst[i] = dst_idx;
-			name2var.insert({ src.first.Name(), dst_idx });
-			m_dst.push_back(src.first);
+		if (port.conns.empty()) {
+			continue;
 		}
-		else
-		{
-			if (m_src.vars[itr->second].first.Type() == src.first.Type())
-			{
-				m_src2dst[i] = itr->second;
-			}
-			else
-			{
-				size_t dst_idx = m_dst.size();
-				Variable renamed(src.first.Type(), src.first.Name() + "_" + std::to_string(src.second));
-				name2var.insert({ renamed.Name(), dst_idx });
-				m_dst.push_back(renamed);
-			}
+		assert(port.conns.size() == 1);
+		auto node = port.conns[0].node.lock();
+		assert(node);
+		InsertNodeRecursive(node, array);
+	}
+}
+
+void Evaluator::InsertVar(const Node& node, Variable& var)
+{
+	auto name = var.GetRealName();
+	auto itr = m_vars_name2type.find(name);
+	if (itr == m_vars_name2type.end())
+	{
+		m_vars_name2type.insert({ name, var.Type() });
+	}
+	else
+	{
+		if (var.Type() != itr->second) {
+			auto name = var.Name() + "_" + std::to_string(node.GetID());
+			var.SetRealName(name);
+			m_vars_name2type.insert({ name, var.Type() });
 		}
 	}
 }

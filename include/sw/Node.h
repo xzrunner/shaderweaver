@@ -19,11 +19,29 @@ public:
 
 	auto& GetID() const { return m_uid; }
 
-	auto& GetParams() const { return m_params; }
-	auto& GetReturn() const { return m_return; }
+	auto& GetImports() { return m_imports; }
+	auto& GetExports() { return m_exports; }
 
-	auto& GetInput() const { return m_input; }
-	auto& GetOutput() const { return m_output; }
+public:
+	struct PortAddr
+	{
+		PortAddr(const std::shared_ptr<Node>& node, int idx)
+			: node(node), idx(idx) {}
+		PortAddr(const PortAddr& addr)
+			: node(addr.node), idx(addr.idx) {}
+
+		std::weak_ptr<Node> node;
+		int idx = -1;
+	};
+
+	struct Port
+	{
+		Port(const Variable& var)
+			: var(var) {}
+
+		Variable var;
+		std::vector<PortAddr> conns;
+	};
 
 protected:
 	virtual std::string GetBody() const = 0;
@@ -31,17 +49,17 @@ protected:
 	void AddVariable(const Variable& var);
 
 private:
-	static std::string VariablesToString(const std::vector<Variable>& vars);
+	static std::string VarsToString(const std::vector<Port>& ports);
 
 private:
 	uint32_t m_uid = 0;
 
 	std::string m_name;
 
-	std::vector<Variable> m_params, m_return;
-
-	std::vector<std::shared_ptr<Node>> m_input, m_output;
+	std::vector<Port> m_imports, m_exports;
 
 }; // Node
+
+void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to);
 
 }

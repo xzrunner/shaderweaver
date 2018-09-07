@@ -10,17 +10,20 @@
     <Filter Include="dataset">
       <UniqueIdentifier>{3e7ab5a3-dd3f-4527-b897-399b44532912}</UniqueIdentifier>
     </Filter>
+    <Filter Include="node\value">
+      <UniqueIdentifier>{b3839221-5f10-448f-a1b0-ae88d0a241c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\primitive">
+      <UniqueIdentifier>{084dd488-005c-475c-af11-87c56886e6d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\complex">
+      <UniqueIdentifier>{1c3e0a9a-03b6-4a10-a35a-d9042fa99c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tools">
+      <UniqueIdentifier>{f98b9fce-d388-4739-af71-4ec486596904}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\sw\node\Add.h">
-      <Filter>node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h">
-      <Filter>node</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Varying.h">
-      <Filter>node</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h">
       <Filter>eval</Filter>
     </ClInclude>
@@ -30,14 +33,44 @@
     <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h">
       <Filter>dataset</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\typedef.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sw\Variable.h">
       <Filter>dataset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\VariableType.h">
       <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Add.h">
+      <Filter>node\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Vector4.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h">
+      <Filter>node\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Uniform.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Input.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Output.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\ShaderType.h">
+      <Filter>dataset</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\typedef.h">
+      <Filter>tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\predef.h">
+      <Filter>tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

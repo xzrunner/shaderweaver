@@ -2,6 +2,7 @@
 
 #include "sw/Variable.h"
 #include "sw/typedef.h"
+#include "sw/Node.h"
 
 #include <cstdint>
 #include <vector>
@@ -13,58 +14,33 @@ namespace sw
 class Evaluator
 {
 public:
-	Evaluator(const NodePtr& vert, const NodePtr& frag);
+	Evaluator(const std::vector<NodePtr>& nodes, ShaderType st);
 
-	auto& GetVert() const { return m_vert; }
-	auto& GetFrag() const { return m_frag; }
-
-private:
-	struct Flatten
-	{
-		Flatten(const NodePtr& node);
-
-		std::vector<std::pair<Variable, uint32_t>> vars;
-
-		std::vector<NodePtr>                       nodes;
-		std::map<uint32_t, size_t>                 node2vars;
-
-		void Insert(const NodePtr& node);
-
-	}; // Flatten
-
-	class VariablesRename
-	{
-	public:
-		VariablesRename(const Flatten& ft);
-
-		auto& GetRenamedVars() const { return m_dst; }
-
-	private:
-		void Rename();
-
-	private:
-		const Flatten&        m_src;
-
-		std::vector<int>      m_src2dst;
-		std::vector<Variable> m_dst;
-
-	}; // VariablesRename
-
-	class ConcatenateNodes
-	{
-	public:
-
-
-	}; // ConcatenateNodes
+	auto& GetShaderStr() const { return m_shader; }
 
 private:
-	static void EvalDeclareOutside(std::string& dst, const VariablesRename& src, bool is_vert);
-	static void EvalDeclareInside(std::string& dst, const VariablesRename& src);
-	static void EvalBody(std::string& dst, const VariablesRename& src_names,
-		const Flatten& src, bool is_vert);
+	// topologically sort
+	void InitNodes(const std::vector<NodePtr>& nodes);
+
+	void Rename();
+
+	void EvalDeclareOutside();
+	void EvalDeclareInside(std::string& dst);
+	void EvalBody();
 
 private:
-	std::string m_vert, m_frag;
+	static void InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array);
+
+	void InsertVar(const Node& node, Variable& var);
+
+private:
+	ShaderType m_st;
+
+	std::string m_shader;
+
+	std::vector<NodePtr> m_nodes;
+
+	std::map<std::string, VariableType> m_vars_name2type;
 
 }; // Evaluator
 

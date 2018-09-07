@@ -1,9 +1,10 @@
 #include "sw/VariableType.h"
+#include "sw/predef.h"
 
 namespace sw
 {
 
-std::string VariableType::ToGLSL() const
+std::string VariableType::ToGLSL(ShaderType st) const
 {
 	std::string str;
 
@@ -12,68 +13,96 @@ std::string VariableType::ToGLSL() const
 	case VT_CONST:
 		str += "const ";
 		break;
-	case VT_ATTRIBUTE:
-		str += "attribute ";
-		break;
-	case VT_UNIFORM:
+	case VT_UNIF:
 		str += "uniform ";
 		break;
-	case VT_VARYING:
+#ifdef GLSL_OLD
+	case VT_SD_IN:
+		switch (st)
+		{
+		case ST_VERT:
+			str += "attribute ";
+			break;
+		case ST_FRAG:
+			str += "varying ";
+			break;
+		}
+		break;
+	case VT_SD_OUT:
 		str += "varying ";
 		break;
+#else
+	case VT_SD_IN:
+		str += "in ";
+		break;
+	case VT_SD_OUT:
+		str += "out ";
+		break;
+#endif // GLSL_OLD
 	}
 
 	switch (interp)
 	{
-	case VT_SAMPLER_2D:
+	case VT_T2D:
 		str += "sampler2D";
 		break;
-	case VT_SAMPLER_CUBE:
+	case VT_TCUBE:
 		str += "samplerCube";
 		break;
 	case VT_MAT:
-		str += "mat";
-		break;
-	}
-
-	if (dim == VT_1)
-	{
-		switch (precision)
-		{
-		case VT_FLOAT:
-			str += "float";
-			break;
-		case VT_INT:
-			str += "int";
-			break;
-		case VT_BOOL:
-			str += "bool";
-			break;
-		}
-	}
-	else
-	{
-		switch (precision)
-		{
-		case VT_INT:
-			str += "i";
-			break;
-		case VT_BOOL:
-			str += "b";
-			break;
-		}
-		str += "vec";
 		switch (dim)
 		{
 		case VT_2:
-			str += "2";
+			str += "mat2";
 			break;
 		case VT_3:
-			str += "3";
+			str += "mat3";
 			break;
 		case VT_4:
-			str += "4";
+			str += "mat4";
 			break;
+		}
+		break;
+	default:
+		if (dim == VT_1)
+		{
+			switch (precision)
+			{
+			case VT_FLT:
+				str += "float";
+				break;
+			case VT_INT:
+				str += "int";
+				break;
+			case VT_BOOL:
+				str += "bool";
+				break;
+			}
+		}
+		else
+		{
+			switch (precision)
+			{
+			case VT_INT:
+				str += "i";
+				break;
+			case VT_BOOL:
+				str += "b";
+				break;
+			}
+			str += "vec";
+			switch (dim)
+			{
+			case VT_2:
+				str += "2";
+				break;
+			case VT_3:
+				str += "3";
+				break;
+			case VT_4:
+				str += "4";
+				break;
+			}
 		}
 	}
 

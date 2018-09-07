@@ -14,15 +14,16 @@ public:
 	Add()
 		: Node("Add")
 	{
-		AddVariable(Variable(t_vec4, "a"));
-		AddVariable(Variable(t_vec4 | t_in, "b"));
-		AddVariable(Variable(t_vec4 | t_out, "sum"));
+		AddVariable(Variable(t_in,  "a"));
+		AddVariable(Variable(t_in,  "b"));
+
+		AddVariable(Variable(t_out, "add"));
 	}
 
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "sum = a + b;\n";
+		return "(add) = (a) + (b);\n";
 	}
 
 }; // Add

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "sw/ShaderType.h"
+
 #include <cstdint>
 #include <string>
 
@@ -39,13 +41,13 @@ enum VarInterpretation
 	VT_VEC,     // direction
 	VT_PNT,     // point
 	VT_MAT,		// matrix
-	VT_SAMPLER_2D,
-	VT_SAMPLER_CUBE,
+	VT_T2D,		// sample 2d
+	VT_TCUBE,	// sample cube
 };
 
 enum VarPrecision
 {
-	VT_FLOAT = 0,
+	VT_FLT = 0,
 	VT_INT,
 	VT_BOOL
 };
@@ -54,9 +56,9 @@ enum VarQualifiers
 {
 	VT_TEMP = 0,
 	VT_CONST,
-	VT_ATTRIBUTE,
-	VT_UNIFORM,
-	VT_VARYING
+	VT_UNIF,
+	VT_SD_IN,
+	VT_SD_OUT,
 };
 
 enum VarIO
@@ -71,8 +73,11 @@ union VariableType
 	bool operator == (const VariableType& type) const {
 		return u32 == type.u32;
 	}
+	bool operator != (const VariableType& type) const {
+		return u32 != type.u32;
+	}
 
-	std::string ToGLSL() const;
+	std::string ToGLSL(ShaderType st) const;
 
 	struct {
 		unsigned dim       : 3;
@@ -89,11 +94,25 @@ union VariableType
 	uint32_t u32 = 0;
 };
 
-static const uint32_t t_vec4 = VariableType{ VT_4 }.u32;
-static const uint32_t t_attr = VariableType{ 0, 0, 0, 0, 0, VT_ATTRIBUTE }.u32;
-static const uint32_t t_unif = VariableType{ 0, 0, 0, 0, 0, VT_UNIFORM }.u32;
-static const uint32_t t_vary = VariableType{ 0, 0, 0, 0, 0, VT_VARYING }.u32;
-static const uint32_t t_in   = VariableType{ 0, 0, 0, 0, 0, 0, VT_IN, 0 }.u32;
-static const uint32_t t_out  = VariableType{ 0, 0, 0, 0, 0, 0, VT_OUT }.u32;
+// single
+
+static const uint32_t t_tex2d   = VariableType{ 0, 0, 0, VT_T2D }.u32;
+
+static const uint32_t t_unif    = VariableType{ 0, 0, 0, 0, 0, VT_UNIF }.u32;
+static const uint32_t t_sd_in   = VariableType{ 0, 0, 0, 0, 0, VT_SD_IN }.u32;
+static const uint32_t t_sd_out  = VariableType{ 0, 0, 0, 0, 0, VT_SD_OUT }.u32;
+
+static const uint32_t t_in      = VariableType{ 0, 0, 0, 0, 0, 0, VT_IN }.u32;
+static const uint32_t t_out     = VariableType{ 0, 0, 0, 0, 0, 0, VT_OUT }.u32;
+
+// complex
+
+static const uint32_t t_flt2    = VariableType{ VT_2, 0, 0, 0, VT_FLT }.u32;
+static const uint32_t t_flt4    = VariableType{ VT_4, 0, 0, 0, VT_FLT }.u32;
+
+static const uint32_t t_uv      = VariableType{ VT_2, 0, 0, VT_TEX, VT_FLT }.u32;
+static const uint32_t t_pos4    = VariableType{ VT_4, 0, 0, VT_PNT, VT_FLT }.u32;
+static const uint32_t t_col4    = VariableType{ VT_4, 0, 0, VT_RGB, VT_FLT }.u32;
+static const uint32_t t_mat4    = VariableType{ VT_4, 0, 0, VT_MAT, VT_FLT }.u32;
 
 }

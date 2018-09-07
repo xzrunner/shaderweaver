@@ -20,13 +20,18 @@ Node::~Node()
 
 std::string Node::ToString() const
 {
+	auto body = GetBody();
+	if (body.empty()) {
+		return "";
+	}
+
 	std::string str;
 	str += "//! START " + m_name + "\n";
-	if (!m_params.empty()) {
-		str += "//! @params " + VariablesToString(m_params) + "\n";
+	if (!m_imports.empty()) {
+		str += "//! @params " + VarsToString(m_imports) + "\n";
 	}
-	if (!m_return.empty()) {
-		str += "//! @return " + VariablesToString(m_return) + "\n";
+	if (!m_exports.empty()) {
+		str += "//! @return " + VarsToString(m_exports) + "\n";
 	}
 	str += GetBody();
 	str += "//! END " + m_name + "\n";
@@ -38,22 +43,40 @@ void Node::AddVariable(const Variable& var)
 	auto type = var.Type();
 	assert(type.io != VT_IO_ANY);
 	if (type.io == VT_IN) {
-		m_params.push_back(var);
+		m_imports.push_back(var);
 	} else {
-		m_return.push_back(var);
+		m_exports.push_back(var);
 	}
 }
 
-std::string Node::VariablesToString(const std::vector<Variable>& vars)
+std::string Node::VarsToString(const std::vector<Port>& ports)
 {
 	std::string str;
-	for (int i = 0, n = vars.size(); i < n; ++i) {
-		str += vars[i].Name();
+	for (int i = 0, n = ports.size(); i < n; ++i) {
+		str += ports[i].var.Name();
 		if (i != n - 1) {
 			str += ", ";
 		}
 	}
 	return str;
+}
+
+void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
+{
+	{
+		auto node = from.node.lock();
+		assert(node);
+		auto& ports = node->GetExports();
+		assert(from.idx >= 0 && from.idx < static_cast<int>(ports.size()));
+		ports[from.idx].conns.push_back(to);
+	}
+	{
+		auto node = to.node.lock();
+		assert(node);
+		auto& ports = node->GetImports();
+		assert(to.idx >= 0 && to.idx < static_cast<int>(ports.size()));
+		ports[to.idx].conns.push_back(from);
+	}
 }
 
 }
