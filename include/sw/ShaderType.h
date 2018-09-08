@@ -5,7 +5,8 @@ namespace sw
 
 enum ShaderType
 {
-	ST_VERT = 0,
+	ST_ANY = 0,
+	ST_VERT,
 	ST_GEO,
 	ST_FRAG,
 

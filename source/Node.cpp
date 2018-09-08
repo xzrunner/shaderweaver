@@ -61,6 +61,26 @@ std::string Node::VarsToString(const std::vector<Port>& ports)
 	return str;
 }
 
+//////////////////////////////////////////////////////////////////////////
+// struct Node::Port
+//////////////////////////////////////////////////////////////////////////
+
+const Variable* Node::Port::GetPair(int idx) const
+{
+	if (idx < 0 || idx >= static_cast<int>(conns.size())) {
+		return nullptr;
+	}
+
+	auto& conn = conns[idx];
+	auto conn_node = conn.node.lock();
+	assert(conn_node);
+	auto& ports = var.Type().io == VT_IN ? conn_node->m_exports : conn_node->m_imports;
+	assert(conn.idx >= 0 && conn.idx < ports.size());
+	return &ports[conn.idx].var;
+}
+
+//////////////////////////////////////////////////////////////////////////
+
 void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 {
 	{
@@ -68,14 +88,16 @@ void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 		assert(node);
 		auto& ports = node->GetExports();
 		assert(from.idx >= 0 && from.idx < static_cast<int>(ports.size()));
-		ports[from.idx].conns.push_back(to);
+		const_cast<Node::Port&>(ports[from.idx]).conns.push_back(to);
+		node->Update();
 	}
 	{
 		auto node = to.node.lock();
 		assert(node);
 		auto& ports = node->GetImports();
 		assert(to.idx >= 0 && to.idx < static_cast<int>(ports.size()));
-		ports[to.idx].conns.push_back(from);
+		const_cast<Node::Port&>(ports[to.idx]).conns.push_back(from);
+		node->Update();
 	}
 }
 

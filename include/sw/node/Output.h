@@ -15,19 +15,22 @@ class Output : public Node
 public:
 	Output(const std::string& name, uint32_t type)
 		: Node("Output")
+		, m_var_name(name)
 	{
-		AddVariable(Variable(t_in | t_sd_out | type, name));
+		AddVariable(Variable(t_in | type, name));
+		AddVariable(Variable(t_out | t_sd_out | type, name));
 	}
 
 protected:
 	virtual std::string GetBody() const override
 	{
-
-		//return cpputil::StringHelper::Format(
-		//	"%s = %s;\n", );
-
-		return "";
+		return cpputil::StringHelper::Format(
+			"%s = (%s);\n", m_var_name.c_str(), m_var_name.c_str()
+		);
 	}
+
+private:
+	std::string m_var_name;
 
 }; // Output
 

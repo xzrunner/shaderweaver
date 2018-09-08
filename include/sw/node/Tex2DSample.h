@@ -20,6 +20,12 @@ public:
 		AddVariable(Variable(t_col4 | t_out, "col4"));
 	}
 
+	enum ImportIdx
+	{
+		IN_TEX = 0,
+		IN_UV,
+	};
+
 protected:
 	virtual std::string GetBody() const override
 	{

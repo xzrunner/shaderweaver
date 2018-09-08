@@ -89,5 +89,8 @@
     <ClCompile Include="..\..\..\source\Variable.cpp">
       <Filter>dataset</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\node\Add.cpp">
+      <Filter>node\primitive</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

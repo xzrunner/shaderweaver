@@ -20,6 +20,14 @@ public:
 		AddVariable(Variable(t_out, "add"));
 	}
 
+	virtual void Update() override;
+
+	enum ImportIdx
+	{
+		IN_A = 0,
+		IN_B,
+	};
+
 protected:
 	virtual std::string GetBody() const override
 	{

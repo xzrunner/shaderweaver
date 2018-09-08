@@ -15,12 +15,14 @@ public:
 	Node(const std::string& name);
 	~Node();
 
+	virtual void Update() {}
+
 	std::string ToString() const;
 
 	auto& GetID() const { return m_uid; }
 
-	auto& GetImports() { return m_imports; }
-	auto& GetExports() { return m_exports; }
+	auto& GetImports() const { return m_imports; }
+	auto& GetExports() const { return m_exports; }
 
 public:
 	struct PortAddr
@@ -39,6 +41,8 @@ public:
 		Port(const Variable& var)
 			: var(var) {}
 
+		const Variable* GetPair(int idx) const;
+
 		Variable var;
 		std::vector<PortAddr> conns;
 	};
@@ -51,12 +55,13 @@ protected:
 private:
 	static std::string VarsToString(const std::vector<Port>& ports);
 
+protected:
+	std::vector<Port> m_imports, m_exports;
+
 private:
 	uint32_t m_uid = 0;
 
 	std::string m_name;
-
-	std::vector<Port> m_imports, m_exports;
 
 }; // Node
 

@@ -23,6 +23,7 @@ Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
 {
 	InitNodes(nodes);
 	Rename();
+	Concatenate();
 	EvalDeclareOutside();
 	EvalBody();
 }
@@ -40,10 +41,10 @@ void Evaluator::Rename()
 	{
 //		Node::PortAddr addr(node, -1);
 //		int idx = 0;
-		for (auto& port : node->GetImports()) {
-			InsertVar(*node, port.var);
-//			addr.idx = idx++;
-		}
+//		for (auto& port : node->GetImports()) {
+//			InsertVar(*node, port.var);
+////			addr.idx = idx++;
+//		}
 //		idx = 0;
 		for (auto& port : node->GetExports()) {
 			InsertVar(*node, port.var);
@@ -52,11 +53,25 @@ void Evaluator::Rename()
 	}
 }
 
+void Evaluator::Concatenate()
+{
+	for (auto& node : m_nodes)
+	{
+		for (auto& port : node->GetImports())
+		{
+			auto in_var = port.GetPair(0);
+			assert(in_var);
+			port.var.SetRealName(in_var->GetRealName());
+		}
+	}
+}
+
 void Evaluator::EvalDeclareOutside()
 {
 	for (auto& itr : m_vars_name2type)
 	{
-		if (itr.second.qualifier == VT_TEMP) {
+		if (itr.second.qualifier == VT_TEMP ||
+			itr.second.qualifier == VT_CONST) {
 			continue;
 		}
 		m_shader += cpputil::StringHelper::Format(
@@ -70,6 +85,9 @@ void Evaluator::EvalDeclareInside(std::string& dst)
 	for (auto& itr : m_vars_name2type)
 	{
 		if (itr.second.qualifier != VT_TEMP) {
+			continue;
+		}
+		if (itr.second.io == VT_IN) {
 			continue;
 		}
 		dst += cpputil::StringHelper::Format(
@@ -140,7 +158,7 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::Nod
 	}
 }
 
-void Evaluator::InsertVar(const Node& node, Variable& var)
+void Evaluator::InsertVar(const Node& node, const Variable& var)
 {
 	auto name = var.GetRealName();
 	auto itr = m_vars_name2type.find(name);
@@ -150,7 +168,11 @@ void Evaluator::InsertVar(const Node& node, Variable& var)
 	}
 	else
 	{
-		if (var.Type() != itr->second) {
+		// todo check const value
+		if (var.Type().qualifier == VT_CONST ||
+			itr->second.qualifier == VT_CONST ||
+			var.Type() != itr->second)
+		{
 			auto name = var.Name() + "_" + std::to_string(node.GetID());
 			var.SetRealName(name);
 			m_vars_name2type.insert({ name, var.Type() });

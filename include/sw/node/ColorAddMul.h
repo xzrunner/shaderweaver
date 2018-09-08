@@ -21,6 +21,13 @@ public:
 		AddVariable(Variable(t_col4 | t_out, "col_add_mul"));
 	}
 
+	enum ImportIdx
+	{
+		IN_COL = 0,
+		IN_MUL,
+		IN_ADD,
+	};
+
 protected:
 	virtual std::string GetBody() const override
 	{
@@ -29,8 +36,8 @@ protected:
 (col_add_mul).w     = (col).w;
 (col_add_mul)      *= (mul).w;
 (col_add_mul).xyz  += (add).xyz * (col).w * (mul).w;
-(col_add_mul).xyzw += (add).w * 10.0 * (col_add_mul).xyzw;";
-)";
+(col_add_mul).xyzw += (add).w * 10.0 * (col_add_mul).xyzw;
+)" + 1;
 	}
 
 }; // ColorAddMul

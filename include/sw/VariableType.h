@@ -4,6 +4,7 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 
 namespace sw
 {
@@ -47,9 +48,10 @@ enum VarInterpretation
 
 enum VarPrecision
 {
-	VT_FLT = 0,
+	VT_PRECISION_ANY = 0,
+	VT_BOOL,
 	VT_INT,
-	VT_BOOL
+	VT_FLT,
 };
 
 enum VarQualifiers
@@ -77,7 +79,9 @@ union VariableType
 		return u32 != type.u32;
 	}
 
-	std::string ToGLSL(ShaderType st) const;
+	std::string ToGLSL(ShaderType st = ST_ANY) const;
+
+	void TypePromoteFrom(const VariableType& type);
 
 	struct {
 		unsigned dim       : 3;
@@ -98,6 +102,7 @@ union VariableType
 
 static const uint32_t t_tex2d   = VariableType{ 0, 0, 0, VT_T2D }.u32;
 
+static const uint32_t t_const   = VariableType{ 0, 0, 0, 0, 0, VT_CONST }.u32;
 static const uint32_t t_unif    = VariableType{ 0, 0, 0, 0, 0, VT_UNIF }.u32;
 static const uint32_t t_sd_in   = VariableType{ 0, 0, 0, 0, 0, VT_SD_IN }.u32;
 static const uint32_t t_sd_out  = VariableType{ 0, 0, 0, 0, 0, VT_SD_OUT }.u32;

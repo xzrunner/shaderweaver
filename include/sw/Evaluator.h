@@ -24,6 +24,8 @@ private:
 
 	void Rename();
 
+	void Concatenate();
+
 	void EvalDeclareOutside();
 	void EvalDeclareInside(std::string& dst);
 	void EvalBody();
@@ -31,7 +33,7 @@ private:
 private:
 	static void InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array);
 
-	void InsertVar(const Node& node, Variable& var);
+	void InsertVar(const Node& node, const Variable& var);
 
 private:
 	ShaderType m_st;
