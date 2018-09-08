@@ -75,6 +75,9 @@
     <ClInclude Include="..\..\..\include\sw\node\Blend.h">
       <Filter>node\complex</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Gray.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">

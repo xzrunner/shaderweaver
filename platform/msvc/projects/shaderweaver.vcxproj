@@ -17,6 +17,7 @@
     <ClInclude Include="..\..\..\include\sw\node\Add.h" />
     <ClInclude Include="..\..\..\include\sw\node\Blend.h" />
     <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Gray.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Input.h" />
     <ClInclude Include="..\..\..\include\sw\node\Output.h" />

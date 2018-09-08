@@ -12,6 +12,7 @@
 #include <sw/node/Add.h>
 #include <sw/node/Vector4.h>
 #include <sw/node/Blend.h>
+#include <sw/node/Gray.h>
 
 #include <catch/catch.hpp>
 #include <gl/glew.h>
@@ -110,36 +111,114 @@ void add_vert_varying(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr>&
 	cache_nodes.push_back(vert_in);
 }
 
+enum ShaderType
+{
+	ST_SHAPE = 0,
+	ST_SPRITE,
+};
+
+void init_layout(ShaderType type)
+{
+	switch (type)
+	{
+	case ST_SHAPE:
+	{
+		std::vector<ur::VertexAttrib> va_list;
+		const int sz = 12;
+		va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
+		va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 8));
+
+		auto layout_id = RC->CreateVertexLayout(va_list);
+		RC->BindVertexLayout(layout_id);
+	}
+		break;
+	case ST_SPRITE:
+	{
+		std::vector<ur::VertexAttrib> va_list;
+		const int sz = 24;
+		va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
+		va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float),   sz, 8));
+		va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 16));
+		va_list.push_back(ur::VertexAttrib("additive", 4, sizeof(uint8_t), sz, 20));
+
+		auto layout_id = RC->CreateVertexLayout(va_list);
+		RC->BindVertexLayout(layout_id);
+	}
+		break;
+	}
+}
+
+void init_vert(ShaderType type, std::vector<sw::NodePtr>& vert_nodes, std::vector<sw::NodePtr>& cache_nodes)
+{
+	switch (type)
+	{
+	case ST_SHAPE:
+		add_vert_pos_trans(vert_nodes, cache_nodes);
+		add_vert_varying(vert_nodes, cache_nodes, "color", sw::t_col4);
+		break;
+	case ST_SPRITE:
+		add_vert_pos_trans(vert_nodes, vert_nodes);
+		add_vert_varying(vert_nodes, vert_nodes, "texcoord", sw::t_uv);
+		add_vert_varying(vert_nodes, vert_nodes, "color",    sw::t_col4);
+		add_vert_varying(vert_nodes, vert_nodes, "additive", sw::t_col4);
+		break;
+	}
+}
+
+sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
+{
+	switch (type)
+	{
+	case ST_SHAPE:
+		return std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+	case ST_SPRITE:
+	{
+		auto tex_sample  = std::make_shared<sw::node::Tex2DSample>();
+		auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
+		auto frag_in_uv  = std::make_shared<sw::node::Input>  ("v_texcoord", sw::t_uv);
+		sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::Tex2DSample::IN_TEX });
+		sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::Tex2DSample::IN_UV });
+
+		auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
+		auto frag_in_mul = std::make_shared<sw::node::Input>("v_color",    sw::t_col4);
+		auto frag_in_add = std::make_shared<sw::node::Input>("v_additive", sw::t_col4);
+		sw::make_connecting({ tex_sample,  0 }, { col_add_mul, sw::node::ColorAddMul::IN_COL });
+		sw::make_connecting({ frag_in_mul, 0 }, { col_add_mul, sw::node::ColorAddMul::IN_MUL });
+		sw::make_connecting({ frag_in_add, 0 }, { col_add_mul, sw::node::ColorAddMul::IN_ADD });
+
+		cache_nodes.push_back(tex_sample);
+		cache_nodes.push_back(frag_in_tex);
+		cache_nodes.push_back(frag_in_uv);
+		cache_nodes.push_back(frag_in_mul);
+		cache_nodes.push_back(frag_in_add);
+
+		return col_add_mul;
+	}
+	default:
+		return nullptr;
+	}
+}
+
 }
 
 TEST_CASE("shape2d") {
 	init();
 
 	// layout
-
-	std::vector<ur::VertexAttrib> va_list;
-	const int sz = 12;
-	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
-	va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 8));
-
-	auto layout_id = RC->CreateVertexLayout(va_list);
-	RC->BindVertexLayout(layout_id);
+	init_layout(ST_SHAPE);
 
 	// vert
+	std::vector<sw::NodePtr> cache_nodes;
 
 	std::vector<sw::NodePtr> vert_nodes;
-	std::vector<sw::NodePtr> cache_nodes;
-	add_vert_pos_trans(vert_nodes, cache_nodes);
-	add_vert_varying(vert_nodes, cache_nodes, "color", sw::t_col4);
+	init_vert(ST_SHAPE, vert_nodes, cache_nodes);
 
 	// frag
-
-	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+	auto frag_node = init_frag(ST_SHAPE, cache_nodes);
 
 	// end
-
 	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ frag_in_col }, sw::ST_FRAG);
+	sw::Evaluator frag({ frag_node }, sw::ST_FRAG);
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -151,44 +230,21 @@ TEST_CASE("sprite") {
 	init();
 
 	// layout
-
-	std::vector<ur::VertexAttrib> va_list;
-	const int sz = 24;
-	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
-	va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float),   sz, 8));
-	va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 16));
-	va_list.push_back(ur::VertexAttrib("additive", 4, sizeof(uint8_t), sz, 20));
-
-	auto layout_id = RC->CreateVertexLayout(va_list);
-	RC->BindVertexLayout(layout_id);
+	init_layout(ST_SPRITE);
 
 	// vert
+	std::vector<sw::NodePtr> cache_nodes;
 
 	std::vector<sw::NodePtr> vert_nodes;
-	add_vert_pos_trans(vert_nodes, vert_nodes);
-	add_vert_varying(vert_nodes, vert_nodes, "texcoord", sw::t_uv);
-	add_vert_varying(vert_nodes, vert_nodes, "color",    sw::t_col4);
-	add_vert_varying(vert_nodes, vert_nodes, "additive", sw::t_col4);
+	init_vert(ST_SPRITE, vert_nodes, cache_nodes);
 
 	// frag
-
-	auto tex_sample  = std::make_shared<sw::node::Tex2DSample>();
-	auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
-	auto frag_in_uv  = std::make_shared<sw::node::Input>  ("v_texcoord", sw::t_uv);
-	sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::Tex2DSample::IN_TEX });
-	sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::Tex2DSample::IN_UV });
-
-	auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
-	auto frag_in_mul = std::make_shared<sw::node::Input>("v_color",    sw::t_col4);
-	auto frag_in_add = std::make_shared<sw::node::Input>("v_additive", sw::t_col4);
-	sw::make_connecting({ tex_sample,  0 }, { col_add_mul, sw::node::ColorAddMul::IN_COL });
-	sw::make_connecting({ frag_in_mul, 0 }, { col_add_mul, sw::node::ColorAddMul::IN_MUL });
-	sw::make_connecting({ frag_in_add, 0 }, { col_add_mul, sw::node::ColorAddMul::IN_ADD });
+	auto frag_node = init_frag(ST_SPRITE, cache_nodes);
 
 	// end
 
 	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ col_add_mul }, sw::ST_FRAG);
+	sw::Evaluator frag({ frag_node }, sw::ST_FRAG);
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -200,7 +256,6 @@ TEST_CASE("blend") {
 	init();
 
 	// layout
-
 	std::vector<ur::VertexAttrib> va_list;
 	const int sz = 32;
 	va_list.push_back(ur::VertexAttrib("position",      2, sizeof(float),   sz, 0));
@@ -259,21 +314,41 @@ TEST_CASE("blend") {
 	REQUIRE(shader != 0);
 }
 
+TEST_CASE("gray") {
+	init();
+
+	// layout
+	init_layout(ST_SPRITE);
+
+	// vert
+	std::vector<sw::NodePtr> cache_nodes;
+
+	std::vector<sw::NodePtr> vert_nodes;
+	init_vert(ST_SPRITE, vert_nodes, cache_nodes);
+
+	// frag
+	auto frag_node = init_frag(ST_SPRITE, cache_nodes);
+
+	auto gray = std::make_shared<sw::node::Gray>();
+	sw::make_connecting({ frag_node,  0 }, { gray, 0 });
+
+	// end
+	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
+	sw::Evaluator frag({ gray }, sw::ST_FRAG);
+
+	debug_print(vert, frag);
+	int shader = create_shader(vert, frag);
+
+	REQUIRE(shader != 0);
+}
+
 TEST_CASE("rename") {
 	init();
 
 	// layout
-
-	std::vector<ur::VertexAttrib> va_list;
-	const int sz = 12;
-	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float), sz, 0));
-	va_list.push_back(ur::VertexAttrib("color", 4, sizeof(uint8_t), sz, 8));
-
-	auto layout_id = RC->CreateVertexLayout(va_list);
-	RC->BindVertexLayout(layout_id);
+	init_layout(ST_SHAPE);
 
 	// vert
-
 	std::vector<sw::NodePtr> vert_nodes;
 	add_vert_pos_trans(vert_nodes, vert_nodes);
 
@@ -294,7 +369,6 @@ TEST_CASE("rename") {
 	vert_nodes.push_back(vert_color_out);
 
 	// frag
-
 	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
 
 	// end
