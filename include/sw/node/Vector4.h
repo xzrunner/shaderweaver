@@ -18,9 +18,9 @@ public:
 		, m_val(val)
 	{
 		if (name.empty()) {
-			AddVariable(Variable(t_out | t_const | t_flt4, "flt4"));
+			AddVariable(Variable(t_n_out | t_const | t_flt4, "flt4"));
 		} else {
-			AddVariable(Variable(t_out | t_const | t_flt4, name));
+			AddVariable(Variable(t_n_out | t_const | t_flt4, name));
 		}
 	}
 

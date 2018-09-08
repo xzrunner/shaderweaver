@@ -15,6 +15,7 @@
     <ClInclude Include="..\..\..\include\sw\Node.h" />
     <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h" />
     <ClInclude Include="..\..\..\include\sw\node\Add.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Blend.h" />
     <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Input.h" />
@@ -33,6 +34,7 @@
     <ClCompile Include="..\..\..\source\Node.cpp" />
     <ClCompile Include="..\..\..\source\NodeIDMgr.cpp" />
     <ClCompile Include="..\..\..\source\node\Add.cpp" />
+    <ClCompile Include="..\..\..\source\node\Blend.cpp" />
     <ClCompile Include="..\..\..\source\Variable.cpp" />
     <ClCompile Include="..\..\..\source\VariableType.cpp" />
   </ItemGroup>

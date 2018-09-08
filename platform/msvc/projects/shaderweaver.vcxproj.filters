@@ -72,6 +72,9 @@
     <ClInclude Include="..\..\..\include\sw\predef.h">
       <Filter>tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Blend.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
@@ -91,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\node\Add.cpp">
       <Filter>node\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\node\Blend.cpp">
+      <Filter>node\complex</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

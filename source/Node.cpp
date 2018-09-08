@@ -18,7 +18,12 @@ Node::~Node()
 	NodeIDMgr::Instance()->Return(m_uid);
 }
 
-std::string Node::ToString() const
+std::string Node::GetHeaderStr() const
+{
+	return GetHeader();
+}
+
+std::string Node::GetBodyStr() const
 {
 	auto body = GetBody();
 	if (body.empty()) {
@@ -41,11 +46,20 @@ std::string Node::ToString() const
 void Node::AddVariable(const Variable& var)
 {
 	auto type = var.Type();
-	assert(type.io != VT_IO_ANY);
-	if (type.io == VT_IN) {
+	assert(type.region != VT_REGION_ANY);
+	switch (type.region)
+	{
+	case VT_NODE_IN:
 		m_imports.push_back(var);
-	} else {
+		break;
+	case VT_NODE_OUT:
 		m_exports.push_back(var);
+		break;
+	case VT_NODE_MID:
+		m_internal.push_back(var);
+		break;
+	default:
+		assert(0);
 	}
 }
 
@@ -74,8 +88,8 @@ const Variable* Node::Port::GetPair(int idx) const
 	auto& conn = conns[idx];
 	auto conn_node = conn.node.lock();
 	assert(conn_node);
-	auto& ports = var.Type().io == VT_IN ? conn_node->m_exports : conn_node->m_imports;
-	assert(conn.idx >= 0 && conn.idx < ports.size());
+	auto& ports = var.Type().region == VT_NODE_IN ? conn_node->m_exports : conn_node->m_imports;
+	assert(conn.idx >= 0 && conn.idx < static_cast<int>(ports.size()));
 	return &ports[conn.idx].var;
 }
 

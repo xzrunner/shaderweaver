@@ -17,8 +17,8 @@ public:
 		: Node("Output")
 		, m_var_name(name)
 	{
-		AddVariable(Variable(t_in | type, name));
-		AddVariable(Variable(t_out | t_sd_out | type, name));
+		AddVariable(Variable(t_n_in | type, name));
+		AddVariable(Variable(t_n_out | t_s_out | type, name));
 	}
 
 protected:

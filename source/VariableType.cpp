@@ -17,7 +17,7 @@ std::string VariableType::ToGLSL(ShaderType st) const
 		str += "uniform ";
 		break;
 #ifdef GLSL_OLD
-	case VT_SD_IN:
+	case VT_SHADER_IN:
 		switch (st)
 		{
 		case ST_VERT:
@@ -28,14 +28,14 @@ std::string VariableType::ToGLSL(ShaderType st) const
 			break;
 		}
 		break;
-	case VT_SD_OUT:
+	case VT_SHADER_OUT:
 		str += "varying ";
 		break;
 #else
-	case VT_SD_IN:
+	case VT_SHADER_IN:
 		str += "in ";
 		break;
-	case VT_SD_OUT:
+	case VT_SHADER_OUT:
 		str += "out ";
 		break;
 #endif // GLSL_OLD

@@ -24,7 +24,8 @@ Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
 	InitNodes(nodes);
 	Rename();
 	Concatenate();
-	EvalDeclareOutside();
+
+	EvalHeader();
 	EvalBody();
 }
 
@@ -39,16 +40,11 @@ void Evaluator::Rename()
 {
 	for (auto& node : m_nodes)
 	{
-//		Node::PortAddr addr(node, -1);
-//		int idx = 0;
-//		for (auto& port : node->GetImports()) {
-//			InsertVar(*node, port.var);
-////			addr.idx = idx++;
-//		}
-//		idx = 0;
 		for (auto& port : node->GetExports()) {
 			InsertVar(*node, port.var);
-//			addr.idx = idx++;
+		}
+		for (auto& var : node->GetInternal()) {
+			InsertVar(*node, var);
 		}
 	}
 }
@@ -66,46 +62,34 @@ void Evaluator::Concatenate()
 	}
 }
 
-void Evaluator::EvalDeclareOutside()
+void Evaluator::EvalHeader()
 {
-	for (auto& itr : m_vars_name2type)
-	{
-		if (itr.second.qualifier == VT_TEMP ||
-			itr.second.qualifier == VT_CONST) {
-			continue;
-		}
-		m_shader += cpputil::StringHelper::Format(
-			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
-		);
-	}
-}
+	std::string header;
 
-void Evaluator::EvalDeclareInside(std::string& dst)
-{
-	for (auto& itr : m_vars_name2type)
+	EvalDeclareInHeader(header);
+
+	header += "\n";
+	for (auto& itr = m_nodes.rbegin(); itr != m_nodes.rend(); ++itr)
 	{
-		if (itr.second.qualifier != VT_TEMP) {
-			continue;
+		auto str = (*itr)->GetHeaderStr();
+		if (!str.empty()) {
+			header += str + "\n";
 		}
-		if (itr.second.io == VT_IN) {
-			continue;
-		}
-		dst += cpputil::StringHelper::Format(
-			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
-		);
 	}
+
+	m_shader += header;
 }
 
 void Evaluator::EvalBody()
 {
 	std::string body;
 
-	EvalDeclareInside(body);
+	EvalDeclareInBody(body);
 
 	body += "\n";
 	for (auto& itr = m_nodes.rbegin(); itr != m_nodes.rend(); ++itr)
 	{
-		auto str = (*itr)->ToString();
+		auto str = (*itr)->GetBodyStr();
 		if (!str.empty())
 		{
 			// rename vars
@@ -116,6 +100,10 @@ void Evaluator::EvalBody()
 			for (auto& p : (*itr)->GetExports()) {
 				auto old = cpputil::StringHelper::Format("(%s)", p.var.Name().c_str());
 				cpputil::StringHelper::ReplaceAll(str, old, p.var.GetRealName());
+			}
+			for (auto& v : (*itr)->GetInternal()) {
+				auto old = cpputil::StringHelper::Format("(%s)", v.Name().c_str());
+				cpputil::StringHelper::ReplaceAll(str, old, v.GetRealName());
 			}
 			body += str +"\n";
 		}
@@ -141,6 +129,36 @@ void main()
 %s
 }
 	)", body.c_str());
+}
+
+void Evaluator::EvalDeclareInHeader(std::string& dst)
+{
+	for (auto& itr : m_vars_name2type)
+	{
+		if (itr.second.qualifier == VT_TEMP ||
+			itr.second.qualifier == VT_CONST) {
+			continue;
+		}
+		dst += cpputil::StringHelper::Format(
+			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
+		);
+	}
+}
+
+void Evaluator::EvalDeclareInBody(std::string& dst)
+{
+	for (auto& itr : m_vars_name2type)
+	{
+		if (itr.second.qualifier != VT_TEMP) {
+			continue;
+		}
+		if (itr.second.region == VT_NODE_IN) {
+			continue;
+		}
+		dst += cpputil::StringHelper::Format(
+			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
+		);
+	}
 }
 
 void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array)

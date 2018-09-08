@@ -17,12 +17,14 @@ public:
 
 	virtual void Update() {}
 
-	std::string ToString() const;
+	std::string GetHeaderStr() const;
+	std::string GetBodyStr() const;
 
 	auto& GetID() const { return m_uid; }
 
 	auto& GetImports() const { return m_imports; }
 	auto& GetExports() const { return m_exports; }
+	auto& GetInternal() const { return m_internal; }
 
 public:
 	struct PortAddr
@@ -48,6 +50,7 @@ public:
 	};
 
 protected:
+	virtual std::string GetHeader() const { return ""; }
 	virtual std::string GetBody() const = 0;
 
 	void AddVariable(const Variable& var);
@@ -57,6 +60,7 @@ private:
 
 protected:
 	std::vector<Port> m_imports, m_exports;
+	std::vector<Variable> m_internal;
 
 private:
 	uint32_t m_uid = 0;

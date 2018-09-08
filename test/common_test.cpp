@@ -11,6 +11,7 @@
 #include <sw/node/ColorAddMul.h>
 #include <sw/node/Add.h>
 #include <sw/node/Vector4.h>
+#include <sw/node/Blend.h>
 
 #include <catch/catch.hpp>
 #include <gl/glew.h>
@@ -195,6 +196,69 @@ TEST_CASE("sprite") {
 	REQUIRE(shader != 0);
 }
 
+TEST_CASE("blend") {
+	init();
+
+	// layout
+
+	std::vector<ur::VertexAttrib> va_list;
+	const int sz = 32;
+	va_list.push_back(ur::VertexAttrib("position",      2, sizeof(float),   sz, 0));
+	va_list.push_back(ur::VertexAttrib("texcoord",      2, sizeof(float),   sz, 8));
+	va_list.push_back(ur::VertexAttrib("texcoord_base", 2, sizeof(float),   sz, 16));
+	va_list.push_back(ur::VertexAttrib("color",         4, sizeof(uint8_t), sz, 24));
+	va_list.push_back(ur::VertexAttrib("additive",      4, sizeof(uint8_t), sz, 28));
+
+	auto layout_id = RC->CreateVertexLayout(va_list);
+	RC->BindVertexLayout(layout_id);
+
+	// vert
+
+	std::vector<sw::NodePtr> vert_nodes;
+	add_vert_pos_trans(vert_nodes, vert_nodes);
+	add_vert_varying(vert_nodes, vert_nodes, "texcoord",      sw::t_uv);
+	add_vert_varying(vert_nodes, vert_nodes, "texcoord_base", sw::t_uv);
+	add_vert_varying(vert_nodes, vert_nodes, "color",         sw::t_col4);
+	add_vert_varying(vert_nodes, vert_nodes, "additive",      sw::t_col4);
+
+	// frag
+
+	auto tex_sample  = std::make_shared<sw::node::Tex2DSample>();
+	auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
+	auto frag_in_uv  = std::make_shared<sw::node::Input>  ("v_texcoord", sw::t_uv);
+	sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::Tex2DSample::IN_TEX });
+	sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::Tex2DSample::IN_UV });
+
+	auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
+	auto frag_in_mul = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+	auto frag_in_add = std::make_shared<sw::node::Input>("v_additive", sw::t_col4);
+	sw::make_connecting({ tex_sample,  0 }, { col_add_mul, sw::node::ColorAddMul::IN_COL });
+	sw::make_connecting({ frag_in_mul, 0 }, { col_add_mul, sw::node::ColorAddMul::IN_MUL });
+	sw::make_connecting({ frag_in_add, 0 }, { col_add_mul, sw::node::ColorAddMul::IN_ADD });
+
+	auto base_tex_sample  = std::make_shared<sw::node::Tex2DSample>();
+	auto frag_in_base_tex = std::make_shared<sw::node::Uniform>("u_texture1",      sw::t_tex2d);
+	auto frag_in_bae_uv   = std::make_shared<sw::node::Input>  ("v_texcoord_base", sw::t_uv);
+	sw::make_connecting({ frag_in_base_tex, 0 }, { base_tex_sample, sw::node::Tex2DSample::IN_TEX });
+	sw::make_connecting({ frag_in_bae_uv,  0 },  { base_tex_sample, sw::node::Tex2DSample::IN_UV });
+
+	auto blend = std::make_shared<sw::node::Blend>();
+	auto blend_mode = std::make_shared<sw::node::Uniform>("u_mode", sw::t_int1);
+	sw::make_connecting({ base_tex_sample,  0 }, { blend, sw::node::Blend::IN_BASE4 });
+	sw::make_connecting({ col_add_mul,  0 },     { blend, sw::node::Blend::IN_BLEND4 });
+	sw::make_connecting({ blend_mode,  0 },      { blend, sw::node::Blend::IN_MODE });
+
+	// end
+
+	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
+	sw::Evaluator frag({ blend }, sw::ST_FRAG);
+
+	//debug_print(vert, frag);
+	int shader = create_shader(vert, frag);
+
+	REQUIRE(shader != 0);
+}
+
 TEST_CASE("rename") {
 	init();
 
@@ -238,7 +302,7 @@ TEST_CASE("rename") {
 	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
 	sw::Evaluator frag({ frag_in_col }, sw::ST_FRAG);
 
-	debug_print(vert, frag);
+	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
 
 	REQUIRE(shader != 0);

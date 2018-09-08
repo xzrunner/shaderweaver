@@ -26,9 +26,11 @@ private:
 
 	void Concatenate();
 
-	void EvalDeclareOutside();
-	void EvalDeclareInside(std::string& dst);
+	void EvalHeader();
 	void EvalBody();
+
+	void EvalDeclareInHeader(std::string& dst);
+	void EvalDeclareInBody(std::string& dst);
 
 private:
 	static void InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array);
