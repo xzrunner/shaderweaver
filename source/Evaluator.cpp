@@ -1,6 +1,8 @@
 #include "sw/Evaluator.h"
 #include "sw/Node.h"
 #include "sw/VariableType.h"
+#include "sw/node/VertexShader.h"
+#include "sw/node/FragmentShader.h"
 
 #include <cpputil/StringHelper.h>
 
@@ -31,6 +33,27 @@ Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
 
 void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 {
+	assert(!nodes.empty());
+	auto& exports = nodes[0]->GetExports();
+	assert(exports.size() == 1);
+	switch (m_st)
+	{
+	case ST_VERT:
+	{
+		auto end = std::make_shared<node::VertexShader>();
+		m_nodes.push_back(end);
+		sw::make_connecting({ nodes[0], 0 }, { end, 0 });
+	}
+		break;
+	case ST_FRAG:
+	{
+		auto end = std::make_shared<node::FragmentShader>();
+		m_nodes.push_back(end);
+		sw::make_connecting({ nodes[0], 0 }, { end, 0 });
+	}
+		break;
+	}
+
 	for (auto& node : nodes) {
 		InsertNodeRecursive(node, m_nodes);
 	}
@@ -109,20 +132,6 @@ void Evaluator::EvalBody()
 		}
 	}
 
-	// final assign
-	assert(!m_nodes.empty());
-	auto& exports = m_nodes[0]->GetExports();
-	assert(exports.size() == 1 && exports[0].var.Type().dim == VT_4);
-	switch (m_st)
-	{
-	case ST_VERT:
-		body += cpputil::StringHelper::Format("gl_Position = %s;\n", exports[0].var.Name().c_str());
-		break;
-	case ST_FRAG:
-		body += cpputil::StringHelper::Format("gl_FragColor = %s;\n", exports[0].var.Name().c_str());
-		break;
-	}
-
 	m_shader += cpputil::StringHelper::Format(R"(
 void main()
 {
@@ -136,7 +145,8 @@ void Evaluator::EvalDeclareInHeader(std::string& dst)
 	for (auto& itr : m_vars_name2type)
 	{
 		if (itr.second.qualifier == VT_TEMP ||
-			itr.second.qualifier == VT_CONST) {
+			itr.second.qualifier == VT_CONST ||
+			itr.second.qualifier == VT_SHADER_END) {
 			continue;
 		}
 		dst += cpputil::StringHelper::Format(

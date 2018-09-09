@@ -111,6 +111,12 @@
     <ClInclude Include="..\..\..\include\sw\node\TypeConv.h">
       <Filter>node\primitive</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\VertexShader.h">
+      <Filter>node\primitive\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h">
+      <Filter>node\primitive\shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">

@@ -17,6 +17,7 @@
     <ClInclude Include="..\..\..\include\sw\node\Add.h" />
     <ClInclude Include="..\..\..\include\sw\node\Blend.h" />
     <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h" />
+    <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Gray.h" />
     <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="..\..\..\include\sw\node\Vector2.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector3.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector4.h" />
+    <ClInclude Include="..\..\..\include\sw\node\VertexShader.h" />
     <ClInclude Include="..\..\..\include\sw\predef.h" />
     <ClInclude Include="..\..\..\include\sw\ShaderType.h" />
     <ClInclude Include="..\..\..\include\sw\typedef.h" />
