@@ -22,6 +22,15 @@
     <Filter Include="tools">
       <UniqueIdentifier>{f98b9fce-d388-4739-af71-4ec486596904}</UniqueIdentifier>
     </Filter>
+    <Filter Include="node\complex\filter">
+      <UniqueIdentifier>{fc6b2e73-e2f0-442e-a846-7844ae208e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\complex\light">
+      <UniqueIdentifier>{59554a13-fbaf-45c7-ba51-a0b3ca5c0b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\primitive\shader">
+      <UniqueIdentifier>{8d3d2ad8-c683-41f8-9189-885f5199bebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h">
@@ -76,7 +85,31 @@
       <Filter>node\complex</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Gray.h">
+      <Filter>node\complex\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Phong.h">
+      <Filter>node\complex\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h">
       <Filter>node\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\PositionTrans2.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Vector3.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Vector2.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Vector1.h">
+      <Filter>node\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\TypeConv.h">
+      <Filter>node\primitive</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
