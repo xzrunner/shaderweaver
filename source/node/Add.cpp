@@ -17,11 +17,11 @@ void Add::Update()
 	VariableType type;
 	for (auto& port : m_imports)
 	{
-		auto in_var = port.GetPair(0);
-		if (!in_var) {
+		auto in_port = port.GetPair(0);
+		if (!in_port) {
 			continue;
 		}
-		type.TypePromoteFrom(in_var->Type());
+		type.TypePromoteFrom(in_port->var.Type());
 	}
 
 	m_imports[0].var.Type().TypePromoteFrom(type);

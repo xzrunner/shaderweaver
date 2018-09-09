@@ -25,6 +25,7 @@ private:
 	void Rename();
 
 	void Concatenate();
+	void Concatenate(Node::Port& from, Node::Port& to);
 
 	void EvalHeader();
 	void EvalBody();

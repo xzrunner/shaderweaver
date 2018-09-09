@@ -43,7 +43,7 @@ public:
 		Port(const Variable& var)
 			: var(var) {}
 
-		const Variable* GetPair(int idx) const;
+		const Port* GetPair(int idx) const;
 
 		Variable var;
 		std::vector<PortAddr> conns;

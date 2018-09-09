@@ -108,9 +108,6 @@
     <ClInclude Include="..\..\..\include\sw\node\Vector1.h">
       <Filter>node\value</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\TypeConv.h">
-      <Filter>node\primitive</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\VertexShader.h">
       <Filter>node\primitive\shader</Filter>
     </ClInclude>

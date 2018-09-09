@@ -27,7 +27,6 @@
     <ClInclude Include="..\..\..\include\sw\node\Output.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans2.h" />
     <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h" />
-    <ClInclude Include="..\..\..\include\sw\node\TypeConv.h" />
     <ClInclude Include="..\..\..\include\sw\node\Uniform.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector1.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector2.h" />

@@ -10,9 +10,15 @@
 #include <sw/node/Tex2DSample.h>
 #include <sw/node/ColorAddMul.h>
 #include <sw/node/Add.h>
+#include <sw/node/Vector1.h>
+#include <sw/node/Vector3.h>
 #include <sw/node/Vector4.h>
 #include <sw/node/Blend.h>
 #include <sw/node/Gray.h>
+#include <sw/node/PositionTrans2.h>
+#include <sw/node/FragPosTrans.h>
+#include <sw/node/NormalTrans.h>
+#include <sw/node/Phong.h>
 
 #include <catch/catch.hpp>
 #include <gl/glew.h>
@@ -88,8 +94,8 @@ void debug_print(const sw::Evaluator& vert, const sw::Evaluator& frag)
 void add_vert_pos_trans(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr>& cache_nodes)
 {
 	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
-	auto modelview = std::make_shared<sw::node::Uniform>("u_modelview", sw::t_mat4);
-	auto position = std::make_shared<sw::node::Input>("position", sw::t_flt4);
+	auto modelview = std::make_shared<sw::node::Uniform> ("u_modelview",  sw::t_mat4);
+	auto position = std::make_shared<sw::node::Input>    ("position",     sw::t_pos4);
 	auto pos_trans = std::make_shared<sw::node::PositionTrans>();
 	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTrans::IN_PROJ });
 	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTrans::IN_MODELVIEW });
@@ -115,37 +121,32 @@ enum ShaderType
 {
 	ST_SHAPE = 0,
 	ST_SPRITE,
+	ST_MODEL,
 };
 
 void init_layout(ShaderType type)
 {
+	std::vector<ur::VertexAttrib> va_list;
 	switch (type)
 	{
 	case ST_SHAPE:
-	{
-		std::vector<ur::VertexAttrib> va_list;
-		const int sz = 12;
-		va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
-		va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 8));
-
-		auto layout_id = RC->CreateVertexLayout(va_list);
-		RC->BindVertexLayout(layout_id);
-	}
+		va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   12, 0));
+		va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), 12, 8));
 		break;
 	case ST_SPRITE:
-	{
-		std::vector<ur::VertexAttrib> va_list;
-		const int sz = 24;
-		va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   sz, 0));
-		va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float),   sz, 8));
-		va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), sz, 16));
-		va_list.push_back(ur::VertexAttrib("additive", 4, sizeof(uint8_t), sz, 20));
-
-		auto layout_id = RC->CreateVertexLayout(va_list);
-		RC->BindVertexLayout(layout_id);
-	}
+		va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float),   24, 0));
+		va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float),   24, 8));
+		va_list.push_back(ur::VertexAttrib("color",    4, sizeof(uint8_t), 24, 16));
+		va_list.push_back(ur::VertexAttrib("additive", 4, sizeof(uint8_t), 24, 20));
+		break;
+	case ST_MODEL:
+		va_list.push_back(ur::VertexAttrib("position", 3, 4, 32, 0));
+		va_list.push_back(ur::VertexAttrib("normal",   3, 4, 32, 12));
+		va_list.push_back(ur::VertexAttrib("texcoord", 2, 4, 32, 24));
 		break;
 	}
+	auto layout_id = RC->CreateVertexLayout(va_list);
+	RC->BindVertexLayout(layout_id);
 }
 
 void init_vert(ShaderType type, std::vector<sw::NodePtr>& vert_nodes, std::vector<sw::NodePtr>& cache_nodes)
@@ -158,9 +159,9 @@ void init_vert(ShaderType type, std::vector<sw::NodePtr>& vert_nodes, std::vecto
 		break;
 	case ST_SPRITE:
 		add_vert_pos_trans(vert_nodes, vert_nodes);
-		add_vert_varying(vert_nodes, vert_nodes, "texcoord", sw::t_uv);
-		add_vert_varying(vert_nodes, vert_nodes, "color",    sw::t_col4);
-		add_vert_varying(vert_nodes, vert_nodes, "additive", sw::t_col4);
+		add_vert_varying(vert_nodes, cache_nodes, "texcoord", sw::t_uv);
+		add_vert_varying(vert_nodes, cache_nodes, "color",    sw::t_col4);
+		add_vert_varying(vert_nodes, cache_nodes, "additive", sw::t_col4);
 		break;
 	}
 }
@@ -269,12 +270,14 @@ TEST_CASE("blend") {
 
 	// vert
 
+	std::vector<sw::NodePtr> cache_nodes;
+
 	std::vector<sw::NodePtr> vert_nodes;
 	add_vert_pos_trans(vert_nodes, vert_nodes);
-	add_vert_varying(vert_nodes, vert_nodes, "texcoord",      sw::t_uv);
-	add_vert_varying(vert_nodes, vert_nodes, "texcoord_base", sw::t_uv);
-	add_vert_varying(vert_nodes, vert_nodes, "color",         sw::t_col4);
-	add_vert_varying(vert_nodes, vert_nodes, "additive",      sw::t_col4);
+	add_vert_varying(vert_nodes, cache_nodes, "texcoord",      sw::t_uv);
+	add_vert_varying(vert_nodes, cache_nodes, "texcoord_base", sw::t_uv);
+	add_vert_varying(vert_nodes, cache_nodes, "color",         sw::t_col4);
+	add_vert_varying(vert_nodes, cache_nodes, "additive",      sw::t_col4);
 
 	// frag
 
@@ -336,7 +339,7 @@ TEST_CASE("gray") {
 	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
 	sw::Evaluator frag({ gray }, sw::ST_FRAG);
 
-	debug_print(vert, frag);
+	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
 
 	REQUIRE(shader != 0);
@@ -379,6 +382,39 @@ TEST_CASE("rename") {
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
 
+	REQUIRE(shader != 0);
+}
+
+TEST_CASE("type conv") {
+	init();
+
+	// layout
+	init_layout(ST_SHAPE);
+
+	// vert
+	std::vector<sw::NodePtr> vert_nodes;
+	add_vert_pos_trans(vert_nodes, vert_nodes);
+
+	auto vert_color_in  = std::make_shared<sw::node::Input>("color", sw::t_col4);
+
+	auto vec3 = std::make_shared<sw::node::Vector3>("", sm::vec3(0.1f, 0.1f, 0.1f));
+	auto vert_color_out = std::make_shared<sw::node::Output>("v_color", sw::t_col4);
+	sw::make_connecting({ vec3, 0 }, { vert_color_out, 0 });
+	vert_nodes.push_back(vert_color_out);
+
+	// frag
+	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+
+	// end
+
+	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
+	sw::Evaluator frag({ frag_in_col }, sw::ST_FRAG);
+
+	//debug_print(vert, frag);
+	int shader = create_shader(vert, frag);
+
+	REQUIRE(shader != 0);
+}
 
 TEST_CASE("phong") {
 	init();

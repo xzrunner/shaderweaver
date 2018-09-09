@@ -78,10 +78,85 @@ void Evaluator::Concatenate()
 	{
 		for (auto& port : node->GetImports())
 		{
-			auto in_var = port.GetPair(0);
-			assert(in_var);
-			port.var.SetRealName(in_var->GetRealName());
+			auto in_port = port.GetPair(0);
+			assert(in_port);
+			Concatenate(const_cast<Node::Port&>(*in_port),
+				const_cast<Node::Port&>(port));
 		}
+	}
+}
+
+void Evaluator::Concatenate(Node::Port& from, Node::Port& to)
+{
+	auto f_type = from.var.Type();
+	auto t_type = to.var.Type();
+
+	// todo
+	assert(f_type.len == t_type.len);
+	assert(f_type.basis == t_type.basis);
+	assert(f_type.interp == VT_INTERP_ANY
+		|| t_type.interp == VT_INTERP_ANY
+		|| f_type.interp == t_type.interp);
+	assert(f_type.precision == t_type.precision);
+
+	if (f_type.dim != t_type.dim)
+	{
+		std::string name = from.var.GetRealName();
+		if (f_type.dim > t_type.dim)
+		{
+			switch (t_type.dim)
+			{
+			case VT_1:
+				name = name + ".x";
+				break;
+			case VT_2:
+				name = name + ".xy";
+				break;
+			case VT_3:
+				name = name + ".xyz";
+				break;
+			}
+		}
+		else
+		{
+			std::string type = to.var.Type().ToGLSL();
+			switch (t_type.dim)
+			{
+			case VT_2:
+				name = cpputil::StringHelper::Format("%s(%s, 0)", type.c_str(), name.c_str());
+				break;
+			case VT_3:
+				switch (f_type.dim)
+				{
+				case VT_1:
+					name = cpputil::StringHelper::Format("%s(%s, 0, 0)", type.c_str(), name.c_str());
+					break;
+				case VT_2:
+					name = cpputil::StringHelper::Format("%s(%s, 0)", type.c_str(), name.c_str());
+					break;
+				}
+				break;
+			case VT_4:
+				switch (f_type.dim)
+				{
+				case VT_1:
+					name = cpputil::StringHelper::Format("%s(%s, 0, 0, 0)", type.c_str(), name.c_str());
+					break;
+				case VT_2:
+					name = cpputil::StringHelper::Format("%s(%s, 0, 0)", type.c_str(), name.c_str());
+					break;
+				case VT_3:
+					name = cpputil::StringHelper::Format("%s(%s, 0)", type.c_str(), name.c_str());
+					break;
+				}
+				break;
+			}
+		}
+		to.var.SetRealName(name);
+	}
+	else
+	{
+		to.var.SetRealName(from.var.GetRealName());
 	}
 }
 

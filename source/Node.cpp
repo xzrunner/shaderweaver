@@ -46,7 +46,6 @@ std::string Node::GetBodyStr() const
 void Node::AddVariable(const Variable& var)
 {
 	auto type = var.Type();
-	assert(type.region != VT_REGION_ANY);
 	switch (type.region)
 	{
 	case VT_NODE_IN:
@@ -79,7 +78,7 @@ std::string Node::VarsToString(const std::vector<Port>& ports)
 // struct Node::Port
 //////////////////////////////////////////////////////////////////////////
 
-const Variable* Node::Port::GetPair(int idx) const
+const Node::Port* Node::Port::GetPair(int idx) const
 {
 	if (idx < 0 || idx >= static_cast<int>(conns.size())) {
 		return nullptr;
@@ -90,7 +89,7 @@ const Variable* Node::Port::GetPair(int idx) const
 	assert(conn_node);
 	auto& ports = var.Type().region == VT_NODE_IN ? conn_node->m_exports : conn_node->m_imports;
 	assert(conn.idx >= 0 && conn.idx < static_cast<int>(ports.size()));
-	return &ports[conn.idx].var;
+	return &ports[conn.idx];
 }
 
 //////////////////////////////////////////////////////////////////////////
