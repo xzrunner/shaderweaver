@@ -140,13 +140,13 @@ void Evaluator::Concatenate(Node::Port& from, Node::Port& to)
 				switch (f_type.dim)
 				{
 				case VT_1:
-					name = cpputil::StringHelper::Format("%s(%s, 0, 0, 0)", type.c_str(), name.c_str());
+					name = cpputil::StringHelper::Format("%s(%s, 0, 0, 1)", type.c_str(), name.c_str());
 					break;
 				case VT_2:
-					name = cpputil::StringHelper::Format("%s(%s, 0, 0)", type.c_str(), name.c_str());
+					name = cpputil::StringHelper::Format("%s(%s, 0, 1)", type.c_str(), name.c_str());
 					break;
 				case VT_3:
-					name = cpputil::StringHelper::Format("%s(%s, 0)", type.c_str(), name.c_str());
+					name = cpputil::StringHelper::Format("%s(%s, 1)", type.c_str(), name.c_str());
 					break;
 				}
 				break;
