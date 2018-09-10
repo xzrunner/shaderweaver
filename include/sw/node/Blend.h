@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Blend : public Node
+class Blend : public sw::Node
 {
 public:
 	Blend();

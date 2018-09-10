@@ -10,7 +10,7 @@ namespace sw
 namespace node
 {
 
-class Output : public Node
+class Output : public sw::Node
 {
 public:
 	Output(const std::string& name, uint32_t type)

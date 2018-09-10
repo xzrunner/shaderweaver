@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class ColorAddMul : public Node
+class ColorAddMul : public sw::Node
 {
 public:
 	ColorAddMul()

@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Add : public Node
+class Add : public sw::Node
 {
 public:
 	Add()

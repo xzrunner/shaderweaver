@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Phong : public Node
+class Phong : public sw::Node
 {
 public:
 	Phong()

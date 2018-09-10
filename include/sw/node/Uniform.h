@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Uniform : public Node
+class Uniform : public sw::Node
 {
 public:
 	Uniform(const std::string& name, uint32_t type)

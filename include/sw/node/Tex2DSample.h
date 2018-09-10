@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Tex2DSample : public Node
+class Tex2DSample : public sw::Node
 {
 public:
 	Tex2DSample()

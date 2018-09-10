@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Input : public Node
+class Input : public sw::Node
 {
 public:
 	Input(const std::string& name, uint32_t type)

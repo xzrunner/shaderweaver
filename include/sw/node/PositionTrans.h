@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class PositionTrans : public Node
+class PositionTrans : public sw::Node
 {
 public:
 	PositionTrans()

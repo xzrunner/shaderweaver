@@ -8,7 +8,7 @@ namespace sw
 namespace node
 {
 
-class Gray : public Node
+class Gray : public sw::Node
 {
 public:
 	Gray()

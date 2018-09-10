@@ -10,7 +10,7 @@ namespace sw
 namespace node
 {
 
-class Vector4 : public Node
+class Vector4 : public sw::Node
 {
 public:
 	Vector4(const std::string& name, const sm::vec4& val)
