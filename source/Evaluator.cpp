@@ -81,7 +81,7 @@ void Evaluator::Concatenate()
 			auto in_port = port.GetPair(0);
 			assert(in_port);
 			Concatenate(const_cast<Node::Port&>(*in_port),
-				const_cast<Node::Port&>(port));
+				        const_cast<Node::Port&>(port));
 		}
 	}
 }
@@ -255,9 +255,9 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::Nod
 			continue;
 		}
 		assert(port.conns.size() == 1);
-		auto node = port.conns[0].node.lock();
-		assert(node);
-		InsertNodeRecursive(node, array);
+		auto pair = port.conns[0].node.lock();
+		assert(pair);
+		InsertNodeRecursive(pair, array);
 	}
 }
 
