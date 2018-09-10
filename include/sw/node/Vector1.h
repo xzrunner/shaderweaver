@@ -3,6 +3,8 @@
 #include "sw/Node.h"
 #include "sw/VariableType.h"
 
+#include <cpputil/StringHelper.h>
+
 #include <SM_Vector.h>
 
 namespace sw
