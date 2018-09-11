@@ -9,16 +9,16 @@ namespace sw
 namespace node
 {
 
-class Add : public sw::Node
+class Multiply : public sw::Node
 {
 public:
-	Add()
-		: Node("Add")
+	Multiply()
+		: Node("Multiply")
 	{
 		AddVariable(Variable(t_n_in,  "a"));
 		AddVariable(Variable(t_n_in,  "b"));
 
-		AddVariable(Variable(t_n_out, "add"));
+		AddVariable(Variable(t_n_out, "mul"));
 	}
 
 	virtual void Update() override {
@@ -34,10 +34,10 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(add) = (a) + (b);\n";
+		return "(add) = (a) * (b);\n";
 	}
 
-}; // Add
+}; // Multiply
 
 }
 }

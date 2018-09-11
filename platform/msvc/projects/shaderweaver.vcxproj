@@ -13,19 +13,23 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h" />
     <ClInclude Include="..\..\..\include\sw\Node.h" />
+    <ClInclude Include="..\..\..\include\sw\NodeHelper.h" />
     <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h" />
     <ClInclude Include="..\..\..\include\sw\node\Add.h" />
     <ClInclude Include="..\..\..\include\sw\node\Blend.h" />
     <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Divide.h" />
     <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Gray.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Multiply.h" />
     <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Phong.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Input.h" />
     <ClInclude Include="..\..\..\include\sw\node\Output.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans2.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h" />
     <ClInclude Include="..\..\..\include\sw\node\Uniform.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector1.h" />
@@ -42,8 +46,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp" />
     <ClCompile Include="..\..\..\source\Node.cpp" />
+    <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
     <ClCompile Include="..\..\..\source\NodeIDMgr.cpp" />
-    <ClCompile Include="..\..\..\source\node\Add.cpp" />
     <ClCompile Include="..\..\..\source\node\Blend.cpp" />
     <ClCompile Include="..\..\..\source\Variable.cpp" />
     <ClCompile Include="..\..\..\source\VariableType.cpp" />

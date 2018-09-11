@@ -31,22 +31,16 @@
     <Filter Include="node\primitive\shader">
       <UniqueIdentifier>{8d3d2ad8-c683-41f8-9189-885f5199bebb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dataset\node">
+      <UniqueIdentifier>{4f4d9280-d661-47f7-9cb0-ee382f009316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dataset\var">
+      <UniqueIdentifier>{911b9438-3a34-4389-ba44-dc1380f79231}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h">
       <Filter>eval</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\Node.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\Variable.h">
-      <Filter>dataset</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\VariableType.h">
-      <Filter>dataset</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Add.h">
       <Filter>node\primitive</Filter>
@@ -114,28 +108,52 @@
     <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h">
       <Filter>node\primitive\shader</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Subtract.h">
+      <Filter>node\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Multiply.h">
+      <Filter>node\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Divide.h">
+      <Filter>node\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\Node.h">
+      <Filter>dataset\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\NodeHelper.h">
+      <Filter>dataset\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h">
+      <Filter>dataset\node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\Variable.h">
+      <Filter>dataset\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\VariableType.h">
+      <Filter>dataset\var</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
       <Filter>eval</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\source\Node.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\NodeIDMgr.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\VariableType.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\Variable.cpp">
-      <Filter>dataset</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\node\Add.cpp">
-      <Filter>node\primitive</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\node\Blend.cpp">
       <Filter>node\complex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Node.cpp">
+      <Filter>dataset\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\NodeHelper.cpp">
+      <Filter>dataset\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\NodeIDMgr.cpp">
+      <Filter>dataset\node</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Variable.cpp">
+      <Filter>dataset\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\VariableType.cpp">
+      <Filter>dataset\var</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
