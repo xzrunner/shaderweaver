@@ -34,7 +34,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(add) = (a) / (b);\n";
+		return "(div) = (a) / (b);\n";
 	}
 
 }; // Divide
