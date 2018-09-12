@@ -72,6 +72,12 @@ enum VarRegion
 	VT_NODE_MID,
 };
 
+enum VarReadWrite
+{
+	VT_READ_WRITE = 0,
+	VT_ONLY_READ,
+};
+
 union VariableType
 {
 	bool operator == (const VariableType& type) const {
@@ -93,8 +99,9 @@ union VariableType
 		unsigned precision : 2;
 		unsigned qualifier : 3;
 		unsigned region    : 2;
+		unsigned readwrite : 1;
 
-		unsigned padding   : 14;
+		unsigned padding   : 13;
 	};
 
 	uint32_t u32 = 0;
@@ -102,36 +109,38 @@ union VariableType
 
 // single
 
-static const uint32_t t_unit    = VariableType{ 0, VT_UNIT }.u32;
+static const uint32_t t_unit      = VariableType{ 0, VT_UNIT }.u32;
 
-static const uint32_t t_tex2d   = VariableType{ 0, 0, 0, VT_T2D }.u32;
+static const uint32_t t_tex2d     = VariableType{ 0, 0, 0, VT_T2D }.u32;
 
-static const uint32_t t_flt     = VariableType{ 0, 0, 0, 0, VT_FLT }.u32;
+static const uint32_t t_flt       = VariableType{ 0, 0, 0, 0, VT_FLT }.u32;
 
-static const uint32_t t_const   = VariableType{ 0, 0, 0, 0, 0, VT_CONST }.u32;
-static const uint32_t t_unif    = VariableType{ 0, 0, 0, 0, 0, VT_UNIF }.u32;
-static const uint32_t t_s_in    = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_IN }.u32;
-static const uint32_t t_s_out   = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_OUT }.u32;
-static const uint32_t t_s_end   = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_END }.u32;
+static const uint32_t t_const     = VariableType{ 0, 0, 0, 0, 0, VT_CONST }.u32;
+static const uint32_t t_unif      = VariableType{ 0, 0, 0, 0, 0, VT_UNIF }.u32;
+static const uint32_t t_s_in      = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_IN }.u32;
+static const uint32_t t_s_out     = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_OUT }.u32;
+static const uint32_t t_s_end     = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_END }.u32;
 
-static const uint32_t t_n_in    = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_IN }.u32;
-static const uint32_t t_n_out   = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_OUT }.u32;
-static const uint32_t t_n_mid   = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_MID }.u32;
+static const uint32_t t_n_in      = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_IN }.u32;
+static const uint32_t t_n_out     = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_OUT }.u32;
+static const uint32_t t_n_mid     = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_MID }.u32;
+
+static const uint32_t t_read      = VariableType{ 0, 0, 0, 0, 0, 0, 0, VT_ONLY_READ }.u32;
 
 // complex
 
-static const uint32_t t_int1    = VariableType{ VT_1, 0, 0, 0, VT_INT }.u32;
-static const uint32_t t_flt1    = VariableType{ VT_1, 0, 0, 0, VT_FLT }.u32;
-static const uint32_t t_flt2    = VariableType{ VT_2, 0, 0, 0, VT_FLT }.u32;
-static const uint32_t t_flt3    = VariableType{ VT_3, 0, 0, 0, VT_FLT }.u32;
-static const uint32_t t_flt4    = VariableType{ VT_4, 0, 0, 0, VT_FLT }.u32;
+static const uint32_t t_int1      = VariableType{ VT_1, 0, 0, 0, VT_INT }.u32;
+static const uint32_t t_flt1      = VariableType{ VT_1, 0, 0, 0, VT_FLT }.u32;
+static const uint32_t t_flt2      = VariableType{ VT_2, 0, 0, 0, VT_FLT }.u32;
+static const uint32_t t_flt3      = VariableType{ VT_3, 0, 0, 0, VT_FLT }.u32;
+static const uint32_t t_flt4      = VariableType{ VT_4, 0, 0, 0, VT_FLT }.u32;
 
-static const uint32_t t_uv      = VariableType{ VT_2, 0, 0, VT_TEX, VT_FLT }.u32;
-static const uint32_t t_pos3    = VariableType{ VT_3, 0, 0, VT_PNT, VT_FLT }.u32;
-static const uint32_t t_pos4    = VariableType{ VT_4, 0, 0, VT_PNT, VT_FLT }.u32;
-static const uint32_t t_col3    = VariableType{ VT_3, 0, 0, VT_RGB, VT_FLT }.u32;
-static const uint32_t t_col4    = VariableType{ VT_4, 0, 0, VT_RGB, VT_FLT }.u32;
-static const uint32_t t_nor3    = VariableType{ VT_3, 0, 0, VT_NOR, VT_FLT }.u32;
-static const uint32_t t_mat4    = VariableType{ VT_4, 0, 0, VT_MAT, VT_FLT }.u32;
+static const uint32_t t_uv        = VariableType{ VT_2, 0, 0, VT_TEX, VT_FLT }.u32;
+static const uint32_t t_pos3      = VariableType{ VT_3, 0, 0, VT_PNT, VT_FLT }.u32;
+static const uint32_t t_pos4      = VariableType{ VT_4, 0, 0, VT_PNT, VT_FLT }.u32;
+static const uint32_t t_col3      = VariableType{ VT_3, 0, 0, VT_RGB, VT_FLT }.u32;
+static const uint32_t t_col4      = VariableType{ VT_4, 0, 0, VT_RGB, VT_FLT }.u32;
+static const uint32_t t_nor3      = VariableType{ VT_3, 0, 0, VT_NOR, VT_FLT }.u32;
+static const uint32_t t_mat4      = VariableType{ VT_4, 0, 0, VT_MAT, VT_FLT }.u32;
 
 }

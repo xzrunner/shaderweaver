@@ -272,10 +272,13 @@ void Evaluator::InsertVar(const Node& node, const Variable& var)
 	}
 	else
 	{
+		auto t0 = var.Type();
+		auto t1 = itr->second;
+
 		// todo check const value
-		if (var.Type().qualifier == VT_CONST ||
-			itr->second.qualifier == VT_CONST ||
-			var.Type() != itr->second)
+		if (t0.qualifier == VT_CONST || t1.qualifier == VT_CONST ||
+			t0.readwrite == VT_ONLY_READ || t1.readwrite == VT_ONLY_READ ||
+			t0 != t1)
 		{
 			auto name = var.Name() + "_" + std::to_string(node.GetID());
 			var.SetRealName(name);
