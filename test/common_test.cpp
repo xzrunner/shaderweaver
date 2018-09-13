@@ -6,7 +6,7 @@
 #include <sw/node/Uniform.h>
 #include <sw/node/Input.h>
 #include <sw/node/Output.h>
-#include <sw/node/PositionTrans.h>
+#include <sw/node/PositionTransOld.h>
 #include <sw/node/Tex2DSample.h>
 #include <sw/node/ColorAddMul.h>
 #include <sw/node/Add.h>
@@ -15,7 +15,7 @@
 #include <sw/node/Vector4.h>
 #include <sw/node/Blend.h>
 #include <sw/node/Gray.h>
-#include <sw/node/PositionTrans2.h>
+#include <sw/node/PositionTrans.h>
 #include <sw/node/FragPosTrans.h>
 #include <sw/node/NormalTrans.h>
 #include <sw/node/Phong.h>
@@ -94,12 +94,12 @@ void debug_print(const sw::Evaluator& vert, const sw::Evaluator& frag)
 void add_vert_pos_trans(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr>& cache_nodes)
 {
 	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
-	auto modelview = std::make_shared<sw::node::Uniform> ("u_modelview",  sw::t_mat4);
-	auto position = std::make_shared<sw::node::Input>    ("position",     sw::t_pos4);
-	auto pos_trans = std::make_shared<sw::node::PositionTrans>();
-	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTrans::IN_PROJ });
-	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTrans::IN_MODELVIEW });
-	sw::make_connecting({ position,   0 }, { pos_trans, sw::node::PositionTrans::IN_POS });
+	auto modelview  = std::make_shared<sw::node::Uniform>("u_modelview",  sw::t_mat4);
+	auto position   = std::make_shared<sw::node::Input>  ("position",     sw::t_pos2);
+	auto pos_trans  = std::make_shared<sw::node::PositionTransOld>(2);
+	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTransOld::IN_PROJ });
+	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTransOld::IN_MODELVIEW });
+	sw::make_connecting({ position,   0 }, { pos_trans, sw::node::PositionTransOld::IN_POS });
 	nodes.push_back(pos_trans);
 
 	cache_nodes.push_back(projection);
@@ -228,6 +228,57 @@ TEST_CASE("shape2d") {
 }
 
 TEST_CASE("sprite") {
+	init();
+
+	// layout
+	std::vector<ur::VertexAttrib> va_list;
+	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float), 24, 0));
+	va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float), 24, 8));
+	auto layout_id = RC->CreateVertexLayout(va_list);
+	RC->BindVertexLayout(layout_id);
+
+	// vert
+	std::vector<sw::NodePtr> cache_nodes;
+	std::vector<sw::NodePtr> vert_nodes;
+
+	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
+	auto modelview  = std::make_shared<sw::node::Uniform>("u_modelview",  sw::t_mat4);
+	auto position   = std::make_shared<sw::node::Input>  ("position",     sw::t_pos2);
+	auto pos_trans  = std::make_shared<sw::node::PositionTransOld>(2);
+	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTransOld::IN_PROJ });
+	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTransOld::IN_MODELVIEW });
+	sw::make_connecting({ position,   0 }, { pos_trans, sw::node::PositionTransOld::IN_POS });
+	vert_nodes.push_back(pos_trans);
+
+	cache_nodes.push_back(projection);
+	cache_nodes.push_back(modelview);
+	cache_nodes.push_back(position);
+
+	add_vert_varying(vert_nodes, cache_nodes, "texcoord", sw::t_uv);
+
+	// frag
+	auto tex_sample = std::make_shared<sw::node::Tex2DSample>();
+	auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
+	auto frag_in_uv = std::make_shared<sw::node::Input>("v_texcoord", sw::t_uv);
+	sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::Tex2DSample::IN_TEX });
+	sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::Tex2DSample::IN_UV });
+
+	cache_nodes.push_back(tex_sample);
+	cache_nodes.push_back(frag_in_tex);
+	cache_nodes.push_back(frag_in_uv);
+
+	// end
+
+	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
+	sw::Evaluator frag({ tex_sample }, sw::ST_FRAG);
+
+	//debug_print(vert, frag);
+	int shader = create_shader(vert, frag);
+
+	REQUIRE(shader != 0);
+}
+
+TEST_CASE("sprite with color") {
 	init();
 
 	// layout
@@ -434,11 +485,11 @@ TEST_CASE("phong") {
 	auto position = std::make_shared<sw::node::Input>("position", sw::t_flt4);
 	auto normal   = std::make_shared<sw::node::Input>("normal",   sw::t_nor3);
 
-	auto pos_trans = std::make_shared<sw::node::PositionTrans2>();
-	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTrans2::IN_PROJ });
-	sw::make_connecting({ view, 0 },       { pos_trans, sw::node::PositionTrans2::IN_VIEW });
-	sw::make_connecting({ model, 0 },      { pos_trans, sw::node::PositionTrans2::IN_MODEL });
-	sw::make_connecting({ position, 0 },   { pos_trans, sw::node::PositionTrans2::IN_POS });
+	auto pos_trans = std::make_shared<sw::node::PositionTrans>();
+	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTrans::IN_PROJ });
+	sw::make_connecting({ view, 0 },       { pos_trans, sw::node::PositionTrans::IN_VIEW });
+	sw::make_connecting({ model, 0 },      { pos_trans, sw::node::PositionTrans::IN_MODEL });
+	sw::make_connecting({ position, 0 },   { pos_trans, sw::node::PositionTrans::IN_POS });
 	vert_nodes.push_back(pos_trans);
 
 	auto frag_pos_trans = std::make_shared<sw::node::FragPosTrans>();
@@ -488,7 +539,7 @@ TEST_CASE("phong") {
 	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
 	sw::Evaluator frag({ phong }, sw::ST_FRAG);
 
-	debug_print(vert, frag);
+	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
 
 	REQUIRE(shader != 0);

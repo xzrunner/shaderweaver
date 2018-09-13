@@ -25,10 +25,10 @@
     <ClInclude Include="..\..\..\include\sw\node\Multiply.h" />
     <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Phong.h" />
-    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
+    <ClInclude Include="..\..\..\include\sw\node\PositionTransOld.h" />
     <ClInclude Include="..\..\..\include\sw\node\Input.h" />
     <ClInclude Include="..\..\..\include\sw\node\Output.h" />
-    <ClInclude Include="..\..\..\include\sw\node\PositionTrans2.h" />
+    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h" />
     <ClInclude Include="..\..\..\include\sw\node\Uniform.h" />

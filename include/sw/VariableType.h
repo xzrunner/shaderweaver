@@ -136,6 +136,7 @@ static const uint32_t t_flt3      = VariableType{ VT_3, 0, 0, 0, VT_FLT }.u32;
 static const uint32_t t_flt4      = VariableType{ VT_4, 0, 0, 0, VT_FLT }.u32;
 
 static const uint32_t t_uv        = VariableType{ VT_2, 0, 0, VT_TEX, VT_FLT }.u32;
+static const uint32_t t_pos2      = VariableType{ VT_2, 0, 0, VT_PNT, VT_FLT }.u32;
 static const uint32_t t_pos3      = VariableType{ VT_3, 0, 0, VT_PNT, VT_FLT }.u32;
 static const uint32_t t_pos4      = VariableType{ VT_4, 0, 0, VT_PNT, VT_FLT }.u32;
 static const uint32_t t_col3      = VariableType{ VT_3, 0, 0, VT_RGB, VT_FLT }.u32;

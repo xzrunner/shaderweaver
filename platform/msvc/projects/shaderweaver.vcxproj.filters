@@ -48,9 +48,6 @@
     <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h">
       <Filter>node\complex</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h">
-      <Filter>node\complex</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Vector4.h">
       <Filter>node\value</Filter>
     </ClInclude>
@@ -88,9 +85,6 @@
       <Filter>node\complex</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h">
-      <Filter>node\complex</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\PositionTrans2.h">
       <Filter>node\complex</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Vector3.h">
@@ -131,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\VariableType.h">
       <Filter>dataset\var</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\PositionTransOld.h">
+      <Filter>node\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h">
+      <Filter>node\complex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
