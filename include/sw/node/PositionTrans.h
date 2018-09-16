@@ -3,6 +3,8 @@
 #include "sw/Node.h"
 #include "sw/VariableType.h"
 
+#include <assert.h>
+
 namespace sw
 {
 namespace node
