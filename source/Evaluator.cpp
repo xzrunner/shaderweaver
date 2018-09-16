@@ -283,7 +283,8 @@ void Evaluator::InsertVar(const Node& node, const Variable& var)
 		auto t1 = itr->second;
 
 		// todo check const value
-		if (t0.qualifier == VT_CONST || t1.qualifier == VT_CONST ||
+		if (t0.qualifier == VT_UNIF || t1.qualifier == VT_UNIF ||
+			t0.qualifier == VT_CONST || t1.qualifier == VT_CONST ||
 			t0.readwrite == VT_ONLY_READ || t1.readwrite == VT_ONLY_READ ||
 			t0 != t1)
 		{
