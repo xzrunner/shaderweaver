@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <vector>
 #include <map>
+#include <set>
 
 namespace sw
 {
@@ -34,7 +35,8 @@ private:
 	void EvalDeclareInBody(std::string& dst);
 
 private:
-	static void InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array);
+	static void InsertNodeRecursive(const sw::NodePtr& node,
+		std::vector<sw::NodePtr>& array, std::set<sw::NodePtr>& unique);
 
 	void InsertVar(const Node& node, const Variable& var);
 

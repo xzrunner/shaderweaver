@@ -54,8 +54,9 @@ void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 		break;
 	}
 
+	std::set<sw::NodePtr> unique;
 	for (auto& node : nodes) {
-		InsertNodeRecursive(node, m_nodes);
+		InsertNodeRecursive(node, m_nodes, unique);
 	}
 }
 
@@ -247,8 +248,14 @@ void Evaluator::EvalDeclareInBody(std::string& dst)
 	}
 }
 
-void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::NodePtr>& array)
+void Evaluator::InsertNodeRecursive(const sw::NodePtr& node,
+	                                std::vector<sw::NodePtr>& array,
+	                                std::set<sw::NodePtr>& unique)
 {
+	if (unique.find(node) != unique.end()) {
+		return;
+	}
+	unique.insert(node);
 	array.push_back(node);
 	for (auto& port : node->GetImports())
 	{
@@ -258,7 +265,7 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, std::vector<sw::Nod
 		assert(port.conns.size() == 1);
 		auto pair = port.conns[0].node.lock();
 		assert(pair);
-		InsertNodeRecursive(pair, array);
+		InsertNodeRecursive(pair, array, unique);
 	}
 }
 
