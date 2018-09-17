@@ -22,6 +22,8 @@
     <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Gray.h" />
+    <ClInclude Include="..\..\..\include\sw\node\InverseLerp.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Lerp.h" />
     <ClInclude Include="..\..\..\include\sw\node\Multiply.h" />
     <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h" />
     <ClInclude Include="..\..\..\include\sw\node\Phong.h" />
@@ -29,6 +31,7 @@
     <ClInclude Include="..\..\..\include\sw\node\Input.h" />
     <ClInclude Include="..\..\..\include\sw\node\Output.h" />
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h" />
+    <ClInclude Include="..\..\..\include\sw\node\Remap.h" />
     <ClInclude Include="..\..\..\include\sw\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h" />
     <ClInclude Include="..\..\..\include\sw\node\Uniform.h" />

@@ -13,23 +13,8 @@
     <Filter Include="node\value">
       <UniqueIdentifier>{b3839221-5f10-448f-a1b0-ae88d0a241c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="node\primitive">
-      <UniqueIdentifier>{084dd488-005c-475c-af11-87c56886e6d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\complex">
-      <UniqueIdentifier>{1c3e0a9a-03b6-4a10-a35a-d9042fa99c18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="tools">
       <UniqueIdentifier>{f98b9fce-d388-4739-af71-4ec486596904}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\complex\filter">
-      <UniqueIdentifier>{fc6b2e73-e2f0-442e-a846-7844ae208e43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\complex\light">
-      <UniqueIdentifier>{59554a13-fbaf-45c7-ba51-a0b3ca5c0b8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\primitive\shader">
-      <UniqueIdentifier>{8d3d2ad8-c683-41f8-9189-885f5199bebb}</UniqueIdentifier>
     </Filter>
     <Filter Include="dataset\node">
       <UniqueIdentifier>{4f4d9280-d661-47f7-9cb0-ee382f009316}</UniqueIdentifier>
@@ -37,22 +22,37 @@
     <Filter Include="dataset\var">
       <UniqueIdentifier>{911b9438-3a34-4389-ba44-dc1380f79231}</UniqueIdentifier>
     </Filter>
+    <Filter Include="node\math">
+      <UniqueIdentifier>{c0e95fdc-c7e8-4878-88be-3cfbba8c20a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\math\basic">
+      <UniqueIdentifier>{fca8c618-03d8-44a9-a526-4e50d5376611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\shader">
+      <UniqueIdentifier>{8d3d2ad8-c683-41f8-9189-885f5199bebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\filter">
+      <UniqueIdentifier>{fc6b2e73-e2f0-442e-a846-7844ae208e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\light">
+      <UniqueIdentifier>{59554a13-fbaf-45c7-ba51-a0b3ca5c0b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\math\interp">
+      <UniqueIdentifier>{380ce50d-93f3-4661-8592-819b7921a3de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\vert">
+      <UniqueIdentifier>{1d0da396-e3c4-416b-9401-dec042c54869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="node\math\range">
+      <UniqueIdentifier>{4f61359b-a267-4c28-8ad1-87d7442e1ce7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h">
       <Filter>eval</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Add.h">
-      <Filter>node\primitive</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h">
-      <Filter>node\complex</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Vector4.h">
       <Filter>node\value</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h">
-      <Filter>node\primitive</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Uniform.h">
       <Filter>node\value</Filter>
@@ -72,20 +72,11 @@
     <ClInclude Include="..\..\..\include\sw\predef.h">
       <Filter>tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Blend.h">
-      <Filter>node\complex</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Gray.h">
-      <Filter>node\complex\filter</Filter>
+      <Filter>node\filter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Phong.h">
-      <Filter>node\complex\light</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h">
-      <Filter>node\complex</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h">
-      <Filter>node\complex</Filter>
+      <Filter>node\light</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Vector3.h">
       <Filter>node\value</Filter>
@@ -97,19 +88,10 @@
       <Filter>node\value</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\VertexShader.h">
-      <Filter>node\primitive\shader</Filter>
+      <Filter>node\shader</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h">
-      <Filter>node\primitive\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Subtract.h">
-      <Filter>node\primitive</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Multiply.h">
-      <Filter>node\primitive</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Divide.h">
-      <Filter>node\primitive</Filter>
+      <Filter>node\shader</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\Node.h">
       <Filter>dataset\node</Filter>
@@ -126,19 +108,52 @@
     <ClInclude Include="..\..\..\include\sw\VariableType.h">
       <Filter>dataset\var</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\PositionTransOld.h">
-      <Filter>node\complex</Filter>
+    <ClInclude Include="..\..\..\include\sw\node\Add.h">
+      <Filter>node\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Divide.h">
+      <Filter>node\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Multiply.h">
+      <Filter>node\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Subtract.h">
+      <Filter>node\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h">
+      <Filter>node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Blend.h">
+      <Filter>node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h">
+      <Filter>node</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\InverseLerp.h">
+      <Filter>node\math\interp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Lerp.h">
+      <Filter>node\math\interp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h">
+      <Filter>node\vert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h">
+      <Filter>node\vert</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h">
-      <Filter>node\complex</Filter>
+      <Filter>node\vert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\PositionTransOld.h">
+      <Filter>node\vert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Remap.h">
+      <Filter>node\math\range</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
       <Filter>eval</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\node\Blend.cpp">
-      <Filter>node\complex</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\Node.cpp">
       <Filter>dataset\node</Filter>
@@ -154,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\VariableType.cpp">
       <Filter>dataset\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\node\Blend.cpp">
+      <Filter>node</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
