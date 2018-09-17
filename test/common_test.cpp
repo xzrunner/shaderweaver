@@ -232,8 +232,8 @@ TEST_CASE("sprite") {
 
 	// layout
 	std::vector<ur::VertexAttrib> va_list;
-	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float), 24, 0));
-	va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float), 24, 8));
+	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float), 16, 0));
+	va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float), 16, 8));
 	auto layout_id = RC->CreateVertexLayout(va_list);
 	RC->BindVertexLayout(layout_id);
 
