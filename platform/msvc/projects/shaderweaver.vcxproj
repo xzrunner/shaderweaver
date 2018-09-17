@@ -35,6 +35,7 @@
     <ClInclude Include="..\..\..\include\sw\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h" />
     <ClInclude Include="..\..\..\include\sw\node\Uniform.h" />
+    <ClInclude Include="..\..\..\include\sw\node\UV.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector1.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector2.h" />
     <ClInclude Include="..\..\..\include\sw\node\Vector3.h" />

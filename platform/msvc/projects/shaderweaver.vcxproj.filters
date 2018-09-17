@@ -46,6 +46,9 @@
     <Filter Include="node\math\range">
       <UniqueIdentifier>{4f61359b-a267-4c28-8ad1-87d7442e1ce7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="node\input">
+      <UniqueIdentifier>{fa91c5a2-e90f-4cd6-afeb-8166f37a8786}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h">
@@ -149,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\Remap.h">
       <Filter>node\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\UV.h">
+      <Filter>node\input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
