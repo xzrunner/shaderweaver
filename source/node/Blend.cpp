@@ -1,4 +1,4 @@
-#include "sw/node/Blend.h"
+#include "shaderweaver/node/Blend.h"
 
 namespace sw
 {

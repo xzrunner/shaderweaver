@@ -1,5 +1,5 @@
-#include "sw/NodeHelper.h"
-#include "sw/Node.h"
+#include "shaderweaver/NodeHelper.h"
+#include "shaderweaver/Node.h"
 
 namespace sw
 {

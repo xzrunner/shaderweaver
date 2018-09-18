@@ -1,4 +1,4 @@
-#include "sw/NodeIDMgr.h"
+#include "shaderweaver/NodeIDMgr.h"
 
 #include <assert.h>
 

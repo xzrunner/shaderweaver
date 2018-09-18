@@ -1,4 +1,4 @@
-#include "sw/Variable.h"
+#include "shaderweaver/Variable.h"
 
 namespace sw
 {

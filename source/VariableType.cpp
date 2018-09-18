@@ -1,5 +1,5 @@
-#include "sw/VariableType.h"
-#include "sw/predef.h"
+#include "shaderweaver/VariableType.h"
+#include "shaderweaver/predef.h"
 
 namespace sw
 {

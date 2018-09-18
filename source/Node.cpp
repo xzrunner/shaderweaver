@@ -1,6 +1,6 @@
-#include "sw/Node.h"
-#include "sw/VariableType.h"
-#include "sw/NodeIDMgr.h"
+#include "shaderweaver/Node.h"
+#include "shaderweaver/VariableType.h"
+#include "shaderweaver/NodeIDMgr.h"
 
 #include <assert.h>
 

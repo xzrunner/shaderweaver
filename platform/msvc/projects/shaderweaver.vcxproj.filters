@@ -1,17 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="node">
-      <UniqueIdentifier>{82db651b-5dc2-4db2-bf15-0f0cd6cd565c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="eval">
       <UniqueIdentifier>{c9efa6ae-1ca4-4783-a3f5-628de0091697}</UniqueIdentifier>
     </Filter>
     <Filter Include="dataset">
       <UniqueIdentifier>{3e7ab5a3-dd3f-4527-b897-399b44532912}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\value">
-      <UniqueIdentifier>{b3839221-5f10-448f-a1b0-ae88d0a241c7}</UniqueIdentifier>
     </Filter>
     <Filter Include="tools">
       <UniqueIdentifier>{f98b9fce-d388-4739-af71-4ec486596904}</UniqueIdentifier>
@@ -22,145 +16,166 @@
     <Filter Include="dataset\var">
       <UniqueIdentifier>{911b9438-3a34-4389-ba44-dc1380f79231}</UniqueIdentifier>
     </Filter>
-    <Filter Include="node\math">
+    <Filter Include="nodes">
+      <UniqueIdentifier>{82db651b-5dc2-4db2-bf15-0f0cd6cd565c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\math">
       <UniqueIdentifier>{c0e95fdc-c7e8-4878-88be-3cfbba8c20a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="node\math\basic">
+    <Filter Include="nodes\math\basic">
       <UniqueIdentifier>{fca8c618-03d8-44a9-a526-4e50d5376611}</UniqueIdentifier>
     </Filter>
-    <Filter Include="node\shader">
-      <UniqueIdentifier>{8d3d2ad8-c683-41f8-9189-885f5199bebb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\filter">
-      <UniqueIdentifier>{fc6b2e73-e2f0-442e-a846-7844ae208e43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\light">
-      <UniqueIdentifier>{59554a13-fbaf-45c7-ba51-a0b3ca5c0b8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\math\interp">
-      <UniqueIdentifier>{380ce50d-93f3-4661-8592-819b7921a3de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\vert">
-      <UniqueIdentifier>{1d0da396-e3c4-416b-9401-dec042c54869}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="node\math\range">
+    <Filter Include="nodes\math\range">
       <UniqueIdentifier>{4f61359b-a267-4c28-8ad1-87d7442e1ce7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="node\input">
+    <Filter Include="nodes\input">
       <UniqueIdentifier>{fa91c5a2-e90f-4cd6-afeb-8166f37a8786}</UniqueIdentifier>
     </Filter>
-    <Filter Include="node\input\basic">
+    <Filter Include="nodes\input\basic">
       <UniqueIdentifier>{40753e26-a8c4-4b5b-b762-3430ce80a307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\input\geometry">
+      <UniqueIdentifier>{78bb7d00-bd5f-4b65-9be4-93b9c740cf4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\master">
+      <UniqueIdentifier>{59554a13-fbaf-45c7-ba51-a0b3ca5c0b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\input\texture">
+      <UniqueIdentifier>{7a51daa0-864b-4671-97d8-a3b826a0278f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\artistic">
+      <UniqueIdentifier>{c6dd2288-db00-4ca3-a59f-b414516a6be9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\artistic\filter">
+      <UniqueIdentifier>{fc6b2e73-e2f0-442e-a846-7844ae208e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\artistic\blend">
+      <UniqueIdentifier>{e8d6b412-ff24-4cc8-abe1-3a76002fe5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\utility">
+      <UniqueIdentifier>{e9ab490d-04d4-4bee-ad03-4564108d3c46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\utility\vert">
+      <UniqueIdentifier>{1d0da396-e3c4-416b-9401-dec042c54869}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\utility\value">
+      <UniqueIdentifier>{b3839221-5f10-448f-a1b0-ae88d0a241c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\utility\shader">
+      <UniqueIdentifier>{8d3d2ad8-c683-41f8-9189-885f5199bebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\math\interplation">
+      <UniqueIdentifier>{380ce50d-93f3-4661-8592-819b7921a3de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\sw\Evaluator.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
       <Filter>eval</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Vector4.h">
-      <Filter>node\value</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
+      <Filter>nodes\utility\value</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Uniform.h">
-      <Filter>node\value</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Input.h">
+      <Filter>nodes\utility\value</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Input.h">
-      <Filter>node\value</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Output.h">
+      <Filter>nodes\utility\value</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Output.h">
-      <Filter>node\value</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\ShaderType.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
       <Filter>dataset</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\typedef.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\typedef.h">
       <Filter>tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\predef.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\predef.h">
       <Filter>tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Gray.h">
-      <Filter>node\filter</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Gray.h">
+      <Filter>nodes\artistic\filter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Phong.h">
-      <Filter>node\light</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Phong.h">
+      <Filter>nodes\master</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Vector3.h">
-      <Filter>node\value</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\VertexShader.h">
+      <Filter>nodes\utility\shader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Vector2.h">
-      <Filter>node\value</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FragmentShader.h">
+      <Filter>nodes\utility\shader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Vector1.h">
-      <Filter>node\value</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\VertexShader.h">
-      <Filter>node\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\FragmentShader.h">
-      <Filter>node\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\Node.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\Node.h">
       <Filter>dataset\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\NodeHelper.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\NodeHelper.h">
       <Filter>dataset\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\NodeIDMgr.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\NodeIDMgr.h">
       <Filter>dataset\node</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\Variable.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\Variable.h">
       <Filter>dataset\var</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\VariableType.h">
+    <ClInclude Include="..\..\..\include\shaderweaver\VariableType.h">
       <Filter>dataset\var</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Add.h">
-      <Filter>node\math\basic</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Add.h">
+      <Filter>nodes\math\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Divide.h">
-      <Filter>node\math\basic</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Divide.h">
+      <Filter>nodes\math\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Multiply.h">
-      <Filter>node\math\basic</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Multiply.h">
+      <Filter>nodes\math\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Subtract.h">
-      <Filter>node\math\basic</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Subtract.h">
+      <Filter>nodes\math\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Tex2DSample.h">
-      <Filter>node</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\InverseLerp.h">
+      <Filter>nodes\math\interplation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Blend.h">
-      <Filter>node</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Lerp.h">
+      <Filter>nodes\math\interplation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\ColorAddMul.h">
-      <Filter>node</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalTrans.h">
+      <Filter>nodes\utility\vert</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\InverseLerp.h">
-      <Filter>node\math\interp</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h">
+      <Filter>nodes\utility\vert</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Lerp.h">
-      <Filter>node\math\interp</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h">
+      <Filter>nodes\utility\vert</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\NormalTrans.h">
-      <Filter>node\vert</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h">
+      <Filter>nodes\utility\vert</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\FragPosTrans.h">
-      <Filter>node\vert</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Remap.h">
+      <Filter>nodes\math\range</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\PositionTrans.h">
-      <Filter>node\vert</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h">
+      <Filter>nodes\input\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\PositionTransOld.h">
-      <Filter>node\vert</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Vector1.h">
+      <Filter>nodes\input\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Remap.h">
-      <Filter>node\math\range</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Vector2.h">
+      <Filter>nodes\input\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\UV.h">
-      <Filter>node\input</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Vector3.h">
+      <Filter>nodes\input\basic</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\sw\node\Time.h">
-      <Filter>node\input\basic</Filter>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Vector4.h">
+      <Filter>nodes\input\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\UV.h">
+      <Filter>nodes\input\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex2D.h">
+      <Filter>nodes\input\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Blend.h">
+      <Filter>nodes\artistic\blend</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h">
+      <Filter>nodes\utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +198,7 @@
       <Filter>dataset\var</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\source\node\Blend.cpp">
-      <Filter>node</Filter>
+      <Filter>nodes\artistic\blend</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
-#include "sw/Evaluator.h"
-#include "sw/Node.h"
-#include "sw/VariableType.h"
-#include "sw/node/VertexShader.h"
-#include "sw/node/FragmentShader.h"
+#include "shaderweaver/Evaluator.h"
+#include "shaderweaver/Node.h"
+#include "shaderweaver/VariableType.h"
+#include "shaderweaver/node/VertexShader.h"
+#include "shaderweaver/node/FragmentShader.h"
 
 #include <cpputil/StringHelper.h>
 
