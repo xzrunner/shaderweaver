@@ -49,6 +49,9 @@
     <Filter Include="node\input">
       <UniqueIdentifier>{fa91c5a2-e90f-4cd6-afeb-8166f37a8786}</UniqueIdentifier>
     </Filter>
+    <Filter Include="node\input\basic">
+      <UniqueIdentifier>{40753e26-a8c4-4b5b-b762-3430ce80a307}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sw\Evaluator.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\sw\node\UV.h">
       <Filter>node\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\sw\node\Time.h">
+      <Filter>node\input\basic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
