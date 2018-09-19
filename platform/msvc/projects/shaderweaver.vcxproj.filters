@@ -70,6 +70,9 @@
     <Filter Include="nodes\uv">
       <UniqueIdentifier>{1d8212da-65b1-48fb-8b15-0fc2e875dcca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\procedural">
+      <UniqueIdentifier>{78aa4342-7239-4b45-a24a-36b1596a0c48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -185,6 +188,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h">
       <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h">
+      <Filter>nodes\procedural</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

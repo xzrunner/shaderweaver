@@ -27,12 +27,14 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Multiply.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\NormalTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Phong.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Input.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Output.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Remap.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rotate.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex2D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
