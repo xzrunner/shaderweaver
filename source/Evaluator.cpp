@@ -35,7 +35,7 @@ void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 {
 	assert(!nodes.empty());
 	auto& exports = nodes[0]->GetExports();
-	assert(exports.size() == 1);
+	assert(exports.size() >= 1);
 	switch (m_st)
 	{
 	case ST_VERT:
