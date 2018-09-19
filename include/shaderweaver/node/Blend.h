@@ -13,11 +13,11 @@ class Blend : public sw::Node
 public:
 	Blend();
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_BASE4 = 0,
-		IN_BLEND4,
-		IN_MODE,
+		ID_BASE4 = 0,
+		ID_BLEND4,
+		ID_MODE,
 	};
 
 protected:

@@ -31,10 +31,10 @@ public:
 	}
 
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_UV = 0,
-		IN_SIDES,
+		ID_UV = 0,
+		ID_SIDES,
 		ID_WIDTH,
 		ID_HEIGHT,
 	};

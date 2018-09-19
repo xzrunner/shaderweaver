@@ -23,10 +23,10 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_MODEL = 0,
-		IN_NORM,
+		ID_MODEL = 0,
+		ID_NORM,
 	};
 
 protected:

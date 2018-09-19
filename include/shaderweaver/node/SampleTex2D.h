@@ -23,10 +23,10 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_TEX = 0,
-		IN_UV,
+		ID_TEX = 0,
+		ID_UV,
 	};
 
 protected:

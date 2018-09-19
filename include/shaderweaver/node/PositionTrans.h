@@ -43,12 +43,12 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_PROJ = 0,
-		IN_VIEW,
-		IN_MODEL,
-		IN_POS,
+		ID_PROJ = 0,
+		ID_VIEW,
+		ID_MODEL,
+		ID_POS,
 	};
 
 protected:

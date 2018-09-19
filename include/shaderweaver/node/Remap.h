@@ -30,11 +30,11 @@ public:
 		NodeHelper::TypePropote(*this);
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_IN = 0,
-		IN_FROM,
-		IN_TO,
+		ID_IN = 0,
+		ID_FROM,
+		ID_TO,
 	};
 
 protected:
@@ -42,7 +42,7 @@ protected:
 	{
 		// (in - from.x) / (from.y - from.x) == (x - to.x) / (to.y - to.x);
 		// x = (in - from.x) / (from.y - from.x) * (to.y - to.x) + to.x;
-		auto& val = GetImports()[IN_IN];
+		auto& val = GetImports()[ID_IN];
 		switch (val.var.Type().dim)
 		{
 		case VT_1:

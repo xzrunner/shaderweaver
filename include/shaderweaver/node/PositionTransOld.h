@@ -42,11 +42,11 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_PROJ = 0,
-		IN_MODELVIEW,
-		IN_POS,
+		ID_PROJ = 0,
+		ID_MODELVIEW,
+		ID_POS,
 	};
 
 protected:

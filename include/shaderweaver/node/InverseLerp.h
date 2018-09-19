@@ -29,11 +29,11 @@ public:
 		NodeHelper::TypePropote(*this);
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_A = 0,
-		IN_B,
-		IN_T,
+		ID_A = 0,
+		ID_B,
+		ID_T,
 	};
 
 protected:

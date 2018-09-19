@@ -28,17 +28,17 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_UV = 0,
-		IN_ANGLE_OFFSET,
-		IN_CELL_DENSITY,
+		ID_UV = 0,
+		ID_ANGLE_OFFSET,
+		ID_CELL_DENSITY,
 	};
 
-	enum ExportIdx
+	enum OutputID
 	{
-		OUT_VORONOI = 0,
-		OUT_CELLS,
+		ID_VORONOI = 0,
+		ID_CELLS,
 	};
 
 protected:

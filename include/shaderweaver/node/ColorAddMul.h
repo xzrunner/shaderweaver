@@ -24,11 +24,11 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_COL = 0,
-		IN_MUL,
-		IN_ADD,
+		ID_COL = 0,
+		ID_MUL,
+		ID_ADD,
 	};
 
 protected:

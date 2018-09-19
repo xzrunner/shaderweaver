@@ -28,12 +28,12 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_UV = 0,
-		IN_CENTER,
-		IN_STRENGTH,
-		IN_OFFSET,
+		ID_UV = 0,
+		ID_CENTER,
+		ID_STRENGTH,
+		ID_OFFSET,
 	};
 
 protected:

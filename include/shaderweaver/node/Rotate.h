@@ -28,11 +28,11 @@ public:
 		});
 	}
 
-	enum ImportIdx
+	enum InputID
 	{
-		IN_UV = 0,
-		IN_CENTER,
-		IN_ROTATION,
+		ID_UV = 0,
+		ID_CENTER,
+		ID_ROTATION,
 	};
 
 protected:
