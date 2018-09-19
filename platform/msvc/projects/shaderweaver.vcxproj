@@ -32,9 +32,11 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Output.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Remap.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Rotate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex2D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\UV.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector1.h" />

@@ -67,6 +67,9 @@
     <Filter Include="nodes\math\interplation">
       <UniqueIdentifier>{380ce50d-93f3-4661-8592-819b7921a3de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\uv">
+      <UniqueIdentifier>{1d8212da-65b1-48fb-8b15-0fc2e875dcca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -176,6 +179,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h">
       <Filter>nodes\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Rotate.h">
+      <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h">
+      <Filter>nodes\uv</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
