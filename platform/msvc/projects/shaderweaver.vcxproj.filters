@@ -195,6 +195,9 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h">
       <Filter>nodes\procedural</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Voronoi.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">

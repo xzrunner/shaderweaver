@@ -46,6 +46,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector3.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector4.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\VertexShader.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Voronoi.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\predef.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\typedef.h" />
