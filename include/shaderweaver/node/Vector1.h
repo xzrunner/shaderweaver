@@ -19,11 +19,16 @@ public:
 		: Node("Vector1")
 		, m_val(val)
 	{
-		if (name.empty()) {
-			AddVariable(Variable(t_n_out | t_const | t_flt1, "flt1"));
-		} else {
-			AddVariable(Variable(t_n_out | t_const | t_flt1, name));
+		std::string real_name = name;
+		if (real_name.empty()) {
+			real_name = "flt1";
 		}
+
+		InitVariables({
+		}, {
+			{ t_const | t_flt1, real_name },
+		}, {
+		});
 	}
 
 protected:

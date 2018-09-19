@@ -15,11 +15,14 @@ public:
 	Lerp()
 		: Node("Lerp")
 	{
-		AddVariable(Variable(t_n_in,  "a"));
-		AddVariable(Variable(t_n_in,  "b"));
-		AddVariable(Variable(t_n_in,  "t"));
-
-		AddVariable(Variable(t_n_out, "lerp"));
+		InitVariables({
+			{ 0,  "a" },
+			{ 0,  "b" },
+			{ 0,  "t" },
+		}, {
+			{ 0, "lerp" },
+		}, {
+		});
 	}
 
 	virtual void Update() override {

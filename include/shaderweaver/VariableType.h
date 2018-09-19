@@ -121,10 +121,6 @@ static const uint32_t t_s_in      = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_IN }.
 static const uint32_t t_s_out     = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_OUT }.u32;
 static const uint32_t t_s_end     = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_END }.u32;
 
-static const uint32_t t_n_in      = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_IN }.u32;
-static const uint32_t t_n_out     = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_OUT }.u32;
-static const uint32_t t_n_mid     = VariableType{ 0, 0, 0, 0, 0, 0, VT_NODE_MID }.u32;
-
 static const uint32_t t_read      = VariableType{ 0, 0, 0, 0, 0, 0, 0, VT_ONLY_READ }.u32;
 
 // complex

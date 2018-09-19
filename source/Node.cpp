@@ -43,22 +43,30 @@ std::string Node::GetBodyStr() const
 	return str;
 }
 
-void Node::AddVariable(const Variable& var)
+void Node::InitVariables(const std::vector<Variable>& input,
+	                     const std::vector<Variable>& output,
+	                     const std::vector<Variable>& middle)
 {
-	auto type = var.Type();
-	switch (type.region)
+	for (auto& v : input)
 	{
-	case VT_NODE_IN:
-		m_imports.push_back(var);
-		break;
-	case VT_NODE_OUT:
-		m_exports.push_back(var);
-		break;
-	case VT_NODE_MID:
-		m_internal.push_back(var);
-		break;
-	default:
-		assert(0);
+		auto type = v.Type();
+		type.region = VT_NODE_IN;
+		const_cast<Variable&>(v).SetType(type);
+		m_imports.push_back(v);
+	}
+	for (auto& v : output)
+	{
+		auto type = v.Type();
+		type.region = VT_NODE_OUT;
+		const_cast<Variable&>(v).SetType(type);
+		m_exports.push_back(v);
+	}
+	for (auto& v : middle)
+	{
+		auto type = v.Type();
+		type.region = VT_NODE_MID;
+		const_cast<Variable&>(v).SetType(type);
+		m_internal.push_back(v);
 	}
 }
 

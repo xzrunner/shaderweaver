@@ -14,18 +14,20 @@ public:
 	Polygon()
 		: Node("Polygon")
 	{
-		AddVariable(Variable(t_uv | t_n_in, "uv"));
-		AddVariable(Variable(t_flt1 | t_n_in, "sides"));
-		AddVariable(Variable(t_flt1 | t_n_in, "width"));
-		AddVariable(Variable(t_flt1 | t_n_in, "height"));
-
-		AddVariable(Variable(t_flt1 | t_n_out, "polygon"));
-
-		AddVariable(Variable(t_flt1 | t_n_mid, "tau"));
-		AddVariable(Variable(t_flt2 | t_n_mid, "_uv"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "coord"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "r"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "distance"));
+		InitVariables({
+			{ t_uv, "uv" },
+			{ t_flt1, "sides" },
+			{ t_flt1, "width" },
+			{ t_flt1, "height" },
+		}, {
+			{ t_flt1, "polygon" },
+		}, {
+			{ t_flt1, "tau" },
+			{ t_flt2, "_uv" },
+			{ t_flt1, "coord" },
+			{ t_flt1, "r" },
+			{ t_flt1, "distance" },
+		});
 	}
 
 

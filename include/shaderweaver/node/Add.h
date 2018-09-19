@@ -15,10 +15,13 @@ public:
 	Add()
 		: Node("Add")
 	{
-		AddVariable(Variable(t_n_in,  "a"));
-		AddVariable(Variable(t_n_in,  "b"));
-
-		AddVariable(Variable(t_n_out, "add"));
+		InitVariables({
+			{ 0,  "a" },
+			{ 0,  "b" },
+		}, {
+			{ 0, "add" },
+		}, {
+		});
 	}
 
 	virtual void Update() override {

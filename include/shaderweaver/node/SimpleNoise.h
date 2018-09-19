@@ -13,12 +13,14 @@ public:
 	SimpleNoise()
 		: Node("SimpleNoise")
 	{
-		AddVariable(Variable(t_uv | t_n_in, "uv"));
-		AddVariable(Variable(t_flt1 | t_n_in, "scale"));
-
-		AddVariable(Variable(t_flt1 | t_n_out, "simple_noise"));
-
-		AddVariable(Variable(t_flt1 | t_n_mid, "t"));
+		InitVariables({
+			{ t_uv, "uv" },
+			{ t_flt1, "scale" },
+		}, {
+			{ t_flt1, "simple_noise" },
+		}, {
+			{ t_flt1, "t" },
+		});
 	}
 
 	enum ImportIdx

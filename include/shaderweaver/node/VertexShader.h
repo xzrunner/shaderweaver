@@ -14,8 +14,12 @@ public:
 	VertexShader()
 		: Node("VertexShader")
 	{
-		AddVariable(Variable(t_pos4 | t_n_in, "pos"));
-		AddVariable(Variable(t_pos4 | t_n_out | t_s_end, "gl_Position"));
+		InitVariables({
+			{ t_pos4, "pos" },
+		}, {
+			{ t_pos4 | t_s_end, "gl_Position" },
+		}, {
+		});
 	}
 
 protected:

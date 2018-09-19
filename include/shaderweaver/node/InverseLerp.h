@@ -15,11 +15,14 @@ public:
 	InverseLerp()
 		: Node("InverseLerp")
 	{
-		AddVariable(Variable(t_n_in,  "a"));
-		AddVariable(Variable(t_n_in,  "b"));
-		AddVariable(Variable(t_n_in,  "t"));
-
-		AddVariable(Variable(t_n_out, "inv_lerp"));
+		InitVariables({
+			{ 0,  "a" },
+			{ 0,  "b" },
+			{ 0,  "t" },
+		}, {
+			{ 0, "inv_lerp" },
+		}, {
+		});
 	}
 
 	virtual void Update() override {

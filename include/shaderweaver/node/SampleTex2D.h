@@ -14,10 +14,13 @@ public:
 	SampleTex2D()
 		: Node("SampleTex2D")
 	{
-		AddVariable(Variable(t_tex2d | t_n_in, "tex"));
-		AddVariable(Variable(t_uv    | t_n_in, "uv"));
-
-		AddVariable(Variable(t_col4 | t_read | t_n_out, "col4"));
+		InitVariables({
+			{ t_tex2d, "tex" },
+			{ t_uv, "uv" },
+		}, {
+			{ t_col4 | t_read, "col4" },
+		}, {
+		});
 	}
 
 	enum ImportIdx

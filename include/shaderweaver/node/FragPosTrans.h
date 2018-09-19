@@ -14,10 +14,13 @@ public:
 	FragPosTrans()
 		: Node("FragPosTrans")
 	{
-		AddVariable(Variable(t_mat4 | t_n_in, "model"));
-		AddVariable(Variable(t_pos4 | t_n_in, "pos"));
-
-		AddVariable(Variable(t_flt3 | t_n_out | t_s_out, "frag_pos"));
+		InitVariables({
+			{ t_mat4, "model" },
+			{ t_pos4, "pos" },
+		}, {
+			{ t_flt3 | t_s_out, "frag_pos" },
+		}, {
+		});
 	}
 
 	enum ImportIdx

@@ -14,11 +14,13 @@ public:
 	NormalTrans()
 		: Node("NormalTrans")
 	{
-		AddVariable(Variable(t_mat4 | t_n_in, "model"));
-		AddVariable(Variable(t_nor3 | t_n_in, "nor"));
-
-		AddVariable(Variable(t_nor3 | t_n_out, "nor_trans"));
-
+		InitVariables({
+			{ t_mat4, "model" },
+			{ t_nor3, "nor" },
+		}, {
+			{ t_nor3, "nor_trans" },
+		}, {
+		});
 	}
 
 	enum ImportIdx

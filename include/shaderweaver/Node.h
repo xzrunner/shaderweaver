@@ -53,7 +53,8 @@ protected:
 	virtual std::string GetHeader() const { return ""; }
 	virtual std::string GetBody() const = 0;
 
-	void AddVariable(const Variable& var);
+	void InitVariables(const std::vector<Variable>& input, const std::vector<Variable>& output,
+		const std::vector<Variable>& middle);
 
 private:
 	static std::string VarsToString(const std::vector<Port>& ports);

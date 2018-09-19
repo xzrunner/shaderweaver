@@ -17,8 +17,12 @@ public:
 		: Node("Output")
 		, m_var_name(name)
 	{
-		AddVariable(Variable(t_n_in | type, name));
-		AddVariable(Variable(t_n_out | t_s_out | type, name));
+		InitVariables({
+			{ type, name },
+		}, {
+			{ t_s_out | type, name },
+		}, {
+		});
 	}
 
 protected:

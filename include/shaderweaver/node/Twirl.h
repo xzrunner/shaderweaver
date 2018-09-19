@@ -13,17 +13,19 @@ public:
 	Twirl()
 		: Node("Twirl")
 	{
-		AddVariable(Variable(t_uv | t_n_in, "uv"));
-		AddVariable(Variable(t_flt2 | t_n_in, "center"));
-		AddVariable(Variable(t_flt1 | t_n_in, "strength"));
-		AddVariable(Variable(t_flt2 | t_n_in, "offset"));
-
-		AddVariable(Variable(t_uv | t_n_out, "twirl"));
-
-		AddVariable(Variable(t_flt2 | t_n_mid, "delta"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "angle"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "x"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "y"));
+		InitVariables({
+			{ t_uv, "uv" },
+			{ t_flt2, "center" },
+			{ t_flt1, "strength" },
+			{ t_flt2, "offset" },
+		}, {
+			{ t_uv, "twirl" },
+		}, {
+			{ t_flt2, "delta" },
+			{ t_flt1, "angle" },
+			{ t_flt1, "x" },
+			{ t_flt1, "y" },
+		});
 	}
 
 	enum ImportIdx

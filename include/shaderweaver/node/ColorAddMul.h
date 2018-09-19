@@ -14,11 +14,14 @@ public:
 	ColorAddMul()
 		: Node("ColorAddMul")
 	{
-		AddVariable(Variable(t_col4 | t_n_in, "col"));
-		AddVariable(Variable(t_col4 | t_n_in, "mul"));
-		AddVariable(Variable(t_col4 | t_n_in, "add"));
-
-		AddVariable(Variable(t_col4 | t_n_out, "col_add_mul"));
+		InitVariables({
+			{ t_col4, "col" },
+			{ t_col4, "mul" },
+			{ t_col4, "add" },
+		}, {
+			{ t_col4, "col_add_mul" },
+		}, {
+		});
 	}
 
 	enum ImportIdx

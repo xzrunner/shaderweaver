@@ -15,12 +15,15 @@ public:
 	Remap()
 		: Node("Remap")
 	{
-		AddVariable(Variable(t_n_in, "in"));
-		AddVariable(Variable(t_n_in, "from"));
-		AddVariable(Variable(t_n_in, "to"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "t"));
-
-		AddVariable(Variable(t_n_out, "remap"));
+		InitVariables({
+			{ 0, "in" },
+			{ 0, "from" },
+			{ 0, "to" },
+		}, {
+			{ 0, "remap" },
+		}, {
+			{ t_flt1, "t" },
+		});
 	}
 
 	virtual void Update() override {

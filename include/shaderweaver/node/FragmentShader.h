@@ -14,9 +14,13 @@ public:
 	FragmentShader()
 		: Node("FragmentShader")
 	{
-		// use t_flt4 to accept uv
-		AddVariable(Variable(/*t_col4*/t_flt4 | t_n_in, "col"));
-		AddVariable(Variable(t_col4 | t_n_out | t_s_end, "gl_FragColor"));
+		InitVariables({
+			// use t_flt4 to accept uv
+			{ /*t_col4*/t_flt4, "col" },
+		}, {
+			{ t_col4 | t_s_end, "gl_FragColor" },
+		}, {
+		});
 	}
 
 protected:

@@ -13,18 +13,19 @@ public:
 	Voronoi()
 		: Node("Voronoi")
 	{
-		AddVariable(Variable(t_uv | t_n_in, "uv"));
-		AddVariable(Variable(t_flt1 | t_n_in, "angle_offset"));
-		AddVariable(Variable(t_flt1 | t_n_in, "cell_density"));
-
-		AddVariable(Variable(t_flt1 | t_n_out, "voronoi"));
-		AddVariable(Variable(t_flt1 | t_n_out, "cells"));
-
-		AddVariable(Variable(t_flt2 | t_n_mid, "g"));
-		AddVariable(Variable(t_flt2 | t_n_mid, "f"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "t"));
-		AddVariable(Variable(t_flt3 | t_n_mid, "res"));
-
+		InitVariables({
+			{ t_uv, "uv" },
+			{ t_flt1, "angle_offset" },
+			{ t_flt1, "cell_density" },
+		}, {
+			{ t_flt1, "voronoi" },
+			{ t_flt1, "cells" },
+		}, {
+			{ t_flt2, "g" },
+			{ t_flt2, "f" },
+			{ t_flt1, "t" },
+			{ t_flt3, "res" },
+		});
 	}
 
 	enum ImportIdx

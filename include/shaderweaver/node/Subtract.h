@@ -15,10 +15,13 @@ public:
 	Subtract()
 		: Node("Subtract")
 	{
-		AddVariable(Variable(t_n_in,  "a"));
-		AddVariable(Variable(t_n_in,  "b"));
-
-		AddVariable(Variable(t_n_out, "sub"));
+		InitVariables({
+			{ 0,  "a" },
+			{ 0,  "b" },
+		}, {
+			{ 0, "sub" },
+		}, {
+		});
 	}
 
 	virtual void Update() override {

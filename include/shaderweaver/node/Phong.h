@@ -14,33 +14,32 @@ public:
 	Phong()
 		: Node("Phong")
 	{
-		// ambient
-		AddVariable(Variable(t_flt  | t_n_in, "light_ambient"));
-		AddVariable(Variable(t_col3 | t_n_in, "material_diffuse"));
-		AddVariable(Variable(t_col3 | t_n_mid, "ambient"));
-		// diffuse
-		AddVariable(Variable(t_nor3 | t_n_in, "normal"));
-		AddVariable(Variable(t_nor3 | t_unit | t_n_mid, "norm"));
-		AddVariable(Variable(t_pos3 | t_n_in, "light_pos"));
-		AddVariable(Variable(t_flt3 | t_n_in, "frag_pos"));
-		AddVariable(Variable(t_nor3 | t_unit | t_n_mid, "light_dir"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "diff"));
-		AddVariable(Variable(t_flt  | t_n_in, "light_diffuse"));
-		AddVariable(Variable(t_col3 | t_n_mid, "diffuse"));
-		// specular
-		AddVariable(Variable(t_pos3 | t_n_in, "view_pos"));
-		AddVariable(Variable(t_nor3 | t_unit | t_n_mid, "view_dir"));
-		AddVariable(Variable(t_nor3 | t_unit | t_n_mid, "reflect_dir"));
-		AddVariable(Variable(t_flt  | t_n_in, "light_specular"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "spec"));
-		AddVariable(Variable(t_flt1 | t_n_in, "material_shininess"));
-		AddVariable(Variable(t_col3 | t_n_in, "material_specular"));
-		AddVariable(Variable(t_col3 | t_n_mid, "specular"));
-		// emission
-		AddVariable(Variable(t_col3 | t_n_in, "material_emission"));
-		AddVariable(Variable(t_col3 | t_n_mid, "emission"));
-		// end
-		AddVariable(Variable(t_col3 | t_n_out, "phong"));
+		InitVariables({
+			{ t_flt, "light_ambient" },
+			{ t_col3, "material_diffuse" },
+			{ t_nor3, "normal" },
+			{ t_pos3, "light_pos" },
+			{ t_flt3, "frag_pos" },
+			{ t_flt, "light_diffuse" },
+			{ t_pos3, "view_pos" },
+			{ t_flt, "light_specular" },
+			{ t_flt1, "material_shininess" },
+			{ t_col3, "material_specular" },
+			{ t_col3, "material_emission" },
+		}, {
+			{ t_col3, "phong" },
+		}, {
+			{ t_col3, "ambient" },
+			{ t_nor3 | t_unit, "norm" },
+			{ t_nor3 | t_unit, "light_dir" },
+			{ t_flt1, "diff" },
+			{ t_col3, "diffuse" },
+			{ t_nor3 | t_unit, "view_dir" },
+			{ t_nor3 | t_unit, "reflect_dir" },
+			{ t_flt1, "spec" },
+			{ t_col3, "specular" },
+			{ t_col3, "emission" },
+		});
 	}
 
 	enum ImportIdx

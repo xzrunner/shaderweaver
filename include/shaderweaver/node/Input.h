@@ -14,7 +14,11 @@ public:
 	Input(const std::string& name, uint32_t type)
 		: Node("Input")
 	{
-		AddVariable(Variable(t_n_out | t_s_in | type, name));
+		InitVariables({
+		}, {
+			{ t_s_in | type, name },
+		}, {
+		});
 	}
 
 protected:

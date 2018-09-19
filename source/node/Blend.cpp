@@ -8,14 +8,17 @@ namespace node
 Blend::Blend()
 	: Node("Blend")
 {
-	AddVariable(Variable(t_col4 | t_n_in, "base4"));
-	AddVariable(Variable(t_col4 | t_n_in, "blend4"));
-	AddVariable(Variable(t_col3 | t_n_mid, "base3"));
-	AddVariable(Variable(t_col3 | t_n_mid, "blend3"));
-	AddVariable(Variable(t_col3 | t_n_mid, "col3"));
-	AddVariable(Variable(t_int1 | t_unif | t_n_in, "u_mode"));
-
-	AddVariable(Variable(t_col4 | t_n_out, "col4"));
+	InitVariables({
+		{ t_col4, "base4" },
+		{ t_col4, "blend4" },
+		{ t_int1 | t_unif, "u_mode" },
+	}, {
+		{ t_col4, "col4" },
+	}, {
+		{ t_col3, "base3" },
+		{ t_col3, "blend3" },
+		{ t_col3, "col3" },
+	});
 }
 
 std::string Blend::GetHeader() const

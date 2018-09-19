@@ -17,24 +17,30 @@ public:
 		: Node("PositionTrans")
 		, m_dim(dim)
 	{
-		AddVariable(Variable(t_mat4 | t_n_in, "proj"));
-		AddVariable(Variable(t_mat4 | t_n_in, "view"));
-		AddVariable(Variable(t_mat4 | t_n_in, "model"));
+		uint32_t pos_type;
 		switch (dim) {
 		case 2:
-			AddVariable(Variable(t_pos2 | t_n_in, "pos"));
+			pos_type = t_pos2;
 			break;
 		case 3:
-			AddVariable(Variable(t_pos3 | t_n_in, "pos"));
+			pos_type = t_pos3;
 			break;
 		case 4:
-			AddVariable(Variable(t_pos4 | t_n_in, "pos"));
+			pos_type = t_pos4;
 			break;
 		default:
 			assert(0);
 		}
 
-		AddVariable(Variable(t_pos4 | t_n_out, "pos_trans"));
+		InitVariables({
+			{ t_mat4, "proj" },
+			{ t_mat4, "view" },
+			{ t_mat4, "model" },
+			{ pos_type, "pos" },
+		}, {
+			{ t_pos4, "pos_trans" },
+		}, {
+		});
 	}
 
 	enum ImportIdx

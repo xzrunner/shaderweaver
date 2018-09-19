@@ -14,10 +14,13 @@ public:
 	Gray()
 		: Node("Gray")
 	{
-		AddVariable(Variable(t_col4 | t_n_in, "col4"));
-		AddVariable(Variable(t_flt1 | t_n_mid, "flt1"));
-
-		AddVariable(Variable(t_col4 | t_n_out, "gray"));
+		InitVariables({
+			{ t_col4, "col4" },
+		}, {
+			{ t_col4, "gray" },
+		}, {
+			{ t_flt1, "flt1" },
+		});
 	}
 
 protected:

@@ -14,7 +14,11 @@ public:
 	UV(const std::string& name)
 		: Node("UV")
 	{
-		AddVariable(Variable(t_uv | t_n_out | t_s_in, name));
+		InitVariables({
+		}, {
+			{ t_uv | t_s_in, name },
+		}, {
+		});
 	}
 
 protected:

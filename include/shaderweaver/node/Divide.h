@@ -15,10 +15,13 @@ public:
 	Divide()
 		: Node("Divide")
 	{
-		AddVariable(Variable(t_n_in,  "a"));
-		AddVariable(Variable(t_n_in,  "b"));
-
-		AddVariable(Variable(t_n_out, "div"));
+		InitVariables({
+			{ 0,  "a" },
+			{ 0,  "b" },
+		}, {
+			{ 0, "div" },
+		}, {
+		});
 	}
 
 	virtual void Update() override {

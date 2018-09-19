@@ -18,16 +18,19 @@ public:
 	Time()
 		: Node("Time")
 	{
-		AddVariable(Variable(t_n_out | t_flt1, "time"));
-		AddVariable(Variable(t_n_out | t_flt1, "sine_time"));
-		AddVariable(Variable(t_n_out | t_flt1, "cosine_time"));
-		AddVariable(Variable(t_n_out | t_flt1, "delta_time"));
-		AddVariable(Variable(t_n_out | t_flt1, "smooth_delta"));
-
-		AddVariable(Variable(t_n_mid | t_unif | t_flt4, "u_time"));
-		AddVariable(Variable(t_n_mid | t_unif | t_flt4, "u_sine_time"));
-		AddVariable(Variable(t_n_mid | t_unif | t_flt4, "u_cos_time"));
-		AddVariable(Variable(t_n_mid | t_unif | t_flt4, "u_delta_time"));
+		InitVariables({
+		}, {
+			{ t_flt1, "time" },
+			{ t_flt1, "sine_time" },
+			{ t_flt1, "cosine_time" },
+			{ t_flt1, "delta_time" },
+			{ t_flt1, "smooth_delta" },
+		}, {
+			{ t_unif | t_flt4, "u_time" },
+			{ t_unif | t_flt4, "u_sine_time" },
+			{ t_unif | t_flt4, "u_cos_time" },
+			{ t_unif | t_flt4, "u_delta_time" },
+		});
 	}
 
 protected:

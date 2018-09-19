@@ -14,7 +14,11 @@ public:
 	Uniform(const std::string& name, uint32_t type)
 		: Node("Uniform")
 	{
-		AddVariable(Variable(t_n_out | t_unif | type, name));
+		InitVariables({
+		}, {
+			{ t_unif | type, name },
+		}, {
+		});
 	}
 
 protected:
