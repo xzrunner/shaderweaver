@@ -198,6 +198,24 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Voronoi.h">
       <Filter>nodes\procedural</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Checkerboard.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Rectangle.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h">
+      <Filter>nodes\procedural</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h">
+      <Filter>nodes\artistic\filter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
