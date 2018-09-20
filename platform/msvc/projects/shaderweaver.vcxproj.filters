@@ -73,6 +73,15 @@
     <Filter Include="nodes\procedural">
       <UniqueIdentifier>{78aa4342-7239-4b45-a24a-36b1596a0c48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\artistic\trans">
+      <UniqueIdentifier>{64f617a0-f80e-4496-b625-345236e7380e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\artistic\adjustment">
+      <UniqueIdentifier>{cd65fea3-8e0e-4a21-8196-8a698348744d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\artistic\mask">
+      <UniqueIdentifier>{b08d702f-1d67-491c-894f-3c55f5933128}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -180,9 +189,6 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Blend.h">
       <Filter>nodes\artistic\blend</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h">
-      <Filter>nodes\utility</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rotate.h">
       <Filter>nodes\uv</Filter>
     </ClInclude>
@@ -215,6 +221,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h">
       <Filter>nodes\artistic\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h">
+      <Filter>nodes\artistic\trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMap.h">
+      <Filter>nodes\artistic\trans</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ReplaceColor.h">
+      <Filter>nodes\artistic\adjustment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMask.h">
+      <Filter>nodes\artistic\mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ChannelMask.h">
+      <Filter>nodes\artistic\mask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

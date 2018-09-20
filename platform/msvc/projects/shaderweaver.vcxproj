@@ -17,8 +17,11 @@
     <ClInclude Include="..\..\..\include\shaderweaver\NodeIDMgr.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Add.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Blend.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ChannelMask.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Checkerboard.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMap.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMask.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Divide.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h" />
@@ -38,6 +41,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rectangle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Remap.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ReplaceColor.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rotate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
