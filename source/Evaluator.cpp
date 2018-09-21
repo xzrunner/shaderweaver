@@ -99,8 +99,8 @@ void Evaluator::Concatenate(Node::Port& from, Node::Port& to)
 		|| t_type.interp == VT_INTERP_ANY
 		|| f_type.interp == t_type.interp);
 	assert(f_type.precision == VT_PRECISION_ANY
+		|| t_type.precision == VT_PRECISION_ANY
 		|| f_type.precision == t_type.precision);
-
 	if (f_type.dim != t_type.dim)
 	{
 		std::string name = from.var.GetRealName();
