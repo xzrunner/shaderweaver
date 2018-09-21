@@ -82,6 +82,9 @@
     <Filter Include="nodes\artistic\mask">
       <UniqueIdentifier>{b08d702f-1d67-491c-894f-3c55f5933128}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\math\advanced">
+      <UniqueIdentifier>{7c916244-7e70-4f94-8e6b-581c17b937b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -236,6 +239,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\ChannelMask.h">
       <Filter>nodes\artistic\mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Power.h">
+      <Filter>nodes\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SquareRoot.h">
+      <Filter>nodes\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Absolute.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Exponential.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Length.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Log.h">
+      <Filter>nodes\math\advanced</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
