@@ -24,12 +24,11 @@ public:
 		, m_type(type)
 	{
 		InitVariables({
-			{ 0, "exp_in" },
+			{ 0, "a" },
 		}, {
-			{ 0, "exp_out" },
+			{ 0, "exp" },
 		}, {
 		});
-	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
@@ -43,9 +42,9 @@ protected:
 		switch (m_type)
 		{
 		case BASE_E:
-			return "(exp_out) = exp((exp_in));\n";
+			return "(exp) = exp((a));\n";
 		case BASE_2:
-			return "(exp_out) = exp2((exp_in));\n";
+			return "(exp) = exp2((a));\n";
 		default:
 			return "";
 		}

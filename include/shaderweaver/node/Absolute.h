@@ -16,12 +16,11 @@ public:
 		: Node("Absolute")
 	{
 		InitVariables({
-			{ 0, "abs_in" },
+			{ 0, "a" },
 		}, {
-			{ 0, "abs_out" },
+			{ 0, "abs" },
 		}, {
 		});
-	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
@@ -29,7 +28,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(abs_out) = abs((abs_in));\n";
+		return "(abs) = abs((a));\n";
 	}
 
 }; // Absolute

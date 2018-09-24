@@ -25,12 +25,11 @@ public:
 		, m_type(type)
 	{
 		InitVariables({
-			{ 0, "log_in" },
+			{ 0, "a" },
 		}, {
-			{ 0, "log_out" },
+			{ 0, "log" },
 		}, {
 		});
-	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
@@ -44,11 +43,11 @@ protected:
 		switch (m_type)
 		{
 		case BASE_E:
-			return "(log_out) = log((log_in));\n";
+			return "(log) = log((a));\n";
 		case BASE_2:
-			return "(log_out) = log2((log_in));\n";
+			return "(log) = log2((a));\n";
 		case BASE_10:
-			return "(log_out) = log2((log_in)) / log2(10);\n";
+			return "(log) = log2((a)) / log2(10);\n";
 		default:
 			return "";
 		}

@@ -16,9 +16,9 @@ public:
 		: Node("Length")
 	{
 		InitVariables({
-			{ 0, "len_in" },
+			{ 0, "a" },
 		}, {
-			{ t_flt1, "len_out" },
+			{ t_flt1, "len" },
 		}, {
 		});
 	}
@@ -26,7 +26,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(len_out) = length((len_in));\n";
+		return "(len) = length((a));\n";
 	}
 
 }; // Length
