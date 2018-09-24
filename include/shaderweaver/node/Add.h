@@ -24,6 +24,7 @@ public:
 		});
 	}
 
+		m_dim_group = { 0, 1, MAX_IMPORTS_COUNT };
 	virtual void Update() override {
 		NodeHelper::TypePropote(*this);
 	}

@@ -26,6 +26,8 @@ public:
 	auto& GetExports() const { return m_exports; }
 	auto& GetInternal() const { return m_internal; }
 
+	auto& GetDimGroup() const { return m_dim_group; }
+
 public:
 	struct PortAddr
 	{
@@ -62,6 +64,11 @@ private:
 protected:
 	std::vector<Port> m_imports, m_exports;
 	std::vector<Variable> m_internal;
+
+public:
+	static const uint32_t MAX_IMPORTS_COUNT = 1024;
+protected:
+	std::vector<uint32_t> m_dim_group;
 
 private:
 	uint32_t m_uid = 0;
