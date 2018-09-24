@@ -21,11 +21,8 @@ public:
 			{ 0, "square" },
 		}, {
 		});
-	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
-	virtual void Update() override {
-		NodeHelper::TypePropote(*this);
 	}
 
 protected:

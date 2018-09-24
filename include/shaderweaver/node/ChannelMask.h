@@ -26,11 +26,8 @@ public:
 			{ 0, "channel_mask" },
 		}, {
 		});
-	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
-	virtual void Update() override {
-		NodeHelper::TypePropote(*this);
 	}
 
 	static const uint32_t CHANNEL_R = 0x1;

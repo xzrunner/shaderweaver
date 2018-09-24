@@ -15,8 +15,6 @@ public:
 	Node(const std::string& name);
 	~Node();
 
-	virtual void Update() {}
-
 	std::string GetHeaderStr() const;
 	std::string GetBodyStr() const;
 

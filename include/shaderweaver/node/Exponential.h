@@ -32,8 +32,6 @@ public:
 	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
-	virtual void Update() override {
-		NodeHelper::TypePropote(*this);
 	}
 
 	BaseType GetType() const { return m_type; }

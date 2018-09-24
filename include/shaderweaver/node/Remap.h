@@ -24,11 +24,8 @@ public:
 		}, {
 			{ t_flt1, "t" },
 		});
-	}
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
-	virtual void Update() override {
-		NodeHelper::TypePropote(*this);
 	}
 
 	enum InputID
