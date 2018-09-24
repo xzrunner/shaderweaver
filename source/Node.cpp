@@ -1,6 +1,7 @@
 #include "shaderweaver/Node.h"
 #include "shaderweaver/VariableType.h"
 #include "shaderweaver/NodeIDMgr.h"
+#include "shaderweaver/NodeHelper.h"
 
 #include <assert.h>
 
@@ -110,7 +111,6 @@ void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 		auto& ports = node->GetExports();
 		assert(from.idx >= 0 && from.idx < static_cast<int>(ports.size()));
 		const_cast<Node::Port&>(ports[from.idx]).conns.push_back(to);
-		node->Update();
 	}
 	{
 		auto node = to.node.lock();
@@ -118,8 +118,8 @@ void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 		auto& ports = node->GetImports();
 		assert(to.idx >= 0 && to.idx < static_cast<int>(ports.size()));
 		const_cast<Node::Port&>(ports[to.idx]).conns.push_back(from);
-		node->Update();
 	}
+	NodeHelper::TypePropote(from, to);
 }
 
 }

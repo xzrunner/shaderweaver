@@ -1,35 +1,63 @@
 #include "shaderweaver/NodeHelper.h"
-#include "shaderweaver/Node.h"
+
+#include <algorithm>
+
+#include <assert.h>
 
 namespace sw
 {
 
-void NodeHelper::TypePropote(Node& node)
+void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& to)
 {
-	auto& imports = node.GetImports();
-	bool empty = true;
-	for (auto& p : imports) {
-		if (!p.conns.empty()) {
-			empty = false;
-			break;
-		}
-	}
+	auto f_node = from.node.lock();
+	assert(f_node && from.idx >= 0 && from.idx < static_cast<int>(f_node->GetExports().size()));
+	auto& f_var = f_node->GetExports()[from.idx].var;
 
-	VariableType type;
-	for (auto& p : imports)
+	auto t_node = to.node.lock();
+	assert(t_node && to.idx >= 0 && to.idx < static_cast<int>(t_node->GetImports().size()));
+	auto& t_var = t_node->GetImports()[to.idx].var;
+
+	auto f_type = f_var.Type();
+	auto t_type = t_var.Type();
+
+	if (t_var.IsDimDynamic() && t_type.dim != f_type.dim)
 	{
-		auto in_port = p.GetPair(0);
-		if (!in_port) {
-			continue;
-		}
-		type.TypePromoteFrom(in_port->var.Type());
+		t_type.dim = f_type.dim;
+		const_cast<sw::Variable&>(t_var).SetType(t_type);
 	}
 
-	for (auto& p : imports) {
-		const_cast<sw::Node::Port&>(p).var.Type().TypePromoteFrom(type);
+	if (f_type.precision != t_type.precision)
+	{
+		t_type.precision = f_type.precision;
+		const_cast<sw::Variable&>(t_var).SetType(t_type);
 	}
-	for (auto& p : node.GetExports()) {
-		const_cast<sw::Node::Port&>(p).var.Type().TypePromoteFrom(type);
+
+	if (t_node->GetName() == "Absolute") {
+		int zz = 0;
+	}
+
+	// update dim group
+	auto& dim_group = t_node->GetDimGroup();
+	if (!dim_group.empty())
+	{
+		bool find = false;
+		for (auto& idx : dim_group) {
+			if (idx == to.idx) {
+				find = true;
+			}
+		}
+		if (find)
+		{
+			for (auto& idx : dim_group)
+			{
+				auto& port = idx < Node::MAX_IMPORTS_COUNT ?
+					t_node->GetImports()[idx] : t_node->GetExports()[idx - Node::MAX_IMPORTS_COUNT];
+				auto type = port.var.Type();
+				type.dim = std::max(type.dim, t_type.dim);
+				type.precision = std::max(type.precision, t_type.precision);
+				const_cast<Node::Port&>(port).var.SetType(type);
+			}
+		}
 	}
 }
 

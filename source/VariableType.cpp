@@ -109,14 +109,4 @@ std::string VariableType::ToGLSL(ShaderType st) const
 	return str;
 }
 
-void VariableType::TypePromoteFrom(const VariableType& type)
-{
-	if (type.dim > dim) {
-		dim = type.dim;
-	}
-	if (type.precision > precision) {
-		precision = type.precision;
-	}
-}
-
 }

@@ -22,7 +22,10 @@ public:
 
 	void SetType(VariableType type) { m_type = type; }
 
+	bool IsDimDynamic() const { return m_is_dim_dynamic; }
+
 private:
+	bool m_is_dim_dynamic;
 	VariableType m_type;
 	std::string  m_name;
 	mutable std::string m_real_name;

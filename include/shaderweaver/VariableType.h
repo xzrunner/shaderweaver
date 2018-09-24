@@ -89,8 +89,6 @@ union VariableType
 
 	std::string ToGLSL(ShaderType st = ST_ANY) const;
 
-	void TypePromoteFrom(const VariableType& type);
-
 	struct {
 		unsigned dim       : 3;
 		unsigned len       : 1;
