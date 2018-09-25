@@ -17,8 +17,8 @@ public:
 	{
 		InitVariables({
 			{ 0, "in" },
-			{ 0, "from" },
-			{ 0, "to" },
+			{ t_flt2, "from" },
+			{ t_flt2, "to" },
 		}, {
 			{ 0, "remap" },
 		}, {
