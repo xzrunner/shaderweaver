@@ -32,10 +32,6 @@ void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& t
 		const_cast<sw::Variable&>(t_var).SetType(t_type);
 	}
 
-	if (t_node->GetName() == "Absolute") {
-		int zz = 0;
-	}
-
 	// update dim group
 	auto& dim_group = t_node->GetDimGroup();
 	if (!dim_group.empty())
