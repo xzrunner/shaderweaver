@@ -8,29 +8,36 @@ namespace sw
 namespace node
 {
 
-class Absolute : public sw::Node
+class Posterize : public sw::Node
 {
 public:
-	Absolute()
-		: Node("Absolute")
+	Posterize()
+		: Node("Posterize")
 	{
 		InitVariables({
 			{ 0, "a" },
+			{ 0, "steps" },
 		}, {
-			{ 0, "abs" },
+			{ 0, "posterize" },
 		}, {
 		});
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
 
+	enum InputID
+	{
+		ID_INPUT = 0,
+		ID_STEPS,
+	};
+
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(abs) = abs((a));\n";
+		return "(posterize) = floor((a) / (1 / (steps))) * (1 / (steps));\n";
 	}
 
-}; // Absolute
+}; // Posterize
 
 }
 }

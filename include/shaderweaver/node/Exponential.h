@@ -2,7 +2,6 @@
 
 #include "shaderweaver/Node.h"
 #include "shaderweaver/NodeHelper.h"
-#include "shaderweaver/VariableType.h"
 
 namespace sw
 {

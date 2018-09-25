@@ -8,16 +8,16 @@ namespace sw
 namespace node
 {
 
-class Absolute : public sw::Node
+class Reciprocal : public sw::Node
 {
 public:
-	Absolute()
-		: Node("Absolute")
+	Reciprocal()
+		: Node("Reciprocal")
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "in_" },
 		}, {
-			{ 0, "abs" },
+			{ 0, "out_" },
 		}, {
 		});
 
@@ -27,10 +27,10 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(abs) = abs((a));\n";
+		return "(out_) = 1.0 / (in_);\n";
 	}
 
-}; // Absolute
+}; // Reciprocal
 
 }
 }

@@ -8,16 +8,16 @@ namespace sw
 namespace node
 {
 
-class Absolute : public sw::Node
+class Negate : public sw::Node
 {
 public:
-	Absolute()
-		: Node("Absolute")
+	Negate()
+		: Node("Negate")
 	{
 		InitVariables({
 			{ 0, "a" },
 		}, {
-			{ 0, "abs" },
+			{ 0, "neg" },
 		}, {
 		});
 
@@ -27,10 +27,10 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(abs) = abs((a));\n";
+		return "(neg) = -1 * (a);\n";
 	}
 
-}; // Absolute
+}; // Negate
 
 }
 }

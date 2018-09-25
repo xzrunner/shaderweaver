@@ -8,16 +8,16 @@ namespace sw
 namespace node
 {
 
-class Absolute : public sw::Node
+class Normalize : public sw::Node
 {
 public:
-	Absolute()
-		: Node("Absolute")
+	Normalize()
+		: Node("Normalize")
 	{
 		InitVariables({
 			{ 0, "a" },
 		}, {
-			{ 0, "abs" },
+			{ 0, "norm" },
 		}, {
 		});
 
@@ -27,10 +27,10 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(abs) = abs((a));\n";
+		return "(norm) = normalize((a));\n";
 	}
 
-}; // Absolute
+}; // Normalize
 
 }
 }

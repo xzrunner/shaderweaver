@@ -258,6 +258,27 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Log.h">
       <Filter>nodes\math\advanced</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Modulo.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Negate.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Normalize.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Posterize.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Reciprocal.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ReciprocalSquareRoot.h">
+      <Filter>nodes\math\advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Smoothstep.h">
+      <Filter>nodes\math\interplation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
