@@ -88,6 +88,9 @@
     <Filter Include="nodes\channel">
       <UniqueIdentifier>{b588d751-43ef-4a67-994f-118216ecb761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\utility\logic">
+      <UniqueIdentifier>{052481df-2ac5-465c-ba6c-a52c50f2df07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -293,6 +296,27 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Swizzle.h">
       <Filter>nodes\channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Assign.h">
+      <Filter>nodes\math\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\And.h">
+      <Filter>nodes\utility\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Or.h">
+      <Filter>nodes\utility\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Not.h">
+      <Filter>nodes\utility\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Boolean.h">
+      <Filter>nodes\input\basic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Branch.h">
+      <Filter>nodes\utility\logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Comparison.h">
+      <Filter>nodes\utility\logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

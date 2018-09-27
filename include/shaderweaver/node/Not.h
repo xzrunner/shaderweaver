@@ -9,36 +9,27 @@ namespace sw
 namespace node
 {
 
-class Add : public sw::Node
+class Not : public sw::Node
 {
 public:
-	Add()
-		: Node("Add")
+	Not()
+		: Node("Not")
 	{
 		InitVariables({
-			{ 0, "a" },
-			{ 0, "b" },
+			{ t_bool, "_in" },
 		}, {
-			{ 0, "_out" },
+			{ t_bool, "_out" },
 		}, {
 		});
-
-		m_dim_group = { 0, 1, MAX_IMPORTS_COUNT };
 	}
-
-	enum InputID
-	{
-		ID_A = 0,
-		ID_B,
-	};
 
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "#_out# = #a# + #b#;\n";
+		return "#_out# = !#_in#;\n";
 	}
 
-}; // Add
+}; // Not
 
 }
 }

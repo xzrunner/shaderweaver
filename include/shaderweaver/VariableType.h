@@ -123,6 +123,7 @@ static const uint32_t t_read      = VariableType{ 0, 0, 0, 0, 0, 0, 0, VT_ONLY_R
 
 // complex
 
+static const uint32_t t_bool      = VariableType{ VT_1, 0, 0, 0, VT_BOOL }.u32;
 static const uint32_t t_int1      = VariableType{ VT_1, 0, 0, 0, VT_INT }.u32;
 static const uint32_t t_flt1      = VariableType{ VT_1, 0, 0, 0, VT_FLT }.u32;
 static const uint32_t t_flt2      = VariableType{ VT_2, 0, 0, 0, VT_FLT }.u32;

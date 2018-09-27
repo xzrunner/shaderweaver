@@ -17,13 +17,17 @@
     <ClInclude Include="..\..\..\include\shaderweaver\NodeIDMgr.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Absolute.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Add.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\And.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Blend.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Boolean.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Branch.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ChannelMask.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Checkerboard.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMap.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMask.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Combine.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Comparison.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Divide.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h" />
@@ -42,6 +46,8 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Negate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Normalize.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\NormalTrans.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Not.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Or.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Phong.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
@@ -50,6 +56,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Posterize.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Power.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Assign.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Reciprocal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ReciprocalSquareRoot.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rectangle.h" />

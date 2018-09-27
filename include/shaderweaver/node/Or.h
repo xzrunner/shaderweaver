@@ -9,21 +9,19 @@ namespace sw
 namespace node
 {
 
-class Add : public sw::Node
+class Or : public sw::Node
 {
 public:
-	Add()
-		: Node("Add")
+	Or()
+		: Node("Or")
 	{
 		InitVariables({
-			{ 0, "a" },
-			{ 0, "b" },
+			{ t_bool, "a" },
+			{ t_bool, "b" },
 		}, {
-			{ 0, "_out" },
+			{ t_bool, "_out" },
 		}, {
 		});
-
-		m_dim_group = { 0, 1, MAX_IMPORTS_COUNT };
 	}
 
 	enum InputID
@@ -35,10 +33,10 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "#_out# = #a# + #b#;\n";
+		return "#_out# = #a# || #b#;\n";
 	}
 
-}; // Add
+}; // Or
 
 }
 }
