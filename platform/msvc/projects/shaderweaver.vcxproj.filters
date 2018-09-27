@@ -318,6 +318,21 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Comparison.h">
       <Filter>nodes\utility\logic</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Flipbook.h">
+      <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h">
+      <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RadialShear.h">
+      <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Spherize.h">
+      <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h">
+      <Filter>nodes\uv</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">

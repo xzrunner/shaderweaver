@@ -33,6 +33,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Exponential.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Flip.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Flipbook.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Not.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Or.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Phong.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Input.h" />
@@ -57,6 +59,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Posterize.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Power.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Assign.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RadialShear.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Reciprocal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ReciprocalSquareRoot.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rectangle.h" />
@@ -66,11 +69,13 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Smoothstep.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Spherize.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Split.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SquareRoot.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex2D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Swizzle.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h" />
