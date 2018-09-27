@@ -91,6 +91,15 @@
     <Filter Include="nodes\utility\logic">
       <UniqueIdentifier>{052481df-2ac5-465c-ba6c-a52c50f2df07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\math\derivative">
+      <UniqueIdentifier>{5bc4dc11-571e-4bd2-b31e-f7180fa47a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\math\matrix">
+      <UniqueIdentifier>{8a4d15cc-cfcc-4190-9be3-592a4cc69b1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\input\matrix">
+      <UniqueIdentifier>{e2d740ed-dcbf-422a-a056-8c0ca3b529b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -332,6 +341,57 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h">
       <Filter>nodes\uv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\DDX.h">
+      <Filter>nodes\math\derivative</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\DDY.h">
+      <Filter>nodes\math\derivative</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\DDXY.h">
+      <Filter>nodes\math\derivative</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixConstruction.h">
+      <Filter>nodes\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixDeterminant.h">
+      <Filter>nodes\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixSplit.h">
+      <Filter>nodes\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixTranspose.h">
+      <Filter>nodes\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Matrix2.h">
+      <Filter>nodes\input\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Matrix3.h">
+      <Filter>nodes\input\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Matrix4.h">
+      <Filter>nodes\input\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Clamp.h">
+      <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Fraction.h">
+      <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Maximum.h">
+      <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Minimum.h">
+      <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\OneMinus.h">
+      <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RandomRange.h">
+      <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h">
+      <Filter>nodes\math\range</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
