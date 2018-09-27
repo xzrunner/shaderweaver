@@ -15,12 +15,12 @@ public:
 		: Node("ColorMap")
 	{
 		InitVariables({
-			{ t_col3, "col" },
+			{ t_col3, "_in" },
 			{ t_col3, "rmap" },
 			{ t_col3, "gmap" },
 			{ t_col3, "bmap" },
 		}, {
-			{ t_col3, "col_map" },
+			{ t_col3, "_out" },
 		}, {
 			{ t_flt1, "s" },
 			{ t_flt1, "k" },
@@ -56,25 +56,25 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(s) = 1.2;
-(k) = (col).r + (col).g + (col).b;
+#s# = 1.2;
+#k# = #_in#.r + #_in#.g + #_in#.b;
 
-(r_valid) = step(0.5, sw_neql((rmap).r, 1.0) + sw_neql((rmap).g, 0.0) + sw_neql((rmap).b, 0.0));
-(cmp_gr)  = step((col).g * (s), (col).r);
-(cmp_br)  = step((col).b * (s), (col).r);
-(dr)      = ((rmap).rgb * (k) - (col)) * (r_valid) * (cmp_gr) * (cmp_br);
+#r_valid# = step(0.5, sw_neql(#rmap#.r, 1.0) + sw_neql(#rmap#.g, 0.0) + sw_neql(#rmap#.b, 0.0));
+#cmp_gr#  = step(#_in#.g * #s#, #_in#.r);
+#cmp_br#  = step(#_in#.b * #s#, #_in#.r);
+#dr#      = (#rmap#.rgb * #k# - #_in#) * #r_valid# * #cmp_gr# * #cmp_br#;
 
-(g_valid) = step(0.5, sw_neql((gmap).r, 0.0) + sw_neql((gmap).g, 1.0) + sw_neql((gmap).b, 0.0));
-(cmp_rg)  = step((col).r * (s), (col).g);
-(cmp_bg)  = step((col).b * (s), (col).g);
-(dg)      = ((gmap).rgb * (k) - (col)) * (g_valid) * (cmp_rg) * (cmp_bg);
+#g_valid# = step(0.5, sw_neql(#gmap#.r, 0.0) + sw_neql(#gmap#.g, 1.0) + sw_neql(#gmap#.b, 0.0));
+#cmp_rg#  = step(#_in#.r * #s#, #_in#.g);
+#cmp_bg#  = step(#_in#.b * #s#, #_in#.g);
+#dg#      = (#gmap#.rgb * #k# - #_in#) * #g_valid# * #cmp_rg# * #cmp_bg#;
 
-(b_valid) = step(0.5, sw_neql((bmap).r, 0.0) + sw_neql((bmap).g, 0.0) + sw_neql((bmap).b, 1.0));
-(cmp_rb)  = step((col).r * (s), (col).b);
-(cmp_gb)  = step((col).g * (s), (col).b);
-(db)      = ((bmap).rgb * (k) - (col)) * (b_valid) * (cmp_rb) * (cmp_gb);
+#b_valid# = step(0.5, sw_neql(#bmap#.r, 0.0) + sw_neql(#bmap#.g, 0.0) + sw_neql(#bmap#.b, 1.0));
+#cmp_rb#  = step(#_in#.r * #s#, #_in#.b);
+#cmp_gb#  = step(#_in#.g * #s#, #_in#.b);
+#db#      = (#bmap#.rgb * #k# - #_in#) * #b_valid# * #cmp_rb# * #cmp_gb#;
 
-(col_map) = (dr) + (dg) + (db) + (col);
+#_out# = #dr# + #dg# + #db# + #_in#;
 )" + 1;
 	}
 

@@ -19,7 +19,7 @@ public:
 			{ 0,  "a" },
 			{ 0,  "b" },
 		}, {
-			{ 0, "power" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -35,7 +35,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(power) = pow((a), (b));\n";
+		return "#_out# = pow(#a#, #b#);\n";
 	}
 
 }; // Power

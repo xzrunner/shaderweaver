@@ -29,7 +29,7 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return cpputil::StringHelper::Format(
-			"%s = (%s);\n", m_var_name.c_str(), m_var_name.c_str()
+			"%s = #%s#;\n", m_var_name.c_str(), m_var_name.c_str()
 		);
 	}
 

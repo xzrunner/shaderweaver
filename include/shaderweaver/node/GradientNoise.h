@@ -17,7 +17,7 @@ public:
 			{ t_uv, "uv" },
 			{ t_flt1, "scale" },
 		}, {
-			{ t_flt1, "gradient_noise" },
+			{ t_flt1, "_out" },
 		}, {
 		});
 	}
@@ -58,7 +58,7 @@ float shaderweaver_gradient_noise(vec2 p)
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(gradient_noise) = shaderweaver_gradient_noise((uv) * (scale)) + 0.5;
+#_out# = shaderweaver_gradient_noise(#uv# * #scale#) + 0.5;
 )" + 1;
 	}
 

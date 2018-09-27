@@ -15,9 +15,9 @@ public:
 		: Node("Reciprocal")
 	{
 		InitVariables({
-			{ 0, "in_" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "out_" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -27,7 +27,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(out_) = 1.0 / (in_);\n";
+		return "#_out# = 1.0 / #_in#;\n";
 	}
 
 }; // Reciprocal

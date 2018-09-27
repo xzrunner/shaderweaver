@@ -18,7 +18,7 @@ public:
 			{ t_flt1, "angle_offset" },
 			{ t_flt1, "cell_density" },
 		}, {
-			{ t_flt1, "voronoi" },
+			{ t_flt1, "_out" },
 			{ t_flt1, "cells" },
 		}, {
 			{ t_flt2, "g" },
@@ -57,23 +57,23 @@ vec2 shaderweaver_voronoi_noise_random_vector(vec2 uv, float offset)
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(g) = floor((uv) * (cell_density));
-(f) = fract((uv) * (cell_density));
-(t) = 8.0;
-(res) = vec3(8.0, 0.0, 0.0);
+#g# = floor(#uv# * #cell_density#);
+#f# = fract(#uv# * #cell_density#);
+#t# = 8.0;
+#res# = vec3(8.0, 0.0, 0.0);
 
 for(int y=-1; y<=1; y++)
 {
     for(int x=-1; x<=1; x++)
     {
         vec2 lattice = vec2(x,y);
-        vec2 offset = shaderweaver_voronoi_noise_random_vector(lattice + (g), (angle_offset));
-        float d = distance(lattice + offset, (f));
-        if(d < (res).x)
+        vec2 offset = shaderweaver_voronoi_noise_random_vector(lattice + #g#, #angle_offset#);
+        float d = distance(lattice + offset, #f#);
+        if(d < #res#.x)
         {
-            (res) = vec3(d, offset.x, offset.y);
-            (voronoi) = (res).x;
-            (cells) = (res).y;
+            #res# = vec3(d, offset.x, offset.y);
+            #_out# = #res#.x;
+            #cells# = #res#.y;
          }
     }
 }

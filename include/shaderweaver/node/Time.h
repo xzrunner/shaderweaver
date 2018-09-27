@@ -37,11 +37,11 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(time)         = (u_time).y;
-(sine_time)    = (u_sine_time).w;
-(cosine_time)  = (u_cos_time).w;
-(delta_time)   = (u_delta_time).x;
-(smooth_delta) = (u_delta_time).z;
+#time#         = #u_time#.y;
+#sine_time#    = #u_sine_time#.w;
+#cosine_time#  = #u_cos_time#.w;
+#delta_time#   = #u_delta_time#.x;
+#smooth_delta# = #u_delta_time#.z;
 )" + 1;
 	}
 

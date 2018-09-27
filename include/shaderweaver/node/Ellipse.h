@@ -19,7 +19,7 @@ public:
 			{ t_flt1, "width" },
 			{ t_flt1, "height" },
 		}, {
-			{ t_flt1, "ellipse" },
+			{ t_flt1, "_out" },
 		}, {
 			{ t_flt1, "d" },
 		});
@@ -37,8 +37,8 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(d) = length(((uv) * 2 - 1) / vec2((width), (height)));
-(ellipse) = clamp((1 - (d)) / fwidth((d)), 0.0, 1.0);
+#d# = length((#uv# * 2 - 1) / vec2(#width#, #height#));
+#_out# = clamp((1 - #d#) / fwidth(#d#), 0.0, 1.0);
 )" + 1;
 	}
 

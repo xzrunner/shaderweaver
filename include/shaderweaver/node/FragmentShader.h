@@ -26,7 +26,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(gl_FragColor) = (col);\n";
+		return "#gl_FragColor# = #col#;\n";
 	}
 
 }; // FragmentShader

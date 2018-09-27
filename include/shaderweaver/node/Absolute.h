@@ -15,9 +15,9 @@ public:
 		: Node("Absolute")
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "abs" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -27,7 +27,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(abs) = abs((a));\n";
+		return "#_out# = abs(#_in#);\n";
 	}
 
 }; // Absolute

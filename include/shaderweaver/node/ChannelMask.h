@@ -21,9 +21,9 @@ public:
 		, m_channels(channels)
 	{
 		InitVariables({
-			{ 0, "input" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "channel_mask" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -45,20 +45,20 @@ protected:
 			switch (n)
 			{
 			case 1:
-				return "(channel_mask) = 0;\n";
+				return "#_out# = 0;\n";
 			case 2:
-				return "(channel_mask) = vec2(0, 0);\n";
+				return "#_out# = vec2(0, 0);\n";
 			case 3:
-				return "(channel_mask) = vec3(0, 0, 0);\n";
+				return "#_out# = vec3(0, 0, 0);\n";
 			case 4:
-				return "(channel_mask) = vec4(0, 0, 0, 0);\n";
+				return "#_out# = vec4(0, 0, 0, 0);\n";
 			default:
 				return "";
 			}
 		}
 		else if (m_channels == (CHANNEL_R & CHANNEL_G & CHANNEL_B & CHANNEL_A))
 		{
-			return "(channel_mask) = (input);\n";
+			return "#_out# = #_in#;\n";
 		}
 		else
 		{
@@ -70,29 +70,29 @@ protected:
 			{
 			case 1:
 				return cpputil::StringHelper::Format(
-					"(channel_mask) = %s;\n",
-					(m_channels & CHANNEL_R) ? (dim_in == 1 ? "(input)" : "(input).r") : "0"
+					"#_out# = %s;\n",
+					(m_channels & CHANNEL_R) ? (dim_in == 1 ? "#_in#" : "#_in#.r") : "0"
 				);
 			case 2:
 				return cpputil::StringHelper::Format(
-					"(channel_mask) = vec2(%s, %s);\n",
-					(m_channels & CHANNEL_R) ? "(input).r" : "0",
-					(m_channels & CHANNEL_G) ? "(input).g" : "0"
+					"#_out# = vec2(%s, %s);\n",
+					(m_channels & CHANNEL_R) ? "#_in#.r" : "0",
+					(m_channels & CHANNEL_G) ? "#_in#.g" : "0"
 				);
 			case 3:
 				return cpputil::StringHelper::Format(
-					"(channel_mask) = vec3(%s, %s, %s);\n",
-					(m_channels & CHANNEL_R) ? "(input).r" : "0",
-					(m_channels & CHANNEL_G) ? "(input).g" : "0",
-					(m_channels & CHANNEL_B) ? "(input).b" : "0"
+					"#_out# = vec3(%s, %s, %s);\n",
+					(m_channels & CHANNEL_R) ? "#_in#.r" : "0",
+					(m_channels & CHANNEL_G) ? "#_in#.g" : "0",
+					(m_channels & CHANNEL_B) ? "#_in#.b" : "0"
 				);
 			case 4:
 				return cpputil::StringHelper::Format(
-					"(channel_mask) = vec4(%s, %s, %s, %s);\n",
-					(m_channels & CHANNEL_R) ? "(input).r" : "0",
-					(m_channels & CHANNEL_G) ? "(input).g" : "0",
-					(m_channels & CHANNEL_B) ? "(input).b" : "0",
-					(m_channels & CHANNEL_A) ? "(input).a" : "0"
+					"#_out# = vec4(%s, %s, %s, %s);\n",
+					(m_channels & CHANNEL_R) ? "#_in#.r" : "0",
+					(m_channels & CHANNEL_G) ? "#_in#.g" : "0",
+					(m_channels & CHANNEL_B) ? "#_in#.b" : "0",
+					(m_channels & CHANNEL_A) ? "#_in#.a" : "0"
 				);
 			default:
 				return "";

@@ -19,7 +19,7 @@ public:
 			{ t_flt1, "width" },
 			{ t_flt1, "height" },
 		}, {
-			{ t_flt1, "rectangle" },
+			{ t_flt1, "_out" },
 		}, {
 			{ t_flt2, "d" },
 		});
@@ -37,9 +37,9 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(d) = abs((uv) * 2 - 1) - vec2((width), (height));
-(d) = 1 - (d) / fwidth((d));
-(rectangle) = clamp(min((d).x, (d).y), 0.0, 1.0);
+#d# = abs(#uv# * 2 - 1) - vec2(#width#, #height#);
+#d# = 1 - #d# / fwidth(#d#);
+#_out# = clamp(min(#d#.x, #d#.y), 0.0, 1.0);
 )" + 1;
 	}
 

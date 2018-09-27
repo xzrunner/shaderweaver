@@ -19,7 +19,7 @@ public:
 			{ t_flt1, "strength" },
 			{ t_flt2, "offset" },
 		}, {
-			{ t_uv, "twirl" },
+			{ t_uv, "_out" },
 		}, {
 			{ t_flt2, "delta" },
 			{ t_flt1, "angle" },
@@ -40,11 +40,11 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(delta) = (uv) - (center);
-(angle) = (strength) * length((delta));
-(x) = cos((angle)) * (delta).x - sin((angle)) * (delta).y;
-(y) = sin((angle)) * (delta).x + cos((angle)) * (delta).y;
-(twirl) = vec2((x) + (center).x + (offset).x, (y) + (center).y + (offset).y);
+#delta# = #uv# - #center#;
+#angle# = #strength# * length(#delta#);
+#x# = cos(#angle#) * #delta#.x - sin(#angle#) * #delta#.y;
+#y# = sin(#angle#) * #delta#.x + cos(#angle#) * #delta#.y;
+#_out# = vec2(#x# + #center#.x + #offset#.x, #y# + #center#.y + #offset#.y);
 )" + 1;
 	}
 

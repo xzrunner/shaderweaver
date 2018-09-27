@@ -36,7 +36,7 @@ protected:
 		assert(exports.size() == 1);
 		auto& out = GetExports()[0].var;
 		return cpputil::StringHelper::Format(
-			"%s (%s) = vec3(%f, %f, %f);\n",
+			"%s #%s# = vec3(%f, %f, %f);\n",
 			out.Type().ToGLSL().c_str(), out.Name().c_str(), m_val.x, m_val.y, m_val.z
 		);
 	}

@@ -194,15 +194,15 @@ void Evaluator::EvalBody()
 		{
 			// rename vars
 			for (auto& p : (*itr)->GetImports()) {
-				auto old = cpputil::StringHelper::Format("(%s)", p.var.Name().c_str());
+				auto old = cpputil::StringHelper::Format("#%s#", p.var.Name().c_str());
 				cpputil::StringHelper::ReplaceAll(str, old, p.var.GetRealName());
 			}
 			for (auto& p : (*itr)->GetExports()) {
-				auto old = cpputil::StringHelper::Format("(%s)", p.var.Name().c_str());
+				auto old = cpputil::StringHelper::Format("#%s#", p.var.Name().c_str());
 				cpputil::StringHelper::ReplaceAll(str, old, p.var.GetRealName());
 			}
 			for (auto& v : (*itr)->GetInternal()) {
-				auto old = cpputil::StringHelper::Format("(%s)", v.Name().c_str());
+				auto old = cpputil::StringHelper::Format("#%s#", v.Name().c_str());
 				cpputil::StringHelper::ReplaceAll(str, old, v.GetRealName());
 			}
 			body += str +"\n";

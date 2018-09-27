@@ -25,7 +25,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(gl_Position) = (pos);\n";
+		return "#gl_Position# = #pos#;\n";
 	}
 
 }; // VertexShader

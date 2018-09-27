@@ -18,7 +18,7 @@ public:
 			{ t_mat4, "model" },
 			{ t_nor3, "nor" },
 		}, {
-			{ t_nor3, "nor_trans" },
+			{ t_nor3, "_out" },
 		}, {
 		});
 	}
@@ -33,8 +33,8 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		// todo: no transpose and inverse
-//		return "(nor_trans) = mat3(transpose(inverse((model)))) * (nor);\n";
-		return "(nor_trans) = mat3((model)) * (nor);\n";
+//		return "#_out# = mat3(transpose(inverse((model)))) * (nor);\n";
+		return "#_out# = mat3(#model#) * #nor#;\n";
 	}
 
 }; // NormalTrans

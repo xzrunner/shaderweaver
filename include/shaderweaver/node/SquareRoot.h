@@ -16,9 +16,9 @@ public:
 		: Node("SquareRoot")
 	{
 		InitVariables({
-			{ 0, "input" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "square" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -28,7 +28,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(square) = sqrt((input));\n";
+		return "#_out# = sqrt(#_in#);\n";
 	}
 
 }; // SquareRoot

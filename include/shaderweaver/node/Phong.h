@@ -65,25 +65,25 @@ protected:
 	{
 		return R"(
 // ambient
-(ambient) = (light_ambient) * (material_diffuse);
+#ambient# = #light_ambient# * #material_diffuse#;
 
 // diffuse
-(norm)      = normalize((normal));
-(light_dir) = normalize((light_pos) - (frag_pos));
-(diff)      = max(dot((norm), (light_dir)), 0.0);
-(diffuse)   = (light_diffuse) * (diff) * (material_diffuse);
+#norm#      = normalize(#normal#);
+#light_dir# = normalize(#light_pos# - #frag_pos#);
+#diff#      = max(dot(#norm#, #light_dir#), 0.0);
+#diffuse#   = #light_diffuse# * #diff# * #material_diffuse#;
 
 // specular
-(view_dir)    = normalize((view_pos) - (frag_pos));
-(reflect_dir) = reflect(-(light_dir), (norm));
-(spec)        = pow(max(dot((view_dir), (reflect_dir)), 0.0), (material_shininess));
-(specular)    = (light_specular) * (spec) * (material_specular);
+#view_dir#    = normalize(#view_pos# - #frag_pos#);
+#reflect_dir# = reflect(-#light_dir#, #norm#);
+#spec#        = pow(max(dot(#view_dir#, #reflect_dir#), 0.0), #material_shininess#);
+#specular#    = #light_specular# * #spec# * #material_specular#;
 
 // emission
-(emission) = (material_emission);
+#emission# = #material_emission#;
 
 // end
-(phong) = (ambient) + (diffuse) + (specular) + (emission);
+#phong# = #ambient# + #diffuse# + #specular# + #emission#;
 )" + 1;
 	}
 

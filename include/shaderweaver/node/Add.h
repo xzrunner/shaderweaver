@@ -19,7 +19,7 @@ public:
 			{ 0,  "a" },
 			{ 0,  "b" },
 		}, {
-			{ 0, "add" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -35,7 +35,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(add) = (a) + (b);\n";
+		return "#_out# = #a# + #b#;\n";
 	}
 
 }; // Add

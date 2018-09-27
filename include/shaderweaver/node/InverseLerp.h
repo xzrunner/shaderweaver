@@ -20,7 +20,7 @@ public:
 			{ 0,  "b" },
 			{ 0,  "t" },
 		}, {
-			{ 0, "inv_lerp" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -37,7 +37,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(inv_lerp) = ((t) - (a)) / ((b) - (a));\n";
+		return "#_out# = (#t# - #a#) / (#b# - #a#);\n";
 	}
 
 }; // InverseLerp

@@ -15,12 +15,12 @@ public:
 		: Node("ColorMask")
 	{
 		InitVariables({
-			{ t_col3, "col" },
+			{ t_col3, "_in" },
 			{ t_col3, "mask" },
 			{ t_flt1, "range" },
 			{ t_flt1, "fuzziness" },
 		}, {
-			{ t_flt1, "col_mask" },
+			{ t_flt1, "_out" },
 		}, {
 			{ t_flt1, "dis" },
 		});
@@ -38,8 +38,8 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(dis) = distance((mask), (col));
-(col_mask) = clamp(1 - ((dis) - (range)) / max((fuzziness), 1e-5), 0.0, 1.0);
+#dis# = distance(#mask#, #_in#);
+#_out# = clamp(1 - (#dis# - #range#) / max(#fuzziness#, 1e-5), 0.0, 1.0);
 )" + 1;
 	}
 

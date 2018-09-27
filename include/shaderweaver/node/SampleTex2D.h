@@ -35,7 +35,7 @@ protected:
 		// todo: in phong, result will be changed by another one before using
 		// 1. clip phong to small block, or
 		// 2. add special flag to make result read only
-		return "(col4) = texture2D((tex), (uv));\n";
+		return "#col4# = texture2D(#tex#, #uv#);\n";
 	}
 
 }; // SampleTex2D

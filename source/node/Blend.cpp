@@ -85,70 +85,70 @@ std::string Blend::GetHeader() const
 std::string Blend::GetBody() const
 {
 	return R"(
-(base3)  = (base4).rgb / (base4).a;
-(blend3) = (blend4).rgb / (blend4).a;
+#base3#  = #base4#.rgb / #base4#.a;
+#blend3# = #blend4#.rgb / #blend4#.a;
 
 // normal
 if (u_mode == 0) {
-	(col3) = BlendNormal((base3), (blend3));
+	#col3# = BlendNormal(#base3#, #blend3#);
 }
 // darken modes
 else if (u_mode == 10) {
-	(col3) = BlendDarken((base3), (blend3));
+	#col3# = BlendDarken(#base3#, #blend3#);
 } else if (u_mode == 11) {
-	(col3) = BlendMultiply((base3), (blend3));
+	#col3# = BlendMultiply(#base3#, #blend3#);
 } else if (u_mode == 12) {
-	(col3) = BlendColorBurn((base3), (blend3));
+	#col3# = BlendColorBurn(#base3#, #blend3#);
 } else if (u_mode == 13) {
-	(col3) = BlendLinearBurn((base3), (blend3));
+	#col3# = BlendLinearBurn(#base3#, #blend3#);
 }
 // lighten modes
 else if (u_mode == 20) {
-	(col3) = BlendLighten((base3), (blend3));
+	#col3# = BlendLighten(#base3#, #blend3#);
 } else if (u_mode == 21) {
-	(col3) = BlendScreen((base3), (blend3));
+	#col3# = BlendScreen(#base3#, #blend3#);
 } else if (u_mode == 22) {
-	(col3) = BlendColorDodge((base3), (blend3));
+	#col3# = BlendColorDodge(#base3#, #blend3#);
 } else if (u_mode == 23) {
-	(col3) = BlendLinearDodge((base3), (blend3));
+	#col3# = BlendLinearDodge(#base3#, #blend3#);
 } else if (u_mode == 24) {
-	(col3) = BlendLinearDodge((base3), (blend3));
+	#col3# = BlendLinearDodge(#base3#, #blend3#);
 }
 // saturation modes
 else if (u_mode == 30) {
-	(col3) = BlendOverlay((base3), (blend3));
+	#col3# = BlendOverlay(#base3#, #blend3#);
 } else if (u_mode == 31) {
-	(col3) = BlendSoftLight((base3), (blend3));
+	#col3# = BlendSoftLight(#base3#, #blend3#);
 } else if (u_mode == 32) {
-	(col3) = BlendHardLight((base3), (blend3));
+	#col3# = BlendHardLight(#base3#, #blend3#);
 } else if (u_mode == 33) {
 	// todo: for "Too many vertex shader constants"
-	(col3) = Blend((base3), (blend3), BlendVividLightf);
+	#col3# = Blend(#base3#, #blend3#, BlendVividLightf);
 } else if (u_mode == 34) {
 	// todo: for "Too many vertex shader constants"
-	(col3) = Blend((base3), (blend3), BlendLinearLightf);
+	#col3# = Blend(#base3#, #blend3#, BlendLinearLightf);
 } else if (u_mode == 35) {
-	(col3) = BlendPinLight((base3), (blend3));
+	#col3# = BlendPinLight(#base3#, #blend3#);
 } else if (u_mode == 36) {
 	// fixed for shader link err on sumsung note3
-//		(col3) = BlendHardMix((base3), (blend3));
+//		#col3# = BlendHardMix(#base3#, #blend3#);
 }
 // substraction modes
 else if (u_mode == 40) {
-	(col3) = BlendDifference((base3), (blend3));
+	#col3# = BlendDifference(#base3#, #blend3#);
 } else if (u_mode == 41) {
-	(col3) = BlendExclusion((base3), (blend3));
+	#col3# = BlendExclusion(#base3#, #blend3#);
 } else if (u_mode == 42) {
-	(col3) = BlendExclusion((base3), (blend3));
+	#col3# = BlendExclusion(#base3#, #blend3#);
 }
 // color modes
 
 // others
 else {
-	(col3) = BlendNormal((base3), (blend3));
+	#col3# = BlendNormal(#base3#, #blend3#);
 }
 
-(col4) = vec4((col3) * (blend4).w, (blend4).w);
+#col4# = vec4(#col3# * #blend4#.w, #blend4#.w);
 )" + 1;
 }
 

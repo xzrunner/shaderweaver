@@ -20,7 +20,7 @@ public:
 			{ 0,  "b" },
 			{ 0,  "t" },
 		}, {
-			{ 0, "lerp" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -37,7 +37,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(lerp) = mix((a), (b), (t));\n";
+		return "#_out# = mix(#a#, #b#, #t#);\n";
 	}
 
 }; // Lerp

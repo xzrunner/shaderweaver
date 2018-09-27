@@ -24,9 +24,9 @@ public:
 		, m_type(type)
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "log" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -42,11 +42,11 @@ protected:
 		switch (m_type)
 		{
 		case BASE_E:
-			return "(log) = log((a));\n";
+			return "#_out# = log(#_in#);\n";
 		case BASE_2:
-			return "(log) = log2((a));\n";
+			return "#_out# = log2(#_in#);\n";
 		case BASE_10:
-			return "(log) = log2((a)) / log2(10);\n";
+			return "#_out# = log2(#_in#) / log2(10);\n";
 		default:
 			return "";
 		}

@@ -15,9 +15,9 @@ public:
 		: Node("Normalize")
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "norm" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -27,7 +27,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(norm) = normalize((a));\n";
+		return "#_out# = normalize(#_in#);\n";
 	}
 
 }; // Normalize

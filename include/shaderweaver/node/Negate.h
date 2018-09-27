@@ -15,9 +15,9 @@ public:
 		: Node("Negate")
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "neg" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -27,7 +27,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(neg) = -1 * (a);\n";
+		return "#_out# = -1 * #_in#;\n";
 	}
 
 }; // Negate

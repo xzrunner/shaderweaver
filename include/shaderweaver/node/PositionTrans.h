@@ -38,7 +38,7 @@ public:
 			{ t_mat4, "model" },
 			{ pos_type, "pos" },
 		}, {
-			{ t_pos4, "pos_trans" },
+			{ t_pos4, "_out" },
 		}, {
 		});
 	}
@@ -57,11 +57,11 @@ protected:
 		switch (m_dim)
 		{
 		case 2:
-			return "(pos_trans) = (proj) * (view) * (model) * vec4((pos), 0.0, 1.0);\n";
+			return "#_out# = #proj# * #view# * #model# * vec4(#pos#, 0.0, 1.0);\n";
 		case 3:
-			return "(pos_trans) = (proj) * (view) * (model) * vec4((pos), 1.0);\n";
+			return "#_out# = #proj# * #view# * #model# * vec4(#pos#, 1.0);\n";
 		case 4:
-			return "(pos_trans) = (proj) * (view) * (model) * (pos);\n";
+			return "#_out# = #proj# * #view# * #model# * #pos#;\n";
 		default:
 			return "";
 		}

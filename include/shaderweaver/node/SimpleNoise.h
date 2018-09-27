@@ -17,7 +17,7 @@ public:
 			{ t_uv, "uv" },
 			{ t_flt1, "scale" },
 		}, {
-			{ t_flt1, "simple_noise" },
+			{ t_flt1, "_out" },
 		}, {
 			{ t_flt1, "t" },
 		});
@@ -70,14 +70,14 @@ float shaderweaver_value_noise(vec2 uv)
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(t) = 0.0;
+#t# = 0.0;
 for (int i = 0; i < 3; i++)
 {
     float freq = pow(2.0, float(i));
     float amp = pow(0.5, float(3 - i));
-    (t) += shaderweaver_value_noise(vec2((uv).x * (scale) / freq, (uv).y * (scale) / freq))*amp;
+    #t# += shaderweaver_value_noise(vec2(#uv#.x * #scale# / freq, #uv#.y * #scale# / freq))*amp;
 }
-(simple_noise) = (t);
+#_out# = #t#;
 )" + 1;
 	}
 

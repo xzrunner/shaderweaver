@@ -15,9 +15,9 @@ public:
 		: Node("Gray")
 	{
 		InitVariables({
-			{ t_col4, "col4" },
+			{ t_col4, "_in" },
 		}, {
-			{ t_col4, "gray" },
+			{ t_col4, "_out" },
 		}, {
 			{ t_flt1, "flt1" },
 		});
@@ -27,8 +27,8 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(flt1) = dot((col4).rgb , vec3(0.299, 0.587, 0.114));
-(gray) = vec4((flt1), (flt1), (flt1), (col4).a);
+#flt1# = dot(#_in#.rgb , vec3(0.299, 0.587, 0.114));
+#_out# = vec4(#flt1#, #flt1#, #flt1#, #_in#.a);
 )" + 1;
 	}
 

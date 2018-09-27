@@ -15,10 +15,10 @@ public:
 		: Node("Posterize")
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "_in" },
 			{ 0, "steps" },
 		}, {
-			{ 0, "posterize" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -34,7 +34,7 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		return "(posterize) = floor((a) / (1 / (steps))) * (1 / (steps));\n";
+		return "#_out# = floor(#_in# / (1 / #steps#)) * (1 / #steps#);\n";
 	}
 
 }; // Posterize

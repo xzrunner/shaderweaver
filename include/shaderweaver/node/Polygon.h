@@ -20,7 +20,7 @@ public:
 			{ t_flt1, "width" },
 			{ t_flt1, "height" },
 		}, {
-			{ t_flt1, "polygon" },
+			{ t_flt1, "_out" },
 		}, {
 			{ t_flt1, "tau" },
 			{ t_flt2, "_uv" },
@@ -43,13 +43,13 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		return R"(
-(tau) = 6.28318530718;
-(_uv) = ((uv) * 2 - 1) / vec2((width), (height));
-(_uv).y *= -1;
-(coord) = atan((_uv).x, (_uv).y);
-(r) = (tau) / (sides);
-(distance) = cos(floor(0.5 + (coord) / (r)) * (r) - (coord)) * length((_uv));
-(polygon) = clamp((1 - (distance)) / fwidth((distance)), 0.0, 1.0);
+#tau# = 6.28318530718;
+#_uv# = (#uv# * 2 - 1) / vec2(#width#, #height#);
+#_uv#.y *= -1;
+#coord# = atan(#_uv#.x, #_uv#.y);
+#r# = #tau# / #sides#;
+#distance# = cos(floor(0.5 + #coord# / #r#) * #r# - #coord#) * length(#_uv#);
+#_out# = clamp((1 - #distance#) / fwidth(#distance#), 0.0, 1.0);
 )" + 1;
 	}
 

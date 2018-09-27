@@ -23,9 +23,9 @@ public:
 		, m_type(type)
 	{
 		InitVariables({
-			{ 0, "a" },
+			{ 0, "_in" },
 		}, {
-			{ 0, "exp" },
+			{ 0, "_out" },
 		}, {
 		});
 
@@ -41,9 +41,9 @@ protected:
 		switch (m_type)
 		{
 		case BASE_E:
-			return "(exp) = exp((a));\n";
+			return "#_out# = exp(#_in#);\n";
 		case BASE_2:
-			return "(exp) = exp2((a));\n";
+			return "#_out# = exp2(#_in#);\n";
 		default:
 			return "";
 		}
