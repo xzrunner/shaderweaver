@@ -20,13 +20,13 @@ void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& t
 	auto f_type = f_var.Type();
 	auto t_type = t_var.Type();
 
-	if (t_var.IsDimDynamic() && t_type.dim != f_type.dim)
+	if (t_var.IsDimDynamic() && f_type.dim > t_type.dim)
 	{
 		t_type.dim = f_type.dim;
 		const_cast<sw::Variable&>(t_var).SetType(t_type);
 	}
 
-	if (f_type.precision != t_type.precision)
+	if (f_type.precision > t_type.precision)
 	{
 		t_type.precision = f_type.precision;
 		const_cast<sw::Variable&>(t_var).SetType(t_type);
@@ -40,6 +40,7 @@ void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& t
 		for (auto& idx : dim_group) {
 			if (idx == to.idx) {
 				find = true;
+				break;
 			}
 		}
 		if (find)
