@@ -85,6 +85,9 @@
     <Filter Include="nodes\math\advanced">
       <UniqueIdentifier>{7c916244-7e70-4f94-8e6b-581c17b937b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\channel">
+      <UniqueIdentifier>{b588d751-43ef-4a67-994f-118216ecb761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -278,6 +281,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Smoothstep.h">
       <Filter>nodes\math\interplation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Combine.h">
+      <Filter>nodes\channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Flip.h">
+      <Filter>nodes\channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Split.h">
+      <Filter>nodes\channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Swizzle.h">
+      <Filter>nodes\channel</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

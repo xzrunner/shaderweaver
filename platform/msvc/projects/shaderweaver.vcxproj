@@ -23,10 +23,12 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMap.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMask.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Combine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Divide.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Exponential.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Flip.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
@@ -57,9 +59,11 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Smoothstep.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Split.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SquareRoot.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex2D.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Swizzle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h" />
