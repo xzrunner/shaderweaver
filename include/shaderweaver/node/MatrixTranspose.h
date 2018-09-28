@@ -12,7 +12,7 @@ class MatrixTranspose : public sw::Node
 {
 public:
 	MatrixTranspose()
-		: Node("MatrixTranspose")
+		: Node("MatrixTranspose", 120)
 	{
 		InitVariables({
 			{ t_d_mat, "_in" },

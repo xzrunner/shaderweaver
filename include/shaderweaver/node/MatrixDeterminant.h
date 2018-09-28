@@ -12,7 +12,7 @@ class MatrixDeterminant : public sw::Node
 {
 public:
 	MatrixDeterminant()
-		: Node("MatrixDeterminant")
+		: Node("MatrixDeterminant", 150)
 	{
 		InitVariables({
 			{ t_d_mat, "_in" },

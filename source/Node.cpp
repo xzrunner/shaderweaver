@@ -8,8 +8,9 @@
 namespace sw
 {
 
-Node::Node(const std::string& name)
+Node::Node(const std::string& name, uint32_t version)
 	: m_name(name)
+	, m_version(version)
 {
 	m_uid = NodeIDMgr::Instance()->Gen();
 }

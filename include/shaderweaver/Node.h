@@ -12,7 +12,7 @@ namespace sw
 class Node : boost::noncopyable
 {
 public:
-	Node(const std::string& name);
+	Node(const std::string& name, uint32_t version = 110);
 	~Node();
 
 	std::string GetHeaderStr() const;
@@ -72,6 +72,8 @@ private:
 	uint32_t m_uid = 0;
 
 	std::string m_name;
+
+	uint32_t m_version = 110;
 
 }; // Node
 
