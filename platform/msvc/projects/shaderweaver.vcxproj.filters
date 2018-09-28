@@ -100,6 +100,15 @@
     <Filter Include="nodes\input\matrix">
       <UniqueIdentifier>{e2d740ed-dcbf-422a-a056-8c0ca3b529b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\math\round">
+      <UniqueIdentifier>{7fb1ec64-5d6a-4cdc-9507-7cec2f65c877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\math\trigonometry">
+      <UniqueIdentifier>{28da4c68-3a7b-48aa-94cb-e5f5c68ad864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\math\vector">
+      <UniqueIdentifier>{5677dd80-4419-4398-a7ca-41895c5d71f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -392,6 +401,75 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h">
       <Filter>nodes\math\range</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Ceiling.h">
+      <Filter>nodes\math\round</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Floor.h">
+      <Filter>nodes\math\round</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Round.h">
+      <Filter>nodes\math\round</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Sign.h">
+      <Filter>nodes\math\round</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Step.h">
+      <Filter>nodes\math\round</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Truncate.h">
+      <Filter>nodes\math\round</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Arccosine.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Arcsine.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Arctangent.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Arctangent2.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Cosine.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\DegreesToRadians.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicSine.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicTangent.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RadiansToDegrees.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Sine.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Tangent.h">
+      <Filter>nodes\math\trigonometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\CrossProduct.h">
+      <Filter>nodes\math\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Distance.h">
+      <Filter>nodes\math\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\DotProduct.h">
+      <Filter>nodes\math\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Projection.h">
+      <Filter>nodes\math\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Rejection.h">
+      <Filter>nodes\math\vector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
