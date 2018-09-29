@@ -109,6 +109,12 @@
     <Filter Include="nodes\math\vector">
       <UniqueIdentifier>{5677dd80-4419-4398-a7ca-41895c5d71f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\artistic\normal">
+      <UniqueIdentifier>{477d9f35-c90f-4b34-992e-5351cf6eda52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\artistic\utility">
+      <UniqueIdentifier>{26bc9a77-3ad1-48d2-9c62-0536c76c2203}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
@@ -471,6 +477,36 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rejection.h">
       <Filter>nodes\math\vector</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Contrast.h">
+      <Filter>nodes\artistic\adjustment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Hue.h">
+      <Filter>nodes\artistic\adjustment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\InvertColors.h">
+      <Filter>nodes\artistic\adjustment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h">
+      <Filter>nodes\artistic\adjustment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WhiteBalance.h">
+      <Filter>nodes\artistic\adjustment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalBlend.h">
+      <Filter>nodes\artistic\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalCreate.h">
+      <Filter>nodes\artistic\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalStrength.h">
+      <Filter>nodes\artistic\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalUnpack.h">
+      <Filter>nodes\artistic\normal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorspaceConversion.h">
+      <Filter>nodes\artistic\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
@@ -490,9 +526,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\VariableType.cpp">
       <Filter>dataset\var</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\source\node\Blend.cpp">
-      <Filter>nodes\artistic\blend</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

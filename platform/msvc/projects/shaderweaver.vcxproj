@@ -32,8 +32,10 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMap.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMask.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ColorspaceConversion.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Combine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Comparison.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Contrast.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Cosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\CrossProduct.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DDX.h" />
@@ -54,10 +56,12 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Gray.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Hue.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicSine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicTangent.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\InverseLerp.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\InvertColors.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Length.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Lerp.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Log.h" />
@@ -73,8 +77,12 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Modulo.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Multiply.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Negate.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalBlend.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalCreate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Normalize.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalStrength.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\NormalTrans.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\NormalUnpack.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Not.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\OneMinus.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Or.h" />
@@ -102,6 +110,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Round.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sign.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sine.h" />
@@ -126,6 +135,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector4.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\VertexShader.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Voronoi.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WhiteBalance.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\predef.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\typedef.h" />
@@ -137,7 +147,6 @@
     <ClCompile Include="..\..\..\source\Node.cpp" />
     <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
     <ClCompile Include="..\..\..\source\NodeIDMgr.cpp" />
-    <ClCompile Include="..\..\..\source\node\Blend.cpp" />
     <ClCompile Include="..\..\..\source\Variable.cpp" />
     <ClCompile Include="..\..\..\source\VariableType.cpp" />
   </ItemGroup>
