@@ -238,6 +238,9 @@ float shaderweaver_blend_vivid_light(float base, float blend, float opacity)
 #_out# = #base# - #blend#;
 #_out# = mix(#base#, #_out#, #opacity#);
 )" + 1;
+
+		default:
+			return "";
 		}
 	}
 
