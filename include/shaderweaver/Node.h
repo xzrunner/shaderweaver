@@ -5,6 +5,7 @@
 #include <boost/noncopyable.hpp>
 
 #include <vector>
+#include <memory>
 
 namespace sw
 {
