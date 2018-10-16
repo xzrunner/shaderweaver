@@ -14,11 +14,21 @@ namespace node
 class Swizzle : public sw::Node
 {
 public:
-	Swizzle(uint32_t channels[4])
-		: Node("Swizzle")
-	{
-		memcpy(m_channels, channels, sizeof(m_channels));
+	static const size_t CHANNEL_COUNT = 4;
 
+	enum ChannelType
+	{
+		CHANNEL_R = 0,
+		CHANNEL_G,
+		CHANNEL_B,
+		CHANNEL_A
+	};
+
+public:
+	Swizzle(const std::array<ChannelType, CHANNEL_COUNT>& channels)
+		: Node("Swizzle")
+		, m_channels(channels)
+	{
 		InitVariables({
 			{ 0,  "_in" },
 		}, {
@@ -28,14 +38,6 @@ public:
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
-
-	enum ChannelType
-	{
-		CHANNEL_R = 0,
-		CHANNEL_G,
-		CHANNEL_B,
-		CHANNEL_A
-	};
 
 protected:
 	virtual std::string GetBody() const override
@@ -63,7 +65,8 @@ protected:
 	}
 
 private:
-	ChannelType m_channels[4] = { CHANNEL_R, CHANNEL_G, CHANNEL_B, CHANNEL_A };
+	std::array<ChannelType, CHANNEL_COUNT> m_channels
+		= { CHANNEL_R, CHANNEL_G, CHANNEL_B, CHANNEL_A };
 
 }; // Swizzle
 
