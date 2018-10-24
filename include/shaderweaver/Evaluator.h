@@ -19,6 +19,16 @@ public:
 
 	auto& GetShaderStr() const { return m_shader; }
 
+	template<typename T>
+	bool HasNodeType() const {
+		for (auto& n : m_nodes) {
+			if (std::dynamic_pointer_cast<T>(n)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 private:
 	// topologically sort
 	void InitNodes(const std::vector<NodePtr>& nodes);
