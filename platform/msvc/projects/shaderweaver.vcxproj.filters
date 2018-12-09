@@ -507,6 +507,9 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorspaceConversion.h">
       <Filter>nodes\artistic\utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h">
+      <Filter>nodes\input\texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Evaluator.cpp">

@@ -43,6 +43,7 @@ enum VarInterpretation
 	VT_PNT,     // point
 	VT_MAT,		// matrix
 	VT_T2D,		// sample 2d
+	VT_T3D,		// sample 3d
 	VT_TCUBE,	// sample cube
 };
 
@@ -110,6 +111,7 @@ union VariableType
 static const uint32_t t_unit      = VariableType{ 0, VT_UNIT }.u32;
 
 static const uint32_t t_tex2d     = VariableType{ 0, 0, 0, VT_T2D }.u32;
+static const uint32_t t_tex3d     = VariableType{ 0, 0, 0, VT_T3D }.u32;
 
 static const uint32_t t_flt       = VariableType{ 0, 0, 0, 0, VT_FLT }.u32;
 
@@ -131,6 +133,7 @@ static const uint32_t t_flt3      = VariableType{ VT_3, 0, 0, 0, VT_FLT }.u32;
 static const uint32_t t_flt4      = VariableType{ VT_4, 0, 0, 0, VT_FLT }.u32;
 
 static const uint32_t t_uv        = VariableType{ VT_2, 0, 0, VT_TEX, VT_FLT }.u32;
+static const uint32_t t_uvw       = VariableType{ VT_3, 0, 0, VT_TEX, VT_FLT }.u32;
 static const uint32_t t_pos2      = VariableType{ VT_2, 0, 0, VT_PNT, VT_FLT }.u32;
 static const uint32_t t_pos3      = VariableType{ VT_3, 0, 0, VT_PNT, VT_FLT }.u32;
 static const uint32_t t_pos4      = VariableType{ VT_4, 0, 0, VT_PNT, VT_FLT }.u32;

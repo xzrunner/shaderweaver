@@ -46,6 +46,9 @@ std::string VariableType::ToGLSL(ShaderType st) const
 	case VT_T2D:
 		str += "sampler2D";
 		break;
+	case VT_T3D:
+		str += "sampler3D";
+		break;
 	case VT_TCUBE:
 		str += "samplerCube";
 		break;

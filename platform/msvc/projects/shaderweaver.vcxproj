@@ -109,6 +109,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rotate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Round.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sign.h" />
