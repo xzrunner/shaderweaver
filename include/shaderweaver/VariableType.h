@@ -45,6 +45,7 @@ enum VarInterpretation
 	VT_T2D,		// sample 2d
 	VT_T3D,		// sample 3d
 	VT_TCUBE,	// sample cube
+	VT_FUNC,	// function
 };
 
 enum VarPrecision
@@ -88,7 +89,7 @@ union VariableType
 		return u32 != type.u32;
 	}
 
-	std::string ToGLSL(ShaderType st = ST_ANY) const;
+	std::string ToGLSL(ShaderType st = ST_NONE) const;
 
 	struct {
 		unsigned dim       : 3;
@@ -146,5 +147,7 @@ static const uint32_t t_mat4      = VariableType{ VT_4, 0, 0, VT_MAT, VT_FLT }.u
 
 static const uint32_t t_d_vec     = VariableType{ 0, 0, 0, VT_VEC, VT_FLT }.u32;
 static const uint32_t t_d_mat     = VariableType{ 0, 0, 0, VT_MAT, VT_FLT }.u32;
+
+static const uint32_t t_func      = VariableType{ 0, 0, 0, VT_FUNC }.u32;
 
 }

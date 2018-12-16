@@ -20,31 +20,6 @@ Node::~Node()
 	NodeIDMgr::Instance()->Return(m_uid);
 }
 
-std::string Node::GetHeaderStr() const
-{
-	return GetHeader();
-}
-
-std::string Node::GetBodyStr() const
-{
-	auto body = GetBody();
-	if (body.empty()) {
-		return "";
-	}
-
-	std::string str;
-	str += "//! START " + m_name + "\n";
-	if (!m_imports.empty()) {
-		str += "//! @params " + VarsToString(m_imports) + "\n";
-	}
-	if (!m_exports.empty()) {
-		str += "//! @return " + VarsToString(m_exports) + "\n";
-	}
-	str += GetBody();
-	str += "//! END " + m_name + "\n";
-	return str;
-}
-
 void Node::InitVariables(const std::vector<Variable>& input,
 	                     const std::vector<Variable>& output,
 	                     const std::vector<Variable>& middle)
@@ -70,6 +45,46 @@ void Node::InitVariables(const std::vector<Variable>& input,
 		const_cast<Variable&>(v).SetType(type);
 		m_internal.push_back(v);
 	}
+}
+
+void Node::AddNesting(const std::shared_ptr<Node>& node)
+{
+	m_nesting.push_back(node);
+}
+
+std::shared_ptr<Node> Node::QueryNesting(const std::string& name) const
+{
+	for (auto& node : m_nesting) {
+		if (node->GetName() == name) {
+			return node;
+		}
+	}
+	return nullptr;
+}
+
+std::string Node::GetHeaderStr() const
+{
+	return GetHeader();
+}
+
+std::string Node::GetBodyStr() const
+{
+	auto body = GetBody();
+	if (body.empty()) {
+		return "";
+	}
+
+	std::string str;
+	str += "//! START " + m_name + "\n";
+	if (!m_imports.empty()) {
+		str += "//! @params " + VarsToString(m_imports) + "\n";
+	}
+	if (!m_exports.empty()) {
+		str += "//! @return " + VarsToString(m_exports) + "\n";
+	}
+	str += GetBody();
+	str += "//! END " + m_name + "\n";
+	return str;
 }
 
 std::string Node::VarsToString(const std::vector<Port>& ports)
@@ -120,6 +135,7 @@ void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 		assert(to.idx >= 0 && to.idx < static_cast<int>(ports.size()));
 		const_cast<Node::Port&>(ports[to.idx]).conns.push_back(from);
 	}
+
 	NodeHelper::TypePropote(from, to);
 }
 

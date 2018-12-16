@@ -115,11 +115,11 @@
     <Filter Include="nodes\artistic\utility">
       <UniqueIdentifier>{26bc9a77-3ad1-48d2-9c62-0536c76c2203}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\sdf">
+      <UniqueIdentifier>{e177f2c5-151f-4f44-9b10-c567dc507ab5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
-      <Filter>eval</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
       <Filter>nodes\utility\value</Filter>
     </ClInclude>
@@ -507,14 +507,23 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorspaceConversion.h">
       <Filter>nodes\artistic\utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Raymarching.h">
+      <Filter>nodes\master</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h">
       <Filter>nodes\input\texture</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h">
+      <Filter>nodes\sdf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
+      <Filter>eval</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h">
+      <Filter>nodes\sdf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\source\Evaluator.cpp">
-      <Filter>eval</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\source\Node.cpp">
       <Filter>dataset\node</Filter>
     </ClCompile>
@@ -529,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\VariableType.cpp">
       <Filter>dataset\var</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\Evaluator.cpp">
+      <Filter>eval</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

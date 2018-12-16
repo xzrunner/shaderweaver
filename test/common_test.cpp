@@ -79,15 +79,15 @@ void init()
 int create_shader(const sw::Evaluator& vert, const sw::Evaluator& frag)
 {
 	std::vector<std::string> textures;
-	return RC->CreateShader(vert.GetShaderStr().c_str(), frag.GetShaderStr().c_str(), textures);
+	return RC->CreateShader(vert.GenShaderStr().c_str(), frag.GenShaderStr().c_str(), textures);
 }
 
 void debug_print(const sw::Evaluator& vert, const sw::Evaluator& frag)
 {
 	printf("//////////////////////////////////////////////////////////////////////////\n");
-	printf("%s\n", vert.GetShaderStr().c_str());
+	printf("%s\n", vert.GenShaderStr().c_str());
 	printf("//////////////////////////////////////////////////////////////////////////\n");
-	printf("%s\n", frag.GetShaderStr().c_str());
+	printf("%s\n", frag.GenShaderStr().c_str());
 	printf("//////////////////////////////////////////////////////////////////////////\n");
 }
 

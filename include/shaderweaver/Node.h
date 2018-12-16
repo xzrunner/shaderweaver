@@ -2,7 +2,7 @@
 
 #include "shaderweaver/Variable.h"
 
-#include <boost/noncopyable.hpp>
+//#include <boost/noncopyable.hpp>
 
 #include <vector>
 #include <memory>
@@ -10,7 +10,7 @@
 namespace sw
 {
 
-class Node : boost::noncopyable
+class Node/* : boost::noncopyable*/
 {
 public:
 	Node(const std::string& name, uint32_t version = 110);
@@ -20,12 +20,19 @@ public:
 	std::string GetBodyStr() const;
 
 	auto& GetID() const { return m_uid; }
+	auto& GetName() const { return m_name; }
 
 	auto& GetImports() const { return m_imports; }
 	auto& GetExports() const { return m_exports; }
 	auto& GetInternal() const { return m_internal; }
 
 	auto& GetDimGroup() const { return m_dim_group; }
+
+	void InitVariables(const std::vector<Variable>& input, const std::vector<Variable>& output,
+		const std::vector<Variable>& middle);
+
+	void AddNesting(const std::shared_ptr<Node>& node);
+	std::shared_ptr<Node> QueryNesting(const std::string& name) const;
 
 public:
 	struct PortAddr
@@ -52,10 +59,7 @@ public:
 
 protected:
 	virtual std::string GetHeader() const { return ""; }
-	virtual std::string GetBody() const = 0;
-
-	void InitVariables(const std::vector<Variable>& input, const std::vector<Variable>& output,
-		const std::vector<Variable>& middle);
+	virtual std::string GetBody()   const { return ""; }
 
 private:
 	static std::string VarsToString(const std::vector<Port>& ports);
@@ -75,6 +79,8 @@ private:
 	std::string m_name;
 
 	uint32_t m_version = 110;
+
+	std::vector<std::shared_ptr<Node>> m_nesting;
 
 }; // Node
 

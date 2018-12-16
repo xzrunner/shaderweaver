@@ -100,6 +100,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\RadialShear.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RadiansToDegrees.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RandomRange.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Raymarching.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Reciprocal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ReciprocalSquareRoot.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Rectangle.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sign.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sine.h" />
@@ -126,6 +128,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Tangent.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Truncate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h" />
