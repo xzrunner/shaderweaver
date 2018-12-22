@@ -142,6 +142,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\WhiteBalance.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\predef.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\ShaderWeaver.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\typedef.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\Variable.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\VariableType.h" />
@@ -151,6 +152,8 @@
     <ClCompile Include="..\..\..\source\Node.cpp" />
     <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
     <ClCompile Include="..\..\..\source\NodeIDMgr.cpp" />
+    <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
+    <ClCompile Include="..\..\..\source\ShaderWeaver.cpp" />
     <ClCompile Include="..\..\..\source\Variable.cpp" />
     <ClCompile Include="..\..\..\source\VariableType.cpp" />
   </ItemGroup>
@@ -197,7 +200,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -211,7 +214,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\external\boost\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\external\boost\include;..\..\..\..\external\rttr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>

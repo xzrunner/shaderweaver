@@ -522,6 +522,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h">
       <Filter>nodes\sdf</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\ShaderWeaver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">
@@ -542,5 +543,7 @@
     <ClCompile Include="..\..\..\source\Evaluator.cpp">
       <Filter>eval</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
+    <ClCompile Include="..\..\..\source\ShaderWeaver.cpp" />
   </ItemGroup>
 </Project>

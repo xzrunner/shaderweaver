@@ -41,7 +41,7 @@ protected:
 		// (_in - from.x) / (from.y - from.x) == (x - to.x) / (to.y - to.x);
 		// x = (_in - from.x) / (from.y - from.x) * (to.y - to.x) + to.x;
 		auto& val = GetImports()[ID_IN];
-		switch (val.var.Type().dim)
+		switch (val.var.GetType().dim)
 		{
 		case VT_1:
 			return R"(

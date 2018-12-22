@@ -5,6 +5,20 @@
 
 #include <assert.h>
 
+RTTR_REGISTRATION
+{
+
+rttr::registration::class_<sw::Node::Port>("sw::Node::Port")
+	.property("var", &sw::Node::Port::var)
+;
+
+rttr::registration::class_<sw::Node>("sw::Node")
+	.method("GetImports", &sw::Node::GetImports)
+	.method("GetExports", &sw::Node::GetExports)
+;
+
+}
+
 namespace sw
 {
 
@@ -26,21 +40,21 @@ void Node::InitVariables(const std::vector<Variable>& input,
 {
 	for (auto& v : input)
 	{
-		auto type = v.Type();
+		auto type = v.GetType();
 		type.region = VT_NODE_IN;
 		const_cast<Variable&>(v).SetType(type);
 		m_imports.push_back(v);
 	}
 	for (auto& v : output)
 	{
-		auto type = v.Type();
+		auto type = v.GetType();
 		type.region = VT_NODE_OUT;
 		const_cast<Variable&>(v).SetType(type);
 		m_exports.push_back(v);
 	}
 	for (auto& v : middle)
 	{
-		auto type = v.Type();
+		auto type = v.GetType();
 		type.region = VT_NODE_MID;
 		const_cast<Variable&>(v).SetType(type);
 		m_internal.push_back(v);
@@ -91,7 +105,7 @@ std::string Node::VarsToString(const std::vector<Port>& ports)
 {
 	std::string str;
 	for (int i = 0, n = ports.size(); i < n; ++i) {
-		str += ports[i].var.Name();
+		str += ports[i].var.GetName();
 		if (i != n - 1) {
 			str += ", ";
 		}
@@ -112,7 +126,7 @@ const Node::Port* Node::Port::GetPair(int idx) const
 	auto& conn = conns[idx];
 	auto conn_node = conn.node.lock();
 	assert(conn_node);
-	auto& ports = var.Type().region == VT_NODE_IN ? conn_node->m_exports : conn_node->m_imports;
+	auto& ports = var.GetType().region == VT_NODE_IN ? conn_node->m_exports : conn_node->m_imports;
 	assert(conn.idx >= 0 && conn.idx < static_cast<int>(ports.size()));
 	return &ports[conn.idx];
 }

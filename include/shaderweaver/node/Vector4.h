@@ -37,7 +37,7 @@ protected:
 		auto& out = GetExports()[0].var;
 		return cpputil::StringHelper::Format(
 			"%s #%s# = vec4(%f, %f, %f, %f);\n",
-			out.Type().ToGLSL().c_str(), out.Name().c_str(), m_val.x, m_val.y, m_val.z, m_val.w
+			out.GetType().ToGLSL().c_str(), out.GetName().c_str(), m_val.x, m_val.y, m_val.z, m_val.w
 		);
 	}
 

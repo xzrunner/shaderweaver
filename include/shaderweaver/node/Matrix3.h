@@ -39,7 +39,7 @@ protected:
 		auto& out = GetExports()[0].var;
 		return cpputil::StringHelper::Format(
 			"%s #%s# = mat3(%f, %f, %f, %f, %f, %f, %f, %f, %f);\n",
-			out.Type().ToGLSL().c_str(), out.Name().c_str(),
+			out.GetType().ToGLSL().c_str(), out.GetName().c_str(),
 			m_val.x[0], m_val.x[1], m_val.x[2],
 			m_val.x[3], m_val.x[4], m_val.x[5],
 			m_val.x[6], m_val.x[7], m_val.x[8]

@@ -44,8 +44,8 @@ protected:
 	{
 		const char* COL[4] = { "r", "g", "b", "a" };
 
-		auto dim = GetImports()[0].var.Type().dim;
-		assert(GetExports()[0].var.Type().dim == dim);
+		auto dim = GetImports()[0].var.GetType().dim;
+		assert(GetExports()[0].var.GetType().dim == dim);
 		switch (dim)
 		{
 		case 4:

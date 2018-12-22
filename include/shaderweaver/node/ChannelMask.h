@@ -40,7 +40,7 @@ protected:
 	{
 		if (m_channels == 0)
 		{
-			int n = m_exports[0].var.Type().dim;
+			int n = m_exports[0].var.GetType().dim;
 			assert(n >= 1 && n <= 4);
 			switch (n)
 			{
@@ -62,9 +62,9 @@ protected:
 		}
 		else
 		{
-			int dim_out = m_exports[0].var.Type().dim;
+			int dim_out = m_exports[0].var.GetType().dim;
 			assert(dim_out >= 1 && dim_out <= 4);
-			int dim_in = m_imports[0].var.Type().dim;
+			int dim_in = m_imports[0].var.GetType().dim;
 			assert(dim_in >= 1 && dim_in <= 4 && dim_in >= dim_out);
 			switch (dim_out)
 			{

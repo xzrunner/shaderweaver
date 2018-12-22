@@ -1,7 +1,25 @@
 #include "shaderweaver/Variable.h"
 
+#include <rttr/registration.h>
+
+RTTR_REGISTRATION
+{
+
+rttr::registration::class_<sw::Variable>("sw::Variable")
+	.property("type", &sw::Variable::GetType, &sw::Variable::SetType)
+	.property("name", &sw::Variable::GetName, &sw::Variable::SetName)
+;
+
+}
+
 namespace sw
 {
+
+Variable::Variable()
+{
+	m_is_dim_dynamic = false;
+	m_type.u32 = 0;
+}
 
 Variable::Variable(VariableType type, const std::string& name)
 	: m_is_dim_dynamic(type.dim)

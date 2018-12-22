@@ -40,7 +40,7 @@ protected:
 	virtual std::string GetBody() const override
 	{
 		std::string ret;
-		auto dim = GetImports()[0].var.Type().dim;
+		auto dim = GetImports()[0].var.GetType().dim;
 		bool out[4] = {
 			!m_exports[ID_M0].conns.empty(),
 			!m_exports[ID_M1].conns.empty(),

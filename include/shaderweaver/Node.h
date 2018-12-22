@@ -2,7 +2,7 @@
 
 #include "shaderweaver/Variable.h"
 
-//#include <boost/noncopyable.hpp>
+#include <rttr/registration>
 
 #include <vector>
 #include <memory>
@@ -10,7 +10,7 @@
 namespace sw
 {
 
-class Node/* : boost::noncopyable*/
+class Node
 {
 public:
 	Node(const std::string& name, uint32_t version = 110);
@@ -48,6 +48,7 @@ public:
 
 	struct Port
 	{
+		Port() {}
 		Port(const Variable& var)
 			: var(var) {}
 
@@ -81,6 +82,8 @@ private:
 	uint32_t m_version = 110;
 
 	std::vector<std::shared_ptr<Node>> m_nesting;
+
+	RTTR_ENABLE()
 
 }; // Node
 

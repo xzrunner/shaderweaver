@@ -123,7 +123,7 @@ float shaderweaver_blend_vivid_light(float base, float blend, float opacity)
 
 	virtual std::string GetBody() const override
 	{
-		auto dim = GetImports()[0].var.Type().dim;
+		auto dim = GetImports()[0].var.GetType().dim;
 		switch (m_mode)
 		{
 		case MODE_BURN:

@@ -17,8 +17,8 @@ void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& t
 	assert(t_node && to.idx >= 0 && to.idx < static_cast<int>(t_node->GetImports().size()));
 	auto& t_var = t_node->GetImports()[to.idx].var;
 
-	auto f_type = f_var.Type();
-	auto t_type = t_var.Type();
+	auto f_type = f_var.GetType();
+	auto t_type = t_var.GetType();
 
 	if (t_var.IsDimDynamic() && f_type.dim > t_type.dim)
 	{
@@ -49,7 +49,7 @@ void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& t
 			{
 				auto& port = idx < Node::MAX_IMPORTS_COUNT ?
 					t_node->GetImports()[idx] : t_node->GetExports()[idx - Node::MAX_IMPORTS_COUNT];
-				auto type = port.var.Type();
+				auto type = port.var.GetType();
 				type.dim = std::max(type.dim, t_type.dim);
 				type.precision = std::max(type.precision, t_type.precision);
 				const_cast<Node::Port&>(port).var.SetType(type);
