@@ -11,7 +11,7 @@ namespace node
 class MatrixSplit : public sw::Node
 {
 public:
-	MatrixSplit(bool row)
+	MatrixSplit(bool row = false)
 		: Node("MatrixSplit")
 		, m_row(row)
 	{
@@ -27,6 +27,8 @@ public:
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT + ID_M0, MAX_IMPORTS_COUNT + ID_M1, MAX_IMPORTS_COUNT + ID_M2, MAX_IMPORTS_COUNT + ID_M3 };
 	}
+
+	void SetRow(bool row) { m_row = row; }
 
 	enum OutputID
 	{

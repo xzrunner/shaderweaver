@@ -19,7 +19,7 @@ public:
 	};
 
 public:
-	Log(BaseType type)
+	Log(BaseType type = BaseType(0))
 		: Node("Log")
 		, m_type(type)
 	{

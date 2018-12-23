@@ -13,7 +13,7 @@ namespace node
 class InvertColors : public sw::Node
 {
 public:
-	InvertColors(uint32_t channels)
+	InvertColors(uint32_t channels = 0)
 		: Node("InvertColors")
 		, m_channels(channels)
 	{
@@ -26,6 +26,8 @@ public:
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
+
+	void SetChannels(uint32_t channels) { m_channels = channels; }
 
 	static const uint32_t CHANNEL_R = 0x1;
 	static const uint32_t CHANNEL_G = 0x2;

@@ -13,9 +13,14 @@ namespace node
 class PositionTransOld : public sw::Node
 {
 public:
-	PositionTransOld(int dim)
+	PositionTransOld(int dim = 2)
 		: Node("PositionTransOld")
 		, m_dim(dim)
+	{
+		SetDim(dim);
+	}
+
+	void SetDim(int dim)
 	{
 		uint32_t pos_type;
 		switch (dim) {

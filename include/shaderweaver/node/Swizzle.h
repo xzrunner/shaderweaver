@@ -25,7 +25,7 @@ public:
 	};
 
 public:
-	Swizzle(const std::array<ChannelType, CHANNEL_COUNT>& channels)
+	Swizzle(const std::array<ChannelType, CHANNEL_COUNT>& channels = {})
 		: Node("Swizzle")
 		, m_channels(channels)
 	{
@@ -37,6 +37,10 @@ public:
 		});
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
+	}
+
+	void SetChannels(const std::array<ChannelType, CHANNEL_COUNT>& channels) {
+		m_channels = channels;
 	}
 
 protected:

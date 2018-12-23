@@ -13,9 +13,14 @@ namespace node
 class Vector4 : public sw::Node
 {
 public:
-	Vector4(const std::string& name, const sm::vec4& val)
+	Vector4(const std::string& name = "", const sm::vec4& val = sm::vec4())
 		: Node("Vector4")
 		, m_val(val)
+	{
+		SetName(name);
+	}
+
+	void SetName(const std::string& name)
 	{
 		std::string real_name = name;
 		if (real_name.empty()) {
@@ -28,6 +33,8 @@ public:
 		}, {
 		});
 	}
+
+	void SetValue(const sm::vec4& val) { m_val = val; }
 
 protected:
 	virtual std::string GetBody() const override

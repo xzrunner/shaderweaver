@@ -11,7 +11,7 @@ namespace node
 class Hue : public sw::Node
 {
 public:
-	Hue(bool radians)
+	Hue(bool radians = true)
 		: Node("Hue")
 		, m_radians(radians)
 	{
@@ -32,6 +32,8 @@ public:
 			{ t_flt3, "p2" },
 		});
 	}
+
+	void SetRadians(bool radians) { m_radians = radians; }
 
 	enum InputID
 	{

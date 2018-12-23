@@ -13,7 +13,7 @@ namespace node
 class Flipbook : public sw::Node
 {
 public:
-	Flipbook(const sm::bvec2& invert)
+	Flipbook(const sm::bvec2& invert = { false, false })
 		: Node("Flipbook")
 		, m_invert(invert)
 	{
@@ -31,6 +31,8 @@ public:
 			{ t_flt1, "tile_x" },
 		});
 	}
+
+	void SetInvert(const sm::bvec2& invert) { m_invert = invert; }
 
 	enum InputID
 	{

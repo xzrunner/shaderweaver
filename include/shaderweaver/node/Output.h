@@ -13,10 +13,17 @@ namespace node
 class Output : public sw::Node
 {
 public:
-	Output(const std::string& name, uint32_t type)
+	Output(const std::string& name = "", uint32_t type = 0)
 		: Node("Output")
 		, m_var_name(name)
 	{
+		SetNameAndType(name, type);
+	}
+
+	void SetNameAndType(const std::string& name, uint32_t type)
+	{
+		m_var_name = name;
+
 		InitVariables({
 			{ type, name },
 		}, {

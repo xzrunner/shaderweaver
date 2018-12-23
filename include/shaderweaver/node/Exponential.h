@@ -18,7 +18,7 @@ public:
 	};
 
 public:
-	Exponential(BaseType type)
+	Exponential(BaseType type = BaseType(0))
 		: Node("Exponential")
 		, m_type(type)
 	{

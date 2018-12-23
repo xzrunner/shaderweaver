@@ -15,9 +15,14 @@ namespace node
 class Matrix2 : public Node
 {
 public:
-	Matrix2(const std::string& name, const sm::mat2& val)
+	Matrix2(const std::string& name = "", const sm::mat2& val = sm::mat2())
 		: Node("Matrix2")
 		, m_val(val)
+	{
+		SetName(name);
+	}
+
+	void SetName(const std::string& name)
 	{
 		std::string real_name = name;
 		if (real_name.empty()) {
@@ -30,6 +35,8 @@ public:
 		}, {
 		});
 	}
+
+	void SetValue(const sm::mat2& val) { m_val = val; }
 
 protected:
 	virtual std::string GetBody() const override

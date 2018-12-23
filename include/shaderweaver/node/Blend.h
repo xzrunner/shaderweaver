@@ -37,7 +37,7 @@ public:
 	};
 
 public:
-	Blend(ModeType mode)
+	Blend(ModeType mode = ModeType(0))
 		: Node("Blend")
 		, m_mode(mode)
 	{
@@ -50,6 +50,8 @@ public:
 		}, {
 		});
 	}
+
+	void SetModeType(ModeType mode) { m_mode = mode; }
 
 	enum InputID
 	{

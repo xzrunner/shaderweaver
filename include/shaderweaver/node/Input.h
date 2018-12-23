@@ -11,9 +11,13 @@ namespace node
 class Input : public sw::Node
 {
 public:
-	Input(const std::string& name, uint32_t type)
+	Input(const std::string& name = "", uint32_t type = 0)
 		: Node("Input")
 	{
+		SetNameAndType(name, type);
+	}
+
+	void SetNameAndType(const std::string& name, uint32_t type) {
 		InitVariables({
 		}, {
 			{ t_s_in | type, name },

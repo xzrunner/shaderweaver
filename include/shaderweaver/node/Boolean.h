@@ -15,9 +15,14 @@ namespace node
 class Boolean : public Node
 {
 public:
-	Boolean(const std::string& name, bool val)
+	Boolean(const std::string& name = "", bool val = true)
 		: Node("Boolean")
 		, m_val(val)
+	{
+		SetName(name);
+	}
+
+	void SetName(const std::string& name)
 	{
 		std::string real_name = name;
 		if (real_name.empty()) {
@@ -30,6 +35,8 @@ public:
 		}, {
 		});
 	}
+
+	void SetValue(bool val) { m_val = val; }
 
 protected:
 	virtual std::string GetBody() const override

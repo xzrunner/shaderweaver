@@ -16,7 +16,7 @@ namespace node
 class ChannelMask : public sw::Node
 {
 public:
-	ChannelMask(uint32_t channels)
+	ChannelMask(uint32_t channels = 0)
 		: Node("ChannelMask")
 		, m_channels(channels)
 	{
@@ -29,6 +29,8 @@ public:
 
 		m_dim_group = { 0, MAX_IMPORTS_COUNT };
 	}
+
+	void SetChannels(uint32_t channels) { m_channels = channels; }
 
 	static const uint32_t CHANNEL_R = 0x1;
 	static const uint32_t CHANNEL_G = 0x2;

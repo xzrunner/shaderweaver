@@ -15,9 +15,14 @@ namespace node
 class Vector1 : public Node
 {
 public:
-	Vector1(const std::string& name, float val)
+	Vector1(const std::string& name = "", float val = 0)
 		: Node("Vector1")
 		, m_val(val)
+	{
+		SetName(name);
+	}
+
+	void SetName(const std::string& name)
 	{
 		std::string real_name = name;
 		if (real_name.empty()) {
@@ -30,6 +35,8 @@ public:
 		}, {
 		});
 	}
+
+	void SetValue(float val) { m_val = val; }
 
 protected:
 	virtual std::string GetBody() const override

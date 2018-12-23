@@ -13,13 +13,13 @@ class ColorspaceConversion : public sw::Node
 public:
 	enum ColorType
 	{
-		COL_RGB,
+		COL_RGB = 0,
 		COL_LINEAR,
 		COL_HSV,
 	};
 
 public:
-	ColorspaceConversion(ColorType from, ColorType to)
+	ColorspaceConversion(ColorType from = ColorType(0), ColorType to = ColorType(0))
 		: Node("ColorspaceConversion")
 		, m_from(from)
 		, m_to(to)
@@ -73,6 +73,11 @@ public:
 		}, {
 			{ t_col3, "_out" },
 		}, middle);
+	}
+
+	void SetColType(ColorType from, ColorType to) {
+		m_from = from;
+		m_to = to;
 	}
 
 protected:

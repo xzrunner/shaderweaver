@@ -12,7 +12,7 @@ namespace node
 class MatrixConstruction : public sw::Node
 {
 public:
-	MatrixConstruction(bool row)
+	MatrixConstruction(bool row = false)
 		: Node("MatrixConstruction")
 		, m_row(row)
 	{
@@ -28,6 +28,8 @@ public:
 		}, {
 		});
 	}
+
+	void SetRow(bool row) { m_row = row; }
 
 	enum InputID
 	{

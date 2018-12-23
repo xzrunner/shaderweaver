@@ -10,7 +10,7 @@ namespace node
 class Rotate : public sw::Node
 {
 public:
-	Rotate(bool radians)
+	Rotate(bool radians = false)
 		: Node("Rotate")
 		, m_radians(radians)
 	{
@@ -27,6 +27,8 @@ public:
 			{ t_mat2, "rot_mat" },
 		});
 	}
+
+	void SetRadians(bool radians) { m_radians = radians; }
 
 	enum InputID
 	{

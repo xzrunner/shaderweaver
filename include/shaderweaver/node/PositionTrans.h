@@ -13,9 +13,14 @@ namespace node
 class PositionTrans : public Node
 {
 public:
-	PositionTrans(int dim)
+	PositionTrans(int dim = 2)
 		: Node("PositionTrans")
 		, m_dim(dim)
+	{
+		SetDim(dim);
+	}
+
+	void SetDim(int dim)
 	{
 		uint32_t pos_type;
 		switch (dim) {

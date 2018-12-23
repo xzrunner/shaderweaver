@@ -23,7 +23,7 @@ public:
 	};
 
 public:
-	Comparison(CmpType cmp_type)
+	Comparison(CmpType cmp_type = CmpType(0))
 		: Node("Comparison")
 		, m_cmp_type(cmp_type)
 	{
@@ -37,6 +37,8 @@ public:
 
 		m_dim_group = { ID_A, ID_B };
 	}
+
+	void SetCmpType(CmpType cmp_type) { m_cmp_type = cmp_type; }
 
 	enum InputID
 	{
