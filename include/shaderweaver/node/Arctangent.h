@@ -30,6 +30,8 @@ protected:
 		return "#_out# = atan(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Arctangent
 
 }

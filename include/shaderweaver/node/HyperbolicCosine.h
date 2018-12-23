@@ -30,6 +30,8 @@ protected:
 		return "#_out# = cosh(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // HyperbolicCosine
 
 }

@@ -44,6 +44,8 @@ protected:
 private:
 	sm::vec2 m_val;
 
+	RTTR_ENABLE(Node)
+
 }; // Vector2
 
 }

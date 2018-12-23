@@ -59,6 +59,8 @@ protected:
 )" + 1;
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Checkerboard
 
 }

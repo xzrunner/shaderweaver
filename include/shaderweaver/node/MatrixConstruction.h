@@ -78,6 +78,8 @@ protected:
 private:
 	bool m_row;
 
+	RTTR_ENABLE(Node)
+
 }; // MatrixConstruction
 
 }

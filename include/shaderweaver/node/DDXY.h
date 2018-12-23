@@ -30,6 +30,8 @@ protected:
 		return "#_out# = abs(dFdx(#_in#)) + abs(dFdy(#_in#));\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // DDXY
 
 }

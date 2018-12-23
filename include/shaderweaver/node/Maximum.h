@@ -37,6 +37,8 @@ protected:
 		return "#_out# = max(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Maximum
 
 }

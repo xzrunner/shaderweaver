@@ -40,6 +40,8 @@ protected:
 		return "#_out# = (#t# - #a#) / (#b# - #a#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // InverseLerp
 
 }

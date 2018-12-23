@@ -37,6 +37,8 @@ protected:
 		return "#_out# = min(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Minimum
 
 }

@@ -36,6 +36,8 @@ protected:
 		return "#_out# = #uv# * #tilling# + #offset#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // TilingAndOffset
 
 }

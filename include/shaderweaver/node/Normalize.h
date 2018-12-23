@@ -30,6 +30,8 @@ protected:
 		return "#_out# = normalize(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Normalize
 
 }

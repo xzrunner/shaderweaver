@@ -70,6 +70,8 @@ protected:
 private:
 	int m_dim;
 
+	RTTR_ENABLE(Node)
+
 }; // PositionTrans
 
 }

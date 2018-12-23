@@ -37,6 +37,8 @@ protected:
 		return "#_out# = mod(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Modulo
 
 }

@@ -38,6 +38,8 @@ protected:
 		return "#_out# = distance(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Distance
 
 }

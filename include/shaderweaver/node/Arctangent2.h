@@ -37,6 +37,8 @@ protected:
 		return "#_out# = atan(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Arctangent2
 
 }

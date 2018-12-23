@@ -30,6 +30,8 @@ protected:
 		return "#_out# = radians(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // DegreesToRadians
 
 }

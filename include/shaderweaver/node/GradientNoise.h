@@ -62,6 +62,8 @@ float shaderweaver_gradient_noise(vec2 p)
 )" + 1;
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // GradientNoise
 
 }

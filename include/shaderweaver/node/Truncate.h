@@ -30,6 +30,8 @@ protected:
 		return "#_out# = trunc(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Truncate
 
 }

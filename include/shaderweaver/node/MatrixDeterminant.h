@@ -28,6 +28,8 @@ protected:
 		return "#_out# = determinant(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // MatrixDeterminant
 
 }

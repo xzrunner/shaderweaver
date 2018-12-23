@@ -37,6 +37,8 @@ protected:
 		return "#_out# = floor(#_in# / (1 / #steps#)) * (1 / #steps#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Posterize
 
 }

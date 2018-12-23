@@ -50,6 +50,8 @@ protected:
 private:
 	sm::mat4 m_val;
 
+	RTTR_ENABLE(Node)
+
 }; // Matrix4
 
 }

@@ -81,6 +81,8 @@ for (int i = 0; i < 3; i++)
 )" + 1;
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // SimpleNoise
 
 }

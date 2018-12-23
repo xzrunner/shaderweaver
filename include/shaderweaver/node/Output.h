@@ -36,6 +36,8 @@ protected:
 private:
 	std::string m_var_name;
 
+	RTTR_ENABLE(Node)
+
 }; // Output
 
 }

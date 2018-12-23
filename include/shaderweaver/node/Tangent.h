@@ -30,6 +30,8 @@ protected:
 		return "#_out# = tan(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Tangent
 
 }

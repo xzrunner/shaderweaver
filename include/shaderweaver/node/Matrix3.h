@@ -49,6 +49,8 @@ protected:
 private:
 	sm::mat3 m_val;
 
+	RTTR_ENABLE(Node)
+
 }; // Matrix3
 
 }

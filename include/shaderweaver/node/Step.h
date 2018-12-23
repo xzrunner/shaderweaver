@@ -37,6 +37,8 @@ protected:
 		return "#_out# = step(#edge#, #_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Step
 
 }

@@ -68,6 +68,8 @@ private:
 	std::array<ChannelType, CHANNEL_COUNT> m_channels
 		= { CHANNEL_R, CHANNEL_G, CHANNEL_B, CHANNEL_A };
 
+	RTTR_ENABLE(Node)
+
 }; // Swizzle
 
 }

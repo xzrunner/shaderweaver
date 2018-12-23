@@ -30,6 +30,8 @@ protected:
 		return "#_out# = sinh(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // HyperbolicSine
 
 }

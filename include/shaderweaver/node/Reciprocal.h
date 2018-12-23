@@ -30,6 +30,8 @@ protected:
 		return "#_out# = 1.0 / #_in#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Reciprocal
 
 }

@@ -40,6 +40,8 @@ protected:
 		return "#_out# = smoothstep(#a#, #b#, #t#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Smoothstep
 
 }

@@ -78,6 +78,8 @@ protected:
 		}
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Remap
 
 }

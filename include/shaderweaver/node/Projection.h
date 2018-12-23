@@ -37,6 +37,8 @@ protected:
 		return "#_out# = #b# * dot(#a#, #b#) / dot(#b#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Projection
 
 }

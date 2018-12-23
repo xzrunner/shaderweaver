@@ -35,6 +35,8 @@ protected:
 		return "#_out# = normalize(vec3(#a#.rg + #b#.rg, #a#.b * #b#.b));\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // NormalBlend
 
 }

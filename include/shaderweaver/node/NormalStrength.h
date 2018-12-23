@@ -35,6 +35,8 @@ protected:
 		return "#_out# = vec3(#_in#.rg * #strength#, #_in#.b);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // NormalStrength
 
 }

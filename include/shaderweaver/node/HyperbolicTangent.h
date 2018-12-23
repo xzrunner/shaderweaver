@@ -30,6 +30,8 @@ protected:
 		return "#_out# = tanh(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // HyperbolicTangent
 
 }

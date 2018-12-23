@@ -38,6 +38,8 @@ protected:
 		return "#_out# = dot(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // DotProduct
 
 }

@@ -30,6 +30,8 @@ protected:
 		return "#_out# = sin(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Sine
 
 }

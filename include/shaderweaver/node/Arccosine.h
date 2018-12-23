@@ -30,6 +30,8 @@ protected:
 		return "#_out# = acos(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Arccosine
 
 }

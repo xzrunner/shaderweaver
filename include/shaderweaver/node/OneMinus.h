@@ -30,6 +30,8 @@ protected:
 		return "#_out# = 1 - #_in#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // OneMinus
 
 }

@@ -159,6 +159,8 @@ protected:
 private:
 	ColorType m_from, m_to;
 
+	RTTR_ENABLE(Node)
+
 }; // ColorspaceConversion
 
 }

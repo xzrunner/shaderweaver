@@ -96,6 +96,8 @@ if (dist > MAX_DIST - EPSILON) {
 )" + 1;
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Raymarching
 
 }

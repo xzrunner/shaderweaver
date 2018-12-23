@@ -28,6 +28,8 @@ protected:
 		return "#gl_Position# = #pos#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // VertexShader
 
 }

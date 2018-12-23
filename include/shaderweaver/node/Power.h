@@ -38,6 +38,8 @@ protected:
 		return "#_out# = pow(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Power
 
 }

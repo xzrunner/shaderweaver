@@ -52,6 +52,8 @@ protected:
 private:
 	BaseType m_type;
 
+	RTTR_ENABLE(Node)
+
 }; // Exponential
 
 }

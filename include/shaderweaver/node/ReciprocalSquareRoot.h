@@ -30,6 +30,8 @@ protected:
 		return "#_out# = inversesqrt(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // ReciprocalSquareRoot
 
 }

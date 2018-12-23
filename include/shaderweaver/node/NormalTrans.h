@@ -37,6 +37,8 @@ protected:
 		return "#_out# = mat3(#model#) * #nor#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // NormalTrans
 
 }

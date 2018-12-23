@@ -247,6 +247,8 @@ float shaderweaver_blend_vivid_light(float base, float blend, float opacity)
 private:
 	ModeType m_mode;
 
+	RTTR_ENABLE(Node)
+
 }; // Blend
 
 }

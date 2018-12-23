@@ -30,6 +30,8 @@ protected:
 		return "#_out# = dFdy(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // DDY
 
 }

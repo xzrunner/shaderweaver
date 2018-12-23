@@ -69,6 +69,8 @@ protected:
 private:
 	bool m_radians;
 
+	RTTR_ENABLE(Node)
+
 }; // Rotate
 
 }

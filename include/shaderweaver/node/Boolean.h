@@ -46,6 +46,8 @@ protected:
 private:
 	bool m_val;
 
+	RTTR_ENABLE(Node)
+
 }; // Boolean
 
 }

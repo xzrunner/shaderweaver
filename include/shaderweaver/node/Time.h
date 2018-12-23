@@ -50,6 +50,8 @@ protected:
 )" + 1, TimeName(), SineTimeName(), CosTimeName(), DeltaTimeName(), DeltaTimeName());
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Time
 
 }

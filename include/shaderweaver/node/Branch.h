@@ -40,6 +40,8 @@ protected:
 		return "#_out# = mix(#false#, #true#, int(#predicate#));\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Branch
 
 }

@@ -30,6 +30,8 @@ protected:
 		return "#_out# = abs(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Absolute
 
 }

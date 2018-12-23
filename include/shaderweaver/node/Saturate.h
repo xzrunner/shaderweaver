@@ -30,6 +30,8 @@ protected:
 		return "#_out# = clamp(#_in#, 0.0, 1.0);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Saturate
 
 }

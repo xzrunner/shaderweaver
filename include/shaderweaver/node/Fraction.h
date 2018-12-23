@@ -30,6 +30,8 @@ protected:
 		return "#_out# = fract(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Fraction
 
 }

@@ -30,6 +30,8 @@ protected:
 		return "#_out# = sign(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Sign
 
 }

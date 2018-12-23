@@ -27,6 +27,8 @@ protected:
 		return "";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Uniform
 
 }

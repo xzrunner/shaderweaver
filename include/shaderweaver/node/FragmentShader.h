@@ -29,6 +29,8 @@ protected:
 		return "#gl_FragColor# = #col#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // FragmentShader
 
 }

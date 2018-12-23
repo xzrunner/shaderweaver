@@ -28,6 +28,8 @@ protected:
 		return "#_out# = length(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Length
 
 }

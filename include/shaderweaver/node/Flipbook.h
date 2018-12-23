@@ -58,6 +58,8 @@ protected:
 private:
 	sm::bvec2 m_invert;
 
+	RTTR_ENABLE(Node)
+
 }; // Flipbook
 
 }

@@ -47,6 +47,8 @@ protected:
 private:
 	sm::mat2 m_val;
 
+	RTTR_ENABLE(Node)
+
 }; // Matrix2
 
 }

@@ -36,6 +36,8 @@ protected:
 		return "#_out# = #a# && #b#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // And
 
 }

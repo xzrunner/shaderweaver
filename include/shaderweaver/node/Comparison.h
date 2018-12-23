@@ -69,6 +69,8 @@ protected:
 private:
 	CmpType m_cmp_type;
 
+	RTTR_ENABLE(Node)
+
 }; // Comparison
 
 }

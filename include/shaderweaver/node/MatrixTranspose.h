@@ -30,6 +30,8 @@ protected:
 		return "#_out# = transpose(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // MatrixTranspose
 
 }

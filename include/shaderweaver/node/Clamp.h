@@ -39,6 +39,8 @@ protected:
 		return "#_out# = clamp(#_in#, #minimum#, #maximum#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Clamp
 
 }

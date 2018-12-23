@@ -30,6 +30,8 @@ protected:
 		return "#_out# = #_in#;\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Assign
 
 }

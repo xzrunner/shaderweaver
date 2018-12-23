@@ -37,6 +37,8 @@ protected:
 		return "#_out# = #a# - (#b# * dot(#a#, #b#) / dot(#b#, #b#));\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Rejection
 
 }

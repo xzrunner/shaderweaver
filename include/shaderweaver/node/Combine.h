@@ -59,6 +59,8 @@ protected:
 		return ret;
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Combine
 
 }

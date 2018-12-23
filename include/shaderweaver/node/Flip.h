@@ -58,6 +58,8 @@ protected:
 private:
 	uint32_t m_channels;
 
+	RTTR_ENABLE(Node)
+
 }; // Flip
 
 }

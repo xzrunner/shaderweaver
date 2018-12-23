@@ -35,6 +35,8 @@ protected:
 		return "#_out# = vec3(#model# * #pos#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // FragPosTrans
 
 }

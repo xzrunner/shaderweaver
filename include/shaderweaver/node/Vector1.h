@@ -46,6 +46,8 @@ protected:
 private:
 	float m_val;
 
+	RTTR_ENABLE(Node)
+
 }; // Vector1
 
 }

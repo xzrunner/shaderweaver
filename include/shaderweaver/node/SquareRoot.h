@@ -31,6 +31,8 @@ protected:
 		return "#_out# = sqrt(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // SquareRoot
 
 }

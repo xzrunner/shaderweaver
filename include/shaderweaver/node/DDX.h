@@ -30,6 +30,8 @@ protected:
 		return "#_out# = dFdx(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // DDX
 
 }

@@ -30,6 +30,8 @@ protected:
 		return "#_out# = floor(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Floor
 
 }

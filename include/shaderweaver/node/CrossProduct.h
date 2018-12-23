@@ -38,6 +38,8 @@ protected:
 		return "#_out# = cross(#a#, #b#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // CrossProduct
 
 }

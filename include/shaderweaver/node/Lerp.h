@@ -40,6 +40,8 @@ protected:
 		return "#_out# = mix(#a#, #b#, #t#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Lerp
 
 }

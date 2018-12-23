@@ -85,6 +85,8 @@ vec3 shaderweaver_white_balance(vec3 col, float temperature, float tint)
 		return "#_out# = shaderweaver_white_balance(#_in#, #temperature#, #tint#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // WhiteBalance
 
 }

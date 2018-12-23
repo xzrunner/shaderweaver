@@ -30,6 +30,8 @@ protected:
 		return "#_out# = asin(#_in#);\n";
 	}
 
+	RTTR_ENABLE(Node)
+
 }; // Arcsine
 
 }

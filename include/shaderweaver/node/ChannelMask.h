@@ -103,6 +103,8 @@ protected:
 private:
 	uint32_t m_channels = CHANNEL_R | CHANNEL_G | CHANNEL_B | CHANNEL_A;
 
+	RTTR_ENABLE(Node)
+
 }; // ChannelMask
 
 }
