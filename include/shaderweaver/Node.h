@@ -31,7 +31,7 @@ public:
 	void InitVariables(const std::vector<Variable>& input, const std::vector<Variable>& output,
 		const std::vector<Variable>& middle);
 
-	void AddNesting(const std::shared_ptr<Node>& node);
+	void AddNesting(const std::string& name, const std::shared_ptr<Node>& node);
 	std::shared_ptr<Node> QueryNesting(const std::string& name) const;
 
 public:
@@ -81,7 +81,7 @@ private:
 
 	uint32_t m_version = 110;
 
-	std::vector<std::shared_ptr<Node>> m_nesting;
+	std::vector<std::pair<std::string, std::shared_ptr<Node>>> m_nesting;
 
 	RTTR_ENABLE()
 

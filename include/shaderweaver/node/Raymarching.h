@@ -1,7 +1,7 @@
 #pragma once
 
-#include "shaderweaver/Node.h"
 #include "shaderweaver/VariableType.h"
+#include "shaderweaver/node/SDF.h"
 
 namespace sw
 {
@@ -26,14 +26,7 @@ public:
 			{ t_flt1, "dist" },
 		});
 
-		auto sdf = std::make_shared<Node>("sdf");
-		sdf->InitVariables({
-			{ t_flt3, "pos" },
-		}, {
-			{ t_flt1, "dis" },
-		}, {
-		});
-		AddNesting(sdf);
+		AddNesting("sdf", std::make_shared<SDF>());
 	}
 
 	enum InputID

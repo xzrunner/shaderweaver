@@ -60,17 +60,16 @@ void Node::InitVariables(const std::vector<Variable>& input,
 		m_internal.push_back(v);
 	}
 }
-
-void Node::AddNesting(const std::shared_ptr<Node>& node)
+void Node::AddNesting(const std::string& name, const std::shared_ptr<Node>& node)
 {
-	m_nesting.push_back(node);
+	m_nesting.push_back({ name, node });
 }
 
 std::shared_ptr<Node> Node::QueryNesting(const std::string& name) const
 {
-	for (auto& node : m_nesting) {
-		if (node->GetName() == name) {
-			return node;
+	for (auto& pair : m_nesting) {
+		if (pair.first == name) {
+			return pair.second;
 		}
 	}
 	return nullptr;
