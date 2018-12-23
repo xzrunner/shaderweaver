@@ -43,7 +43,6 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\DDY.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DegreesToRadians.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Distance.h" />
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Divide.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DotProduct.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h" />
@@ -55,6 +54,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\EstimateNormal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Gray.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Hue.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h" />
@@ -87,6 +87,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\OneMinus.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Or.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Phong.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PhongIllumination.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SDF.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sign.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />
@@ -208,6 +210,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -221,6 +224,7 @@
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

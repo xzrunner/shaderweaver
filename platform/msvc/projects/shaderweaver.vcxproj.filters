@@ -118,6 +118,18 @@
     <Filter Include="nodes\sdf">
       <UniqueIdentifier>{e177f2c5-151f-4f44-9b10-c567dc507ab5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\sdf\primitive">
+      <UniqueIdentifier>{0d24dcee-5379-4089-9c68-7c1c7fcb73c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\sdf\render">
+      <UniqueIdentifier>{63f8b390-e391-4ed7-94be-0929e6a24c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\sdf\operator">
+      <UniqueIdentifier>{d8926860-7921-446c-ac6f-997b24db3cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\sdf\utility">
+      <UniqueIdentifier>{44b641db-bea1-4a67-928c-f035fdfe2850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
@@ -251,9 +263,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\RoundedRectangle.h">
       <Filter>nodes\procedural</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Dither.h">
-      <Filter>nodes\artistic\filter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorAddMul.h">
       <Filter>nodes\artistic\trans</Filter>
@@ -513,16 +522,25 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h">
       <Filter>nodes\input\texture</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h">
-      <Filter>nodes\sdf</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\Evaluator.h">
       <Filter>eval</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h">
-      <Filter>nodes\sdf</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderWeaver.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h">
+      <Filter>nodes\sdf\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h">
+      <Filter>nodes\sdf\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PhongIllumination.h">
+      <Filter>nodes\sdf\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\EstimateNormal.h">
+      <Filter>nodes\sdf\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SDF.h">
+      <Filter>nodes\sdf\utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">
