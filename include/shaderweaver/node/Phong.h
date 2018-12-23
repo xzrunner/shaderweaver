@@ -17,9 +17,9 @@ public:
 		InitVariables({
 			{ t_flt, "light_ambient" },
 			{ t_col3, "material_diffuse" },
-			{ t_nor3, "normal" },
+			{ t_nor3, "normal", false },
 			{ t_pos3, "light_pos" },
-			{ t_flt3, "frag_pos" },
+			{ t_flt3, "frag_pos", false },
 			{ t_flt, "light_diffuse" },
 			{ t_pos3, "view_pos" },
 			{ t_flt, "light_specular" },

@@ -11,8 +11,8 @@ class Variable
 {
 public:
 	Variable();
-	Variable(VariableType type, const std::string& name);
-	Variable(uint32_t type, const std::string& name);
+	Variable(VariableType type, const std::string& name, bool default_input = true);
+	Variable(uint32_t type, const std::string& name, bool default_input = true);
 
 	auto& GetType() const { return m_type; }
 	void  SetType(const VariableType& type) { m_type = type; }
@@ -24,11 +24,16 @@ public:
 
 	bool IsDimDynamic() const { return m_is_dim_dynamic; }
 
+	bool IsDefaultInput() const { return m_default_input; }
+
 private:
 	bool m_is_dim_dynamic = false;
 	VariableType m_type;
 	std::string  m_name;
 	mutable std::string m_real_name;
+
+	// for editor view
+	bool m_default_input;
 
 }; // Variable
 

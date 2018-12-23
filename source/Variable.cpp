@@ -21,17 +21,19 @@ Variable::Variable()
 	m_type.u32 = 0;
 }
 
-Variable::Variable(VariableType type, const std::string& name)
+Variable::Variable(VariableType type, const std::string& name, bool default_input)
 	: m_is_dim_dynamic(type.dim)
 	, m_type(type)
 	, m_name(name)
 	, m_real_name(name)
+	, m_default_input(default_input)
 {
 }
 
-Variable::Variable(uint32_t type, const std::string& name)
+Variable::Variable(uint32_t type, const std::string& name, bool default_input)
 	: m_name(name)
 	, m_real_name(name)
+	, m_default_input(default_input)
 {
 	m_type.u32 = type;
 
