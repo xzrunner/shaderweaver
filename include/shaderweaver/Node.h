@@ -28,9 +28,6 @@ public:
 
 	auto& GetDimGroup() const { return m_dim_group; }
 
-	void InitVariables(const std::vector<Variable>& input, const std::vector<Variable>& output,
-		const std::vector<Variable>& middle);
-
 	void AddNesting(const std::string& name, const std::shared_ptr<Node>& node);
 	std::shared_ptr<Node> QueryNesting(const std::string& name) const;
 
@@ -61,6 +58,9 @@ public:
 protected:
 	virtual std::string GetHeader() const { return ""; }
 	virtual std::string GetBody()   const { return ""; }
+
+	void InitVariables(const std::vector<Variable>& input, const std::vector<Variable>& output,
+		const std::vector<Variable>& middle);
 
 private:
 	static std::string VarsToString(const std::vector<Port>& ports);

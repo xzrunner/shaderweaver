@@ -34,32 +34,6 @@ Node::~Node()
 	NodeIDMgr::Instance()->Return(m_uid);
 }
 
-void Node::InitVariables(const std::vector<Variable>& input,
-	                     const std::vector<Variable>& output,
-	                     const std::vector<Variable>& middle)
-{
-	for (auto& v : input)
-	{
-		auto type = v.GetType();
-		type.region = VT_NODE_IN;
-		const_cast<Variable&>(v).SetType(type);
-		m_imports.push_back(v);
-	}
-	for (auto& v : output)
-	{
-		auto type = v.GetType();
-		type.region = VT_NODE_OUT;
-		const_cast<Variable&>(v).SetType(type);
-		m_exports.push_back(v);
-	}
-	for (auto& v : middle)
-	{
-		auto type = v.GetType();
-		type.region = VT_NODE_MID;
-		const_cast<Variable&>(v).SetType(type);
-		m_internal.push_back(v);
-	}
-}
 void Node::AddNesting(const std::string& name, const std::shared_ptr<Node>& node)
 {
 	m_nesting.push_back({ name, node });
@@ -98,6 +72,36 @@ std::string Node::GetBodyStr() const
 	str += GetBody();
 	str += "//! END " + m_name + "\n";
 	return str;
+}
+
+void Node::InitVariables(const std::vector<Variable>& input,
+	                     const std::vector<Variable>& output,
+	                     const std::vector<Variable>& middle)
+{
+	m_imports.clear();
+	m_exports.clear();
+	m_internal.clear();
+	for (auto& v : input)
+	{
+		auto type = v.GetType();
+		type.region = VT_NODE_IN;
+		const_cast<Variable&>(v).SetType(type);
+		m_imports.push_back(v);
+	}
+	for (auto& v : output)
+	{
+		auto type = v.GetType();
+		type.region = VT_NODE_OUT;
+		const_cast<Variable&>(v).SetType(type);
+		m_exports.push_back(v);
+	}
+	for (auto& v : middle)
+	{
+		auto type = v.GetType();
+		type.region = VT_NODE_MID;
+		const_cast<Variable&>(v).SetType(type);
+		m_internal.push_back(v);
+	}
 }
 
 std::string Node::VarsToString(const std::vector<Port>& ports)
