@@ -21,6 +21,8 @@ public:
 		});
 	}
 
+    RTTR_ENABLE(Node)
+
 }; // SDF
 
 }
