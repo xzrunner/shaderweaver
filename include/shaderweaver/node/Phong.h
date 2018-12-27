@@ -15,17 +15,17 @@ public:
 		: Node("Phong")
 	{
 		InitVariables({
-			{ t_flt, "light_ambient" },
-			{ t_col3, "material_diffuse" },
-			{ t_nor3, "normal", false },
 			{ t_pos3, "light_pos" },
-			{ t_flt3, "frag_pos", false },
+			{ t_flt, "light_ambient" },
 			{ t_flt, "light_diffuse" },
-			{ t_pos3, "view_pos" },
 			{ t_flt, "light_specular" },
-			{ t_flt1, "material_shininess" },
+			{ t_col3, "material_diffuse" },
 			{ t_col3, "material_specular" },
+			{ t_flt1, "material_shininess" },
 			{ t_col3, "material_emission" },
+			{ t_pos3, "view_pos" },
+			{ t_nor3, "normal", false },
+			{ t_flt3, "frag_pos", false },
 		}, {
 			{ t_col3, "phong" },
 		}, {
@@ -44,20 +44,17 @@ public:
 
 	enum InputID
 	{
-		ID_LIT_AMBIENT = 0,
-		ID_MAT_DIFFUSE,
-
-		ID_NORMAL,
-		ID_LIT_POSITION,
-		ID_FRAG_POS,
+		ID_LIT_POSITION = 0,
+		ID_LIT_AMBIENT,
 		ID_LIT_DIFFUSE,
-
-		ID_VIEW_POS,
 		ID_LIT_SPECULAR,
-		ID_MAT_SHININESS,
+		ID_MAT_DIFFUSE,
 		ID_MAT_SPECULAR,
-
+		ID_MAT_SHININESS,
 		ID_MAT_EMISSION,
+		ID_VIEW_POS,
+		ID_NORMAL,
+		ID_FRAG_POS,
 	};
 
 protected:
