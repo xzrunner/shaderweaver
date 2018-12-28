@@ -24,7 +24,7 @@ public:
 	{
 		std::string real_name = name;
 		if (real_name.empty()) {
-			real_name = "flt3";
+			real_name = "_out";
 		}
 
 		InitVariables({
