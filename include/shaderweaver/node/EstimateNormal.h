@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "shaderweaver/node/SDF.h"
+#include "shaderweaver/Node.h"
 
 namespace sw
 {
@@ -17,28 +17,34 @@ public:
 	{
 		InitVariables({
 			{ t_flt3, "pos" },
-			{ t_func, "sdf" },
+			{ t_func, "sdf", false },
 		}, {
 			{ t_flt3, "normal" },
 		}, {
 		});
 
-		AddNesting("sdf", std::make_shared<SDF>());
+        AddNesting("sdf", "sw::SDF");
 	}
+
+	enum InputID
+	{
+		ID_POS = 0,
+		ID_SDF,
+	};
 
 protected:
 	virtual std::string GetHeader() const override
 	{
-		return "const float EPSILON = 0.0001;\n";
+		return "const float EPSILON_NORM = 0.0001;\n";
 	}
 
 	virtual std::string GetBody() const override
 	{
 		return R"(
 #normal# = normalize(vec3(
-    #sdf#(vec3(p.x + EPSILON, p.y, p.z))  - #sdf#(vec3(p.x - EPSILON, p.y, p.z)),
-    #sdf#(vec3(p.x, p.y + EPSILON, p.z))  - #sdf#(vec3(p.x, p.y - EPSILON, p.z)),
-    #sdf#(vec3(p.x, p.y, p.z  + EPSILON)) - #sdf#(vec3(p.x, p.y, p.z - EPSILON))
+    #sdf#(vec3(#pos#.x + EPSILON_NORM, #pos#.y, #pos#.z))  - #sdf#(vec3(#pos#.x - EPSILON_NORM, #pos#.y, #pos#.z)),
+    #sdf#(vec3(#pos#.x, #pos#.y + EPSILON_NORM, #pos#.z))  - #sdf#(vec3(#pos#.x, #pos#.y - EPSILON_NORM, #pos#.z)),
+    #sdf#(vec3(#pos#.x, #pos#.y, #pos#.z  + EPSILON_NORM)) - #sdf#(vec3(#pos#.x, #pos#.y, #pos#.z - EPSILON_NORM))
 ));
 )" + 1;
 	}

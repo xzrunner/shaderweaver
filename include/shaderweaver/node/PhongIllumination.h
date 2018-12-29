@@ -2,7 +2,8 @@
 
 #pragma once
 
-#include "shaderweaver/node/SDF.h"
+#include "shaderweaver/Node.h"
+// todo
 #include "shaderweaver/node/EstimateNormal.h"
 
 namespace sw
@@ -24,16 +25,41 @@ public:
 			{ t_flt3, "p" },		// position of point being lit
 			{ t_flt3, "eye" },		// the position of the camera
 
-			{ t_func, "sdf" },
+			{ t_func, "sdf", false },
 			{ t_func, "normal" },
 		}, {
 			{ t_flt3, "color" },
 		}, {
 		});
 
-		AddNesting("sdf", std::make_shared<SDF>());
-		AddNesting("normal", std::make_shared<EstimateNormal>());
+		AddNesting("sdf", "sw::SDF");
+		AddNesting("normal", "sw::EstimateNormal");
+
+        m_nest_cb = [&]()
+        {
+            assert(m_imports[ID_SDF].conns.size() == 1);
+            auto from = m_imports[ID_SDF].conns[0].node.lock();
+            assert(from);
+
+            assert(m_imports[ID_NORMAL].conns.size() == 1);
+            auto to = m_imports[ID_NORMAL].conns[0].node.lock();
+            assert(to);
+
+            make_connecting({ from, 0 }, { to, EstimateNormal::ID_SDF });
+        };
 	}
+
+	enum InputID
+	{
+		ID_K_A = 0,
+		ID_k_D,
+		ID_k_S,
+		ID_ALPHA,
+		ID_POS,
+		ID_EYE,
+		ID_SDF,
+		ID_NORMAL,
+	};
 
 protected:
 	virtual std::string GetHeader() const override
@@ -42,7 +68,7 @@ protected:
 vec3 phong_contrib_for_light(vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye,
                              vec3 light_pos, vec3 light_intensity)
 {
-    vec3 N = #normal#(p, #sdf#);
+    vec3 N = #normal#(p);
     vec3 L = normalize(light_pos - p);
     vec3 V = normalize(eye - p);
     vec3 R = normalize(reflect(-L, N));
@@ -65,6 +91,8 @@ vec3 phong_contrib_for_light(vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye,
 
 vec3 phong_illumination(vec3 k_a, vec3 k_d, vec3 k_s, float alpha, vec3 p, vec3 eye)
 {
+    float iTime = 0;
+
     const vec3 ambient_light = 0.5 * vec3(1.0, 1.0, 1.0);
     vec3 color = ambient_light * k_a;
 

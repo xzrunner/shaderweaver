@@ -15,6 +15,7 @@ rttr::registration::class_<sw::Node::Port>("sw::Node::Port")
 rttr::registration::class_<sw::Node>("sw::Node")
 	.method("GetImports", &sw::Node::GetImports)
 	.method("GetExports", &sw::Node::GetExports)
+    .method("QueryNesting", &sw::Node::QueryNesting)
 ;
 
 }
@@ -34,12 +35,12 @@ Node::~Node()
 	NodeIDMgr::Instance()->Return(m_uid);
 }
 
-void Node::AddNesting(const std::string& name, const std::shared_ptr<Node>& node)
+void Node::AddNesting(const std::string& name, const std::string& cls_name)
 {
-	m_nesting.push_back({ name, node });
+	m_nesting.push_back({ name, cls_name });
 }
 
-std::shared_ptr<Node> Node::QueryNesting(const std::string& name) const
+std::string Node::QueryNesting(const std::string& name) const
 {
 	for (auto& pair : m_nesting) {
 		if (pair.first == name) {
@@ -47,6 +48,14 @@ std::shared_ptr<Node> Node::QueryNesting(const std::string& name) const
 		}
 	}
 	return nullptr;
+}
+
+void Node::InitNestingConn()
+{
+    if (!m_inited_nest_conn && m_nest_cb) {
+        m_nest_cb();
+    }
+    m_inited_nest_conn = true;
 }
 
 std::string Node::GetHeaderStr() const

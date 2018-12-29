@@ -45,6 +45,14 @@ Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
 	: m_st(st)
 {
 	InitNodes(nodes);
+
+    for (auto& node : m_body_nodes) {
+        node->InitNestingConn();
+    }
+    for (auto& node : m_head_nodes) {
+        node.first->InitNestingConn();
+    }
+
 	Rename();
 	Concatenate();
 }
@@ -53,7 +61,7 @@ const std::string& Evaluator::GenShaderStr() const
 {
 	if (m_cached_shader.empty())
 	{
-		m_cached_shader += EvalHeader();
+		m_cached_shader += EvalHeader(std::set<NodePtr>());
 		m_cached_shader += cpputil::StringHelper::Format(R"(
 void main()
 {
@@ -124,7 +132,15 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node,
 			head_unique.insert(pair);
 
 			auto src = pair;
-			auto dst = node->QueryNesting(port.var.GetName());
+
+			auto dst_cls = node->QueryNesting(port.var.GetName());
+            auto rt_type = rttr::type::get_by_name(dst_cls);
+            assert(rt_type.is_valid());
+            auto rt_obj = rt_type.create();
+
+            assert(rt_obj.is_valid()/* && rt_obj.is_type<std::shared_ptr<sw::Node>>()*/);
+            auto dst = rt_obj.get_value<std::shared_ptr<sw::Node>>();
+
 			head_nodes.push_back({ src, dst });
 		}
 		else
@@ -186,6 +202,9 @@ void Evaluator::Concatenate() const
 		for (auto& port : node->GetImports())
 		{
 			auto in_port = port.GetPair(0);
+			if (!in_port && port.var.GetType().interp == VT_FUNC) {
+				continue;
+			}
 			assert(in_port);
 			Concatenate(const_cast<Node::Port&>(*in_port),
 				        const_cast<Node::Port&>(port));
@@ -269,7 +288,7 @@ void Evaluator::Concatenate(Node::Port& from, Node::Port& to) const
 	}
 }
 
-std::string Evaluator::EvalHeader() const
+std::string Evaluator::EvalHeader(std::set<NodePtr>& created) const
 {
 	std::string ret;
 
@@ -287,17 +306,25 @@ std::string Evaluator::EvalHeader() const
 	}
 
 	ret += "\n";
+
 	for (auto& itr = m_head_nodes.rbegin(); itr != m_head_nodes.rend(); ++itr) {
-		ret += EvalFunc(itr->first, itr->second);
+		ret += EvalFunc(itr->first, itr->second, created);
 	}
+
 	ret += "\n";
 	for (auto& itr = m_body_nodes.rbegin(); itr != m_body_nodes.rend(); ++itr)
 	{
+        if (created.find(*itr) != created.end()) {
+            continue;
+        }
+
 		auto str = (*itr)->GetHeaderStr();
 		if (!str.empty()) {
 			rename_vars(str, **itr);
 			ret += str + "\n";
 		}
+
+        created.insert(*itr);
 	}
 
 	return ret;
@@ -334,8 +361,13 @@ std::string Evaluator::EvalBody() const
 	return ret;
 }
 
-std::string Evaluator::EvalFunc(const NodePtr& src, const NodePtr& dst) const
+std::string Evaluator::EvalFunc(const NodePtr& src, const NodePtr& dst,
+                                std::set<NodePtr>& created) const
 {
+    if (created.find(src) != created.end()) {
+        return "";
+    }
+
 	std::string str;
 
 	auto& params = src->GetImports();
@@ -354,12 +386,16 @@ std::string Evaluator::EvalFunc(const NodePtr& src, const NodePtr& dst) const
 	auto func_name = src->GetName();
 	str += " " + src->GetName() + "(";
 	// params
-	for (int i = 0, n = dst->GetImports().size(); i < n; ++i) {
+	for (int i = 0, n = dst->GetImports().size(); i < n; ++i)
+    {
 		auto& p = params[i];
+        if (p.var.GetType().interp == VT_FUNC) {
+            continue;
+        }
+        if (i != 0) {
+            str += ", ";
+        }
 		str += p.var.GetType().ToGLSL() + " " + p.var.GetRealName();
-		if (i != n - 1) {
-			str += ", ";
-		}
 	}
 	str += ")\n";
 
@@ -379,6 +415,9 @@ std::string Evaluator::EvalFunc(const NodePtr& src, const NodePtr& dst) const
 
 	str += body_str;
 	str += "}\n";
+
+    // header
+    str = eval.EvalHeader(created) + "\n" + str;
 
 	return str;
 }

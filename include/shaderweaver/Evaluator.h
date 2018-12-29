@@ -53,10 +53,11 @@ private:
 	void Concatenate(Node::Port& from, Node::Port& to) const;
 
 	// gen
-	std::string EvalHeader() const;
+	std::string EvalHeader(std::set<NodePtr>& created) const;
 	std::string EvalBody() const;
 
-	std::string EvalFunc(const NodePtr& src, const NodePtr& dst) const;
+	std::string EvalFunc(const NodePtr& src, const NodePtr& dst,
+        std::set<NodePtr>& created) const;
 
 private:
 	ShaderType m_st;

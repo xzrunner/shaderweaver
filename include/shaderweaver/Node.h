@@ -28,8 +28,10 @@ public:
 
 	auto& GetDimGroup() const { return m_dim_group; }
 
-	void AddNesting(const std::string& name, const std::shared_ptr<Node>& node);
-	std::shared_ptr<Node> QueryNesting(const std::string& name) const;
+	void AddNesting(const std::string& name, const std::string& cls_name);
+    std::string QueryNesting(const std::string& name) const;
+
+    void InitNestingConn();
 
 public:
 	struct PortAddr
@@ -74,6 +76,8 @@ public:
 protected:
 	std::vector<uint32_t> m_dim_group;
 
+    std::function<void()> m_nest_cb = nullptr;
+
 private:
 	uint32_t m_uid = 0;
 
@@ -81,7 +85,9 @@ private:
 
 	uint32_t m_version = 110;
 
-	std::vector<std::pair<std::string, std::shared_ptr<Node>>> m_nesting;
+	std::vector<std::pair<std::string, std::string>> m_nesting;
+
+    bool m_inited_nest_conn = false;
 
 	RTTR_ENABLE()
 
