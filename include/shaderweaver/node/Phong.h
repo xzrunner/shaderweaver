@@ -16,9 +16,9 @@ public:
 	{
 		InitVariables({
 			{ t_pos3, "light_pos" },
-			{ t_flt, "light_ambient" },
-			{ t_flt, "light_diffuse" },
-			{ t_flt, "light_specular" },
+			{ t_col3, "light_ambient" },
+			{ t_col3, "light_diffuse" },
+			{ t_col3, "light_specular" },
 			{ t_col3, "material_diffuse" },
 			{ t_col3, "material_specular" },
 			{ t_flt1, "material_shininess" },
