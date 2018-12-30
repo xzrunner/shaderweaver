@@ -107,8 +107,12 @@
 #include "shaderweaver/node/SimpleNoise.h"
 #include "shaderweaver/node/Voronoi.h"
 // sdf
+#include "shaderweaver/node/Intersection.h"
+#include "shaderweaver/node/Subtraction.h"
+#include "shaderweaver/node/Union.h"
 #include "shaderweaver/node/Sphere.h"
 #include "shaderweaver/node/Torus.h"
+#include "shaderweaver/node/Box.h"
 #include "shaderweaver/node/EstimateNormal.h"
 #include "shaderweaver/node/PhongIllumination.h"
 #include "shaderweaver/node/SDF.h"
@@ -330,11 +334,17 @@ REGIST_NODE_TYPE2(Voronoi, (
 	rttr::metadata((int)(sw::node::Voronoi::ID_CELL_DENSITY), 5)
 ))
 // sdf
+REGIST_NODE_TYPE(Intersection)
+REGIST_NODE_TYPE(Subtraction)
+REGIST_NODE_TYPE(Union)
 REGIST_NODE_TYPE2(Sphere, (
 	rttr::metadata((int)(sw::node::Sphere::ID_RADIUS), 0.5f)
 ))
 REGIST_NODE_TYPE2(Torus, (
 	rttr::metadata((int)(sw::node::Torus::ID_RADIUS), sm::vec2(0.2f, 0.8f))
+))
+REGIST_NODE_TYPE2(Box, (
+	rttr::metadata((int)(sw::node::Box::ID_SIZE), sm::vec3(1.0f, 1.0f, 1.0f))
 ))
 REGIST_NODE_TYPE(EstimateNormal)
 REGIST_NODE_TYPE(PhongIllumination)

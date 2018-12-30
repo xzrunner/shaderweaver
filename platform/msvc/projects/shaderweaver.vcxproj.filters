@@ -541,6 +541,18 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\SDF.h">
       <Filter>nodes\sdf\utility</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Union.h">
+      <Filter>nodes\sdf\operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Subtraction.h">
+      <Filter>nodes\sdf\operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Intersection.h">
+      <Filter>nodes\sdf\operator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Box.h">
+      <Filter>nodes\sdf\primitive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">

@@ -24,6 +24,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Arctangent2.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Blend.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Boolean.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Box.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Branch.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ceiling.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ChannelMask.h" />
@@ -60,6 +61,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicSine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicTangent.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Intersection.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\InverseLerp.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\InvertColors.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Length.h" />
@@ -126,6 +128,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Step.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Subtract.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex2D.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Subtraction.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Swizzle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Tangent.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h" />
@@ -134,6 +137,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Truncate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Union.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\UV.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector1.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector2.h" />
