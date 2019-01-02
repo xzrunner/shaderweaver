@@ -19,14 +19,14 @@ public:
 		: Node("Raymarching")
 	{
 		InitVariables({
-			{ t_uv,   "uv" },
+            { t_uv,   "uv" }, // todo NodePreview::Update
 			{ t_func, "sdf" },
 			{ t_func, "lighting" },
 		}, {
 			{ t_flt4, "_out" },
 		}, {
-			{ t_flt2, "resolution" },
-			{ t_flt3, "view_dir" },
+            { t_flt2 | t_unif, ResolutionName() },
+            { t_flt3, "view_dir" },
 			{ t_flt3, "eye" },
 			{ t_flt1, "dist" },
 		});
@@ -50,10 +50,12 @@ public:
 
 	enum InputID
 	{
-		ID_UV = 0,
+        ID_UV = 0, // todo
 		ID_SDF,
 		ID_LIGHTING,
 	};
+
+    static const char* ResolutionName() { return "u_resolution"; }
 
 protected:
 	virtual std::string GetHeader() const override
@@ -131,8 +133,7 @@ mat4 view_matrix(vec3 eye, vec3 center, vec3 up) {
 	virtual std::string GetBody() const override
 	{
 		return R"(
-resolution = vec2(200, 200);
-view_dir = ray_direction(45.0, resolution, #uv# * resolution);
+view_dir = ray_direction(45.0, #u_resolution#, gl_FragCoord.xy);
 
 eye = vec3(8.0, 5.0, 7.0);
 
