@@ -5,6 +5,7 @@
 #include "shaderweaver/Node.h"
 // todo
 #include "shaderweaver/node/EstimateNormal.h"
+#include <assert.h>
 
 namespace sw
 {
