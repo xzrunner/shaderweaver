@@ -49,7 +49,7 @@ Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
     for (auto& node : m_body_nodes) {
         node->InitNestingConn();
     }
-    for (auto& node : m_head_nodes) {
+    for (auto& node : m_func_nodes) {
         node.first->InitNestingConn();
     }
 
@@ -96,23 +96,23 @@ void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 		break;
 	}
 
-	std::set<sw::NodePtr> body_unique, head_unique;
+    NodesUnique unique;
+    NodesCache cache;
 	for (auto& node : nodes)
 	{
-		if (body_unique.find(node) != body_unique.end()) {
+		if (unique.body.find(node) != unique.body.end()) {
 			continue;
 		}
-		body_unique.insert(node);
-		m_body_nodes.push_back(node);
-		InsertNodeRecursive(node, body_unique, head_unique, m_body_nodes, m_head_nodes);
+        unique.body.insert(node);
+        cache.body.push_back(node);
+		InsertNodeRecursive(node, unique, cache);
 	}
+    std::copy(cache.body.begin(), cache.body.end(), std::back_inserter(m_body_nodes));
+    std::copy(cache.head.begin(), cache.head.end(), std::back_inserter(m_head_nodes));
+    std::copy(cache.func.begin(), cache.func.end(), std::back_inserter(m_func_nodes));
 }
 
-void Evaluator::InsertNodeRecursive(const sw::NodePtr& node,
-	                                std::set<sw::NodePtr>& body_unique,
-	                                std::set<sw::NodePtr>& head_unique,
-	                                std::vector<NodePtr>& body_nodes,
-	                                std::vector<std::pair<NodePtr, NodePtr>>& head_nodes) const
+void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, NodesUnique& unique, NodesCache& cache) const
 {
 	for (auto& port : node->GetImports())
 	{
@@ -126,10 +126,10 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node,
 
 		if (port.var.GetType().interp == VT_FUNC)
 		{
-			if (head_unique.find(pair) != head_unique.end()) {
+			if (unique.func.find(pair) != unique.func.end()) {
 				continue;
 			}
-			head_unique.insert(pair);
+			unique.func.insert(pair);
 
 			auto src = pair;
 
@@ -141,17 +141,17 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node,
             assert(rt_obj.is_valid()/* && rt_obj.is_type<std::shared_ptr<sw::Node>>()*/);
             auto dst = rt_obj.get_value<std::shared_ptr<sw::Node>>();
 
-			head_nodes.push_back({ src, dst });
+			cache.func.push_back({ src, dst });
 		}
 		else
 		{
-			if (body_unique.find(pair) != body_unique.end()) {
+			if (unique.body.find(pair) != unique.body.end()) {
 				continue;
 			}
-			body_unique.insert(pair);
-			body_nodes.push_back(pair);
+			unique.body.insert(pair);
+			cache.body.push_back(pair);
 		}
-		InsertNodeRecursive(pair, body_unique, head_unique, body_nodes, head_nodes);
+		InsertNodeRecursive(pair, unique, cache);
 	}
 }
 
@@ -307,7 +307,7 @@ std::string Evaluator::EvalHeader(std::set<NodePtr>& created) const
 
 	ret += "\n";
 
-	for (auto& itr = m_head_nodes.rbegin(); itr != m_head_nodes.rend(); ++itr) {
+	for (auto& itr = m_func_nodes.rbegin(); itr != m_func_nodes.rend(); ++itr) {
 		ret += EvalFunc(itr->first, itr->second, created);
 	}
 

@@ -23,7 +23,7 @@ public:
 	template<typename T>
 	bool HasNodeType() const
 	{
-		for (auto& n : m_head_nodes) {
+		for (auto& n : m_func_nodes) {
 			if (std::dynamic_pointer_cast<T>(n.first)) {
 				return true;
 			}
@@ -40,10 +40,15 @@ private:
 	// prepare
 
 	// 1. topologically sort nodes
+    struct NodesUnique {
+        std::set<sw::NodePtr> body, head, func;
+    };
+    struct NodesCache {
+        std::vector<NodePtr> body, head;
+        std::vector<std::pair<NodePtr, NodePtr>> func;
+    };
 	void InitNodes(const std::vector<NodePtr>& nodes);
-	void InsertNodeRecursive(const sw::NodePtr& node, std::set<sw::NodePtr>& body_unique,
-		std::set<sw::NodePtr>& head_unique, std::vector<NodePtr>& body_nodes,
-		std::vector<std::pair<NodePtr, NodePtr>>& head_nodes) const;
+	void InsertNodeRecursive(const sw::NodePtr& node, NodesUnique& unique, NodesCache& cache) const;
 	// 2. pepare vars
 	void Rename();
 	static void InsertVar(const Node& node, const Variable& var,
@@ -63,7 +68,8 @@ private:
 	ShaderType m_st;
 
 	std::vector<NodePtr> m_body_nodes;
-	std::vector<std::pair<NodePtr, NodePtr>> m_head_nodes;
+    std::vector<NodePtr> m_head_nodes;
+	std::vector<std::pair<NodePtr, NodePtr>> m_func_nodes;
 
 	std::map<std::string, VariableType> m_vars_name2type;
 

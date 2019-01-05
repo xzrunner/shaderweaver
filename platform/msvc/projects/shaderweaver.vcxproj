@@ -39,6 +39,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Contrast.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Cosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\CrossProduct.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Custom.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DDX.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DDXY.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DDY.h" />

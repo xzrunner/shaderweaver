@@ -130,6 +130,9 @@
     <Filter Include="nodes\sdf\utility">
       <UniqueIdentifier>{44b641db-bea1-4a67-928c-f035fdfe2850}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\tools">
+      <UniqueIdentifier>{e5a3a50c-9fde-4f6f-ab43-7bb48f6c48e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
@@ -552,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Box.h">
       <Filter>nodes\sdf\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Custom.h">
+      <Filter>nodes\tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

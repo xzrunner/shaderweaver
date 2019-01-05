@@ -139,6 +139,8 @@
 #include "shaderweaver/node/Spherize.h"
 #include "shaderweaver/node/TilingAndOffset.h"
 #include "shaderweaver/node/Twirl.h"
+// tools
+#include "shaderweaver/node/Custom.h"
 
 #include <SM_Vector.h>
 
@@ -391,6 +393,8 @@ REGIST_NODE_TYPE2(Twirl, (                                                     \
 	rttr::metadata((int)(sw::node::Twirl::ID_CENTER),   sm::vec2(0.5f, 0.5f)), \
 	rttr::metadata((int)(sw::node::Twirl::ID_STRENGTH), 10)                    \
 ))
+// tools
+REGIST_NODE_TYPE(Custom)
 
 }
 
