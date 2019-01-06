@@ -159,6 +159,7 @@
     <ClCompile Include="..\..\..\source\Node.cpp" />
     <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
     <ClCompile Include="..\..\..\source\NodeIDMgr.cpp" />
+    <ClCompile Include="..\..\..\source\node\Custom.cpp" />
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
     <ClCompile Include="..\..\..\source\ShaderWeaver.cpp" />
     <ClCompile Include="..\..\..\source\Variable.cpp" />

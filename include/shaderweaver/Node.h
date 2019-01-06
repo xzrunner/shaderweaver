@@ -21,6 +21,7 @@ public:
 
 	auto& GetID() const { return m_uid; }
 	auto& GetName() const { return m_name; }
+    void  SetName(const std::string& name) { m_name = name; }
 
 	auto& GetImports() const { return m_imports; }
 	auto& GetExports() const { return m_exports; }

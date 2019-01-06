@@ -2,6 +2,7 @@
 
 #include "shaderweaver/node/VertexShader.h"
 #include "shaderweaver/node/FragmentShader.h"
+#include "shaderweaver/node/Custom.h"
 
 #include <cpputil/StringHelper.h>
 
@@ -124,6 +125,7 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, NodesUnique& unique
 		auto pair = port.conns[0].node.lock();
 		assert(pair);
 
+        // function
 		if (port.var.GetType().interp == VT_FUNC)
 		{
 			if (unique.func.find(pair) != unique.func.end()) {
@@ -143,13 +145,24 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, NodesUnique& unique
 
 			cache.func.push_back({ src, dst });
 		}
+        // custom
+        else if (pair->get_type() == rttr::type::get<sw::node::Custom>())
+        {
+            if (unique.head.find(pair) == unique.head.end()) {
+                unique.head.insert(pair);
+                cache.head.push_back(pair);
+            }
+            if (unique.body.find(pair) == unique.body.end()) {
+                unique.body.insert(pair);
+                cache.body.push_back(pair);
+            }
+        }
 		else
 		{
-			if (unique.body.find(pair) != unique.body.end()) {
-				continue;
-			}
-			unique.body.insert(pair);
-			cache.body.push_back(pair);
+			if (unique.body.find(pair) == unique.body.end()) {
+                unique.body.insert(pair);
+                cache.body.push_back(pair);
+            }
 		}
 		InsertNodeRecursive(pair, unique, cache);
 	}
@@ -306,6 +319,16 @@ std::string Evaluator::EvalHeader(std::set<NodePtr>& created) const
 	}
 
 	ret += "\n";
+
+	for (auto& itr = m_head_nodes.rbegin(); itr != m_head_nodes.rend(); ++itr) {
+        if (created.find(*itr) == created.end()) {
+            ret += (*itr)->GetHeaderStr();
+            ret += "\n";
+            created.insert(*itr);
+        }
+	}
+
+    ret += "\n";
 
 	for (auto& itr = m_func_nodes.rbegin(); itr != m_func_nodes.rend(); ++itr) {
 		ret += EvalFunc(itr->first, itr->second, created);

@@ -10,41 +10,20 @@ namespace node
 class Custom : public sw::Node
 {
 public:
-    Custom()
-        : Node("Custom")
-    {
-    }
+    Custom();
 
-    void SetParams(const std::vector<Variable>& params)
-    {
-        m_imports.clear();
-        m_imports.reserve(params.size());
-        for (auto& var : params)
-        {
-            auto v = var;
-            auto type = v.GetType();
-            type.region = VT_NODE_IN;
-            v.SetType(type);
-            m_imports.push_back(v);
-        }
-    }
+    void SetParams(const std::vector<Variable>& params);
+    void SetReturn(const Variable& ret);
 
-    void SetReturn(const Variable& ret)
-    {
-        m_exports.clear();
+    void SetHeadStr(const std::string& str);
+    void SetBodyStr(const std::string& str);
 
-        auto v = ret;
-        auto type = v.GetType();
-        type.region = VT_NODE_OUT;
-        v.SetType(type);
-        m_exports.push_back(v);
-    }
+protected:
+    virtual std::string GetHeader() const;
+    virtual std::string GetBody() const;
 
-    auto& GetHeadStr() const { return m_head_str; }
-    void SetHeadStr(const std::string& str) { m_head_str = str; }
-
-    auto& GetBodyStr() const { return m_body_str; }
-    void SetBodyStr(const std::string& str) { m_body_str = str; }
+private:
+    static std::string FormatString(const std::string& str);
 
 private:
     std::string m_head_str;

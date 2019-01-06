@@ -581,5 +581,8 @@
     </ClCompile>
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
     <ClCompile Include="..\..\..\source\ShaderWeaver.cpp" />
+    <ClCompile Include="..\..\..\source\node\Custom.cpp">
+      <Filter>nodes\tools</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
