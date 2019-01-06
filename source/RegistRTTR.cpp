@@ -341,7 +341,7 @@ REGIST_NODE_TYPE2(Sphere, (                                  \
 	rttr::metadata((int)(sw::node::Sphere::ID_RADIUS), 0.5f) \
 ))
 REGIST_NODE_TYPE2(Torus, (                                                  \
-	rttr::metadata((int)(sw::node::Torus::ID_RADIUS), sm::vec2(0.2f, 0.8f)) \
+	rttr::metadata((int)(sw::node::Torus::ID_RADIUS), sm::vec2(1.6f, 0.6f)) \
 ))
 REGIST_NODE_TYPE2(Box, (                                                      \
 	rttr::metadata((int)(sw::node::Box::ID_SIZE), sm::vec3(1.0f, 1.0f, 1.0f)) \
