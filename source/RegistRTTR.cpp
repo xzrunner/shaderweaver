@@ -36,6 +36,7 @@
 #include "shaderweaver/node/SampleTex2D.h"
 #include "shaderweaver/node/SampleTex3D.h"
 // master
+#include "shaderweaver/node/PBR.h"
 #include "shaderweaver/node/Phong.h"
 #include "shaderweaver/node/Raymarching.h"
 // math
@@ -219,6 +220,13 @@ REGIST_NODE_TYPE(Matrix4)
 REGIST_NODE_TYPE(SampleTex2D)
 REGIST_NODE_TYPE(SampleTex3D)
 // master
+REGIST_NODE_TYPE2(PBR, (                                                           \
+	rttr::metadata((int)(sw::node::PBR::ID_ALBEDO), sm::vec3(0.5f, 0.0f, 0.0f)),   \
+	rttr::metadata((int)(sw::node::PBR::ID_METALLIC), 0.5f),                       \
+    rttr::metadata((int)(sw::node::PBR::ID_ROUGHNESS), 0.5f),                      \
+    rttr::metadata((int)(sw::node::PBR::ID_AO), 1.0f),                             \
+    rttr::metadata((int)(sw::node::PBR::ID_CAM_POS), sm::vec3(0.0f, 2.0f, -2.0f))  \
+))
 REGIST_NODE_TYPE2(Phong, (                                                                \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_POSITION),  sm::vec3(1.2f, 1.0f, 2.0f)), \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_AMBIENT),   sm::vec3(0.2f, 0.2f, 0.2f)), \

@@ -559,6 +559,9 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Custom.h">
       <Filter>nodes\tools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PBR.h">
+      <Filter>nodes\master</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">

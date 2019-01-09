@@ -46,6 +46,7 @@ enum VarInterpretation
 	VT_T3D,		// sample 3d
 	VT_TCUBE,	// sample cube
 	VT_FUNC,	// function
+    VT_ARRAY,   // array
 };
 
 enum VarPrecision
@@ -91,6 +92,11 @@ union VariableType
 
 	std::string ToGLSL(ShaderType st = ST_NONE) const;
 
+    void SetArray(int dim) {
+        interp = VT_ARRAY;
+        desc = dim;
+    }
+
 	struct {
 		unsigned dim       : 3;
 		unsigned len       : 1;
@@ -100,8 +106,7 @@ union VariableType
 		unsigned qualifier : 3;
 		unsigned region    : 2;
 		unsigned readwrite : 1;
-
-		unsigned padding   : 13;
+		unsigned desc      : 13;
 	};
 
 	uint32_t u32 = 0;
@@ -113,6 +118,7 @@ static const uint32_t t_unit      = VariableType{ 0, VT_UNIT }.u32;
 
 static const uint32_t t_tex2d     = VariableType{ 0, 0, 0, VT_T2D }.u32;
 static const uint32_t t_tex3d     = VariableType{ 0, 0, 0, VT_T3D }.u32;
+static const uint32_t t_func      = VariableType{ 0, 0, 0, VT_FUNC }.u32;
 
 static const uint32_t t_flt       = VariableType{ 0, 0, 0, 0, VT_FLT }.u32;
 
@@ -147,7 +153,5 @@ static const uint32_t t_mat4      = VariableType{ VT_4, 0, 0, VT_MAT, VT_FLT }.u
 
 static const uint32_t t_d_vec     = VariableType{ 0, 0, 0, VT_VEC, VT_FLT }.u32;
 static const uint32_t t_d_mat     = VariableType{ 0, 0, 0, VT_MAT, VT_FLT }.u32;
-
-static const uint32_t t_func      = VariableType{ 0, 0, 0, VT_FUNC }.u32;
 
 }

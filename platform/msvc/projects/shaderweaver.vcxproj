@@ -89,6 +89,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Not.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\OneMinus.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Or.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PBR.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Phong.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PhongIllumination.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h" />
