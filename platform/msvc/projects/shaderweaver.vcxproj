@@ -26,6 +26,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Boolean.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Box.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Branch.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\CameraPos.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ceiling.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ChannelMask.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Checkerboard.h" />

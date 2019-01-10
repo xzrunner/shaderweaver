@@ -29,6 +29,7 @@
 #include "shaderweaver/node/Vector2.h"
 #include "shaderweaver/node/Vector3.h"
 #include "shaderweaver/node/Vector4.h"
+#include "shaderweaver/node/CameraPos.h"
 #include "shaderweaver/node/UV.h"
 #include "shaderweaver/node/Matrix2.h"
 #include "shaderweaver/node/Matrix3.h"
@@ -214,6 +215,7 @@ REGIST_NODE_TYPE(Vector2)
 REGIST_NODE_TYPE(Vector3)
 REGIST_NODE_TYPE(Vector4)
 REGIST_NODE_TYPE(UV)
+REGIST_NODE_TYPE(CameraPos)
 REGIST_NODE_TYPE(Matrix2)
 REGIST_NODE_TYPE(Matrix3)
 REGIST_NODE_TYPE(Matrix4)
@@ -224,8 +226,7 @@ REGIST_NODE_TYPE2(PBR, (                                                        
 	rttr::metadata((int)(sw::node::PBR::ID_ALBEDO), sm::vec3(0.5f, 0.0f, 0.0f)),   \
 	rttr::metadata((int)(sw::node::PBR::ID_METALLIC), 0.5f),                       \
     rttr::metadata((int)(sw::node::PBR::ID_ROUGHNESS), 0.5f),                      \
-    rttr::metadata((int)(sw::node::PBR::ID_AO), 1.0f),                             \
-    rttr::metadata((int)(sw::node::PBR::ID_CAM_POS), sm::vec3(0.0f, 2.0f, -2.0f))  \
+    rttr::metadata((int)(sw::node::PBR::ID_AO), 1.0f)                              \
 ))
 REGIST_NODE_TYPE2(Phong, (                                                                \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_POSITION),  sm::vec3(1.2f, 1.0f, 2.0f)), \
@@ -235,8 +236,7 @@ REGIST_NODE_TYPE2(Phong, (                                                      
 	rttr::metadata((int)(sw::node::Phong::ID_MAT_DIFFUSE),   sm::vec3(1, 0, 0)),          \
 	rttr::metadata((int)(sw::node::Phong::ID_MAT_SPECULAR),  sm::vec3(0, 0.5f, 0)),       \
 	rttr::metadata((int)(sw::node::Phong::ID_MAT_SHININESS), 64.0f),                      \
-	rttr::metadata((int)(sw::node::Phong::ID_MAT_EMISSION),  sm::vec3(0, 0, 0)),          \
-	rttr::metadata((int)(sw::node::Phong::ID_VIEW_POS),      sm::vec3(1.2f, 1.0f, 2.0f))  \
+	rttr::metadata((int)(sw::node::Phong::ID_MAT_EMISSION),  sm::vec3(0, 0, 0))           \
 ))
 REGIST_NODE_TYPE(Raymarching)
 // math

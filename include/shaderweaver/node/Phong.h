@@ -23,7 +23,7 @@ public:
 			{ t_col3, "material_specular" },
 			{ t_flt1, "material_shininess" },
 			{ t_col3, "material_emission" },
-			{ t_pos3, "view_pos" },
+			{ t_pos3, "view_pos", false },
 			{ t_nor3, "normal", false },
 			{ t_flt3, "frag_pos", false },
 		}, {

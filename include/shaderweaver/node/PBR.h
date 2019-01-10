@@ -23,7 +23,7 @@ public:
             { t_flt1, "ao" },
             { t_flt3, "light_positions" },
             { t_flt3, "light_colors" },
-            { t_flt3, "cam_pos" },
+            { t_flt3, "cam_pos", false },
 		}, {
 			{ t_col3, "_out" },
 		}, {

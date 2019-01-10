@@ -22,6 +22,7 @@ public:
             { t_uv,   "uv" }, // todo NodePreview::Update
 			{ t_func, "sdf" },
 			{ t_func, "lighting" },
+            { t_flt3, "cam_pos", false },
 		}, {
 			{ t_flt4, "_out" },
 		}, {
@@ -53,6 +54,7 @@ public:
         ID_UV = 0, // todo
 		ID_SDF,
 		ID_LIGHTING,
+        ID_CAM_POS,
 	};
 
     static const char* ResolutionName() { return "u_resolution"; }
@@ -135,7 +137,8 @@ mat4 view_matrix(vec3 eye, vec3 center, vec3 up) {
 		return R"(
 view_dir = ray_direction(45.0, #u_resolution#, gl_FragCoord.xy);
 
-eye = vec3(8.0, 5.0, 7.0);
+//eye = vec3(8.0, 5.0, 7.0);
+eye = #cam_pos#;
 
 mat4 view2world = view_matrix(eye, vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0));
 
