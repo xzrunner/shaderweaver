@@ -158,7 +158,8 @@ void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 		auto node = to.node.lock();
 		assert(node);
 		auto& ports = node->GetImports();
-		assert(to.idx >= 0 && to.idx < static_cast<int>(ports.size()));
+		assert(to.idx >= 0 && to.idx < static_cast<int>(ports.size())
+            && ports[to.idx].conns.empty());
 		const_cast<Node::Port&>(ports[to.idx]).conns.push_back(from);
 	}
 
