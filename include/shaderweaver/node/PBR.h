@@ -2,6 +2,8 @@
 
 #include "shaderweaver/Node.h"
 
+#define SW_PBR_TEXTURE
+
 namespace sw
 {
 namespace node
@@ -14,19 +16,33 @@ public:
         : Node("PBR")
     {
 		InitVariables({
-			{ t_flt2, "tex_coords" },
             { t_flt3, "world_pos", false },
             { t_flt3, "normal", false },
+            { t_flt2, "texcoord", false },
+#ifdef SW_PBR_TEXTURE
+            { t_tex2d, "normal_map" },
+            { t_tex2d, "albedo_map" },
+            { t_tex2d, "metallic_map" },
+            { t_tex2d, "roughness_map" },
+            { t_tex2d, "ao_map" },
+#else
             { t_flt3, "albedo" },
             { t_flt1, "metallic" },
             { t_flt1, "roughness" },
             { t_flt1, "ao" },
+#endif // SW_PBR_TEXTURE
             { t_flt3, "light_positions" },
             { t_flt3, "light_colors" },
             { t_flt3, "cam_pos", false },
 		}, {
 			{ t_col3, "_out" },
 		}, {
+#ifdef SW_PBR_TEXTURE
+            { t_flt3, "albedo" },
+            { t_flt1, "metallic" },
+            { t_flt1, "roughness" },
+            { t_flt1, "ao" },
+#endif // SW_PBR_TEXTURE
 		});
 
         SetArray(ID_LIGHT_POSITIONS, 4);
@@ -35,13 +51,21 @@ public:
 
     enum InputID
     {
-        ID_TEX_COORDS = 0,
-        ID_FRAG_POS,
+        ID_FRAG_POS = 0,
         ID_NORMAL,
+        ID_TEXCOORD,
+#ifdef SW_PBR_TEXTURE
+        ID_NORMAL_MAP,
+        ID_ALBEDO_MAP,
+        ID_METALLIC_MAP,
+        ID_ROUGHNESS_MAP,
+        ID_AO_MAP,
+#else
         ID_ALBEDO,
         ID_METALLIC,
         ID_ROUGHNESS,
         ID_AO,
+#endif // SW_PBR_TEXTURE
         ID_LIGHT_POSITIONS,
         ID_LIGHT_COLORS,
         ID_CAM_POS,
@@ -50,7 +74,7 @@ public:
 protected:
     virtual std::string GetHeader() const override
     {
-        return R"(
+        auto ret = R"(
 
 const float PI = 3.14159265359;
 
@@ -66,6 +90,25 @@ uniform vec3 light_colors[4] = {
         vec3(300.0f, 300.0f, 300.0f),
         vec3(300.0f, 300.0f, 300.0f)
 };
+
+#ifdef PBR_TEXTURE
+vec3 GetNormalFromMap()
+{
+    vec3 tangentNormal = texture2D(#normal_map#, #texcoord#).xyz * 2.0 - 1.0;
+
+    vec3 Q1  = dFdx(#world_pos#);
+    vec3 Q2  = dFdy(#world_pos#);
+    vec2 st1 = dFdx(#texcoord#);
+    vec2 st2 = dFdy(#texcoord#);
+
+    vec3 N   = normalize(#normal#);
+    vec3 T  = normalize(Q1*st2.t - Q2*st1.t);
+    vec3 B  = -normalize(cross(N, T));
+    mat3 TBN = mat3(T, B, N);
+
+    return normalize(TBN * tangentNormal);
+}
+#endif // PBR_TEXTURE
 
 float DistributionGGX(vec3 N, vec3 H, float roughness)
 {
@@ -108,12 +151,30 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
 }
 
 )" + 1;
+
+#ifdef SW_PBR_TEXTURE
+        return "#define PBR_TEXTURE\n" + std::string(ret);
+#else
+        return ret;
+#endif // SW_PBR_TEXTURE
+
     }
 
     virtual std::string GetBody() const override
     {
         return R"(
+#ifdef PBR_TEXTURE
+#albedo#    = pow(texture2D(#albedo_map#, #texcoord#).rgb, vec3(2.2));
+#metallic#  = texture2D(#metallic_map#, #texcoord#).r;
+#roughness# = texture2D(#roughness_map#, #texcoord#).r;
+#ao#        = texture2D(#ao_map#, #texcoord#).r;
+#endif // PBR_TEXTURE
+
+#ifdef PBR_TEXTURE
+vec3 N = GetNormalFromMap();
+#else
 vec3 N = normalize(#normal#);
+#endif // PBR_TEXTURE
 vec3 V = normalize(#cam_pos# - #world_pos#);
 
 // calculate reflectance at normal incidence; if dia-electric (like plastic) use F0
@@ -171,6 +232,7 @@ color = color / (color + vec3(1.0));
 color = pow(color, vec3(1.0/2.2));
 
 #_out# = color;
+
 )" + 1;
     }
 

@@ -222,12 +222,16 @@ REGIST_NODE_TYPE(Matrix4)
 REGIST_NODE_TYPE(SampleTex2D)
 REGIST_NODE_TYPE(SampleTex3D)
 // master
+#ifdef SW_PBR_TEXTURE
+REGIST_NODE_TYPE(PBR)
+#else
 REGIST_NODE_TYPE2(PBR, (                                                           \
 	rttr::metadata((int)(sw::node::PBR::ID_ALBEDO), sm::vec3(0.5f, 0.0f, 0.0f)),   \
 	rttr::metadata((int)(sw::node::PBR::ID_METALLIC), 0.5f),                       \
     rttr::metadata((int)(sw::node::PBR::ID_ROUGHNESS), 0.5f),                      \
     rttr::metadata((int)(sw::node::PBR::ID_AO), 1.0f)                              \
 ))
+#endif // SW_PBR_TEXTURE
 REGIST_NODE_TYPE2(Phong, (                                                                \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_POSITION),  sm::vec3(1.2f, 1.0f, 2.0f)), \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_AMBIENT),   sm::vec3(0.2f, 0.2f, 0.2f)), \
