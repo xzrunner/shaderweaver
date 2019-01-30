@@ -120,6 +120,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SDF.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Skin.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sign.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SimpleNoise.h" />

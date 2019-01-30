@@ -136,6 +136,9 @@
     <Filter Include="nodes\input\camera">
       <UniqueIdentifier>{9a5dc5e8-4d01-4c21-8b71-270d4d6279e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\anim">
+      <UniqueIdentifier>{5f91d5f4-d043-4e7f-b6b8-37f73d753b8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
@@ -567,6 +570,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\CameraPos.h">
       <Filter>nodes\input\camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Skin.h">
+      <Filter>nodes\anim</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -143,6 +143,8 @@
 #include "shaderweaver/node/Twirl.h"
 // tools
 #include "shaderweaver/node/Custom.h"
+// anim
+#include "shaderweaver/node/Skin.h"
 
 #include <SM_Vector.h>
 
@@ -407,6 +409,8 @@ REGIST_NODE_TYPE2(Twirl, (                                                     \
 ))
 // tools
 REGIST_NODE_TYPE(Custom)
+// anim
+REGIST_NODE_TYPE(Skin)
 
 }
 
