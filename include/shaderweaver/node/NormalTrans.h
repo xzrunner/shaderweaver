@@ -15,26 +15,28 @@ public:
 		: Node("NormalTrans")
 	{
 		InitVariables({
-			{ t_mat4, "model" },
-			{ t_nor3, "nor" },
+			{ t_mat3 | t_unif, NormalMatName() },
+			{ t_nor3, "normal" },
 		}, {
 			{ t_nor3, "_out" },
 		}, {
 		});
 	}
 
+    static const char* NormalMatName() { return "u_normal_matrix"; }
+
 	enum InputID
 	{
-		ID_MODEL = 0,
-		ID_NORM,
+		ID_NORMAL_MAT = 0,
+		ID_NORMAL,
 	};
 
 protected:
 	virtual std::string GetBody() const override
 	{
-		// todo: no transpose and inverse
-//		return "#_out# = mat3(transpose(inverse((model)))) * (nor);\n";
-		return "#_out# = mat3(#model#) * #nor#;\n";
+		// todo: no transpose and inverse, calc normal_matrix by cpu
+//		return "#_out# = mat3(transpose(inverse((model_matrix)))) * (normal);\n";
+		return "#_out# = #u_normal_matrix# * #normal#;\n";
 	}
 
 	RTTR_ENABLE(Node)
