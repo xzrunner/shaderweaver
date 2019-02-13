@@ -21,7 +21,7 @@ public:
 		}, {
             { t_pos4, "_out" },
 		}, {
-            { t_mat4 | t_unif, "bone_matrix" },
+            { t_mat4 | t_unif, "u_bone_matrix" },
 		});
 
         // mat4 u_bone_matrix[60];
@@ -29,6 +29,13 @@ public:
         type.SetArray(60);
         m_internal[0].SetType(type);
     }
+
+    enum InputID
+    {
+        ID_POSITION,
+        ID_BLEND_INDICES,
+        ID_BLEND_WEIGHTS,
+    };
 
 protected:
     virtual std::string GetHeader() const override
