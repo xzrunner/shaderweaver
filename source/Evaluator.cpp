@@ -313,9 +313,15 @@ std::string Evaluator::EvalHeader(std::set<NodePtr>& created) const
 			itr.second.qualifier == VT_SHADER_END) {
 			continue;
 		}
-		ret += cpputil::StringHelper::Format(
-			"%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
-		);
+        if (itr.second.array == VT_ARRAY) {
+            ret += cpputil::StringHelper::Format(
+                "%s %s[%d];\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str(), itr.second.desc
+            );
+        } else {
+            ret += cpputil::StringHelper::Format(
+                "%s %s;\n", itr.second.ToGLSL(m_st).c_str(), itr.first.c_str()
+            );
+        }
 	}
 
 	ret += "\n";

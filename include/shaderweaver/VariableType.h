@@ -46,7 +46,6 @@ enum VarInterpretation
 	VT_T3D,		// sample 3d
 	VT_TCUBE,	// sample cube
 	VT_FUNC,	// function
-    VT_ARRAY,   // array
 };
 
 enum VarPrecision
@@ -81,6 +80,12 @@ enum VarReadWrite
 	VT_ONLY_READ,
 };
 
+enum VarArray
+{
+    VT_NO_ARRAY = 0,
+    VT_ARRAY,
+};
+
 union VariableType
 {
 	bool operator == (const VariableType& type) const {
@@ -93,8 +98,8 @@ union VariableType
 	std::string ToGLSL(ShaderType st = ST_NONE) const;
 
     void SetArray(int dim) {
-        interp = VT_ARRAY;
-        desc = dim;
+        array = VT_ARRAY;
+        desc  = dim;
     }
 
 	struct {
@@ -106,7 +111,8 @@ union VariableType
 		unsigned qualifier : 3;
 		unsigned region    : 2;
 		unsigned readwrite : 1;
-		unsigned desc      : 13;
+        unsigned array     : 1;
+		unsigned desc      : 12;
 	};
 
 	uint32_t u32 = 0;
