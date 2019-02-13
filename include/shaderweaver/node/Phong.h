@@ -68,13 +68,13 @@ protected:
 #norm#      = normalize(#normal#);
 #light_dir# = normalize(#light_pos# - #frag_pos#);
 #diff#      = max(dot(#norm#, #light_dir#), 0.0);
-#diffuse#   = #light_diffuse# * #diff# * #material_diffuse#;
+#diffuse#   = #light_diffuse# * (#diff# * #material_diffuse#);
 
 // specular
 #view_dir#    = normalize(#view_pos# - #frag_pos#);
 #reflect_dir# = reflect(-#light_dir#, #norm#);
 #spec#        = pow(max(dot(#view_dir#, #reflect_dir#), 0.0), #material_shininess#);
-#specular#    = #light_specular# * #spec# * #material_specular#;
+#specular#    = #light_specular# * (#spec# * #material_specular#);
 
 // emission
 #emission# = #material_emission#;
