@@ -1,7 +1,6 @@
 #pragma once
 
 #include "shaderweaver/typedef.h"
-#include "shaderweaver/ShaderType.h"
 #include "shaderweaver/Variable.h"
 #include "shaderweaver/Node.h"
 
@@ -15,8 +14,7 @@ namespace sw
 class Evaluator
 {
 public:
-	Evaluator(const std::vector<NodePtr>& nodes,
-		ShaderType st = ST_NONE);
+	Evaluator(const std::vector<NodePtr>& nodes);
 
 	const std::string& GenShaderStr() const;
 
@@ -65,7 +63,7 @@ private:
         std::set<NodePtr>& created) const;
 
 private:
-	ShaderType m_st;
+	ShaderType m_st = ST_NONE;
 
 	std::vector<NodePtr> m_body_nodes;
     std::vector<NodePtr> m_head_nodes;

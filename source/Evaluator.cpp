@@ -42,8 +42,7 @@ void rename_vars(std::string& str, const sw::Node& node)
 namespace sw
 {
 
-Evaluator::Evaluator(const std::vector<NodePtr>& nodes, ShaderType st)
-	: m_st(st)
+Evaluator::Evaluator(const std::vector<NodePtr>& nodes)
 {
 	InitNodes(nodes);
 
@@ -76,31 +75,17 @@ void main()
 
 void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 {
-	assert(!nodes.empty());
-	auto& exports = nodes[0]->GetExports();
-	assert(exports.size() >= 1);
-	switch (m_st)
-	{
-	case ST_VERT:
-	{
-		auto end = std::make_shared<node::VertexShader>();
-		m_body_nodes.push_back(end);
-		sw::make_connecting({ nodes[0], 0 }, { end, 0 });
-	}
-		break;
-	case ST_FRAG:
-	{
-		auto end = std::make_shared<node::FragmentShader>();
-		m_body_nodes.push_back(end);
-		sw::make_connecting({ nodes[0], 0 }, { end, 0 });
-	}
-		break;
-	}
-
     NodesUnique unique;
     NodesCache cache;
 	for (auto& node : nodes)
 	{
+        auto type = node->get_type();
+        if (type == rttr::type::get<node::VertexShader>()) {
+            m_st = ST_VERT;
+        } else if (type == rttr::type::get<node::FragmentShader>()) {
+            m_st = ST_FRAG;
+        }
+
 		if (unique.body.find(node) != unique.body.end()) {
 			continue;
 		}
@@ -108,6 +93,7 @@ void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
         cache.body.push_back(node);
 		InsertNodeRecursive(node, unique, cache);
 	}
+    assert(m_st != ST_NONE);
     std::copy(cache.body.begin(), cache.body.end(), std::back_inserter(m_body_nodes));
     std::copy(cache.head.begin(), cache.head.end(), std::back_inserter(m_head_nodes));
     std::copy(cache.func.begin(), cache.func.end(), std::back_inserter(m_func_nodes));

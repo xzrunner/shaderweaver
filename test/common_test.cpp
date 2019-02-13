@@ -19,6 +19,8 @@
 #include <shaderweaver/node/FragPosTrans.h>
 #include <shaderweaver/node/NormalTrans.h>
 #include <shaderweaver/node/Phong.h>
+#include <shaderweaver/node/VertexShader.h>
+#include <shaderweaver/node/FragmentShader.h>
 
 #include <catch/catch.hpp>
 #include <gl/glew.h>
@@ -96,15 +98,19 @@ void add_vert_pos_trans(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr
 	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
 	auto modelview  = std::make_shared<sw::node::Uniform>("u_modelview",  sw::t_mat4);
 	auto position   = std::make_shared<sw::node::Input>  ("position",     sw::t_pos2);
+    cache_nodes.push_back(projection);
+    cache_nodes.push_back(modelview);
+    cache_nodes.push_back(position);
+
 	auto pos_trans  = std::make_shared<sw::node::PositionTransOld>(2);
 	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTransOld::ID_PROJ });
 	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTransOld::ID_MODELVIEW });
 	sw::make_connecting({ position,   0 }, { pos_trans, sw::node::PositionTransOld::ID_POS });
-	nodes.push_back(pos_trans);
+    cache_nodes.push_back(pos_trans);
 
-	cache_nodes.push_back(projection);
-	cache_nodes.push_back(modelview);
-	cache_nodes.push_back(position);
+    auto vert_end = std::make_shared<sw::node::VertexShader>();
+    sw::make_connecting({ pos_trans, 0 }, { vert_end, 0 });
+	nodes.push_back(vert_end);
 }
 
 void add_vert_varying(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr>& cache_nodes, const std::string& name, uint32_t type)
@@ -168,10 +174,16 @@ void init_vert(ShaderType type, std::vector<sw::NodePtr>& vert_nodes, std::vecto
 
 sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
 {
+    sw::NodePtr ret = nullptr;
 	switch (type)
 	{
 	case ST_SHAPE:
-		return std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+    {
+        auto color = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+        cache_nodes.push_back(color);
+        ret = color;
+    }
+        break;
 	case ST_SPRITE:
 	{
 		auto tex_sample  = std::make_shared<sw::node::SampleTex2D>();
@@ -179,6 +191,9 @@ sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
 		auto frag_in_uv  = std::make_shared<sw::node::Input>  ("v_texcoord", sw::t_uv);
 		sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::SampleTex2D::ID_TEX });
 		sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::SampleTex2D::ID_UV });
+        cache_nodes.push_back(tex_sample);
+        cache_nodes.push_back(frag_in_tex);
+        cache_nodes.push_back(frag_in_uv);
 
 		auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
 		auto frag_in_mul = std::make_shared<sw::node::Input>("v_color",    sw::t_col4);
@@ -186,18 +201,16 @@ sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
 		sw::make_connecting({ tex_sample,  0 }, { col_add_mul, sw::node::ColorAddMul::ID_COL });
 		sw::make_connecting({ frag_in_mul, 0 }, { col_add_mul, sw::node::ColorAddMul::ID_MUL });
 		sw::make_connecting({ frag_in_add, 0 }, { col_add_mul, sw::node::ColorAddMul::ID_ADD });
+        cache_nodes.push_back(col_add_mul);
+        cache_nodes.push_back(frag_in_mul);
+        cache_nodes.push_back(frag_in_add);
 
-		cache_nodes.push_back(tex_sample);
-		cache_nodes.push_back(frag_in_tex);
-		cache_nodes.push_back(frag_in_uv);
-		cache_nodes.push_back(frag_in_mul);
-		cache_nodes.push_back(frag_in_add);
-
-		return col_add_mul;
+        ret = col_add_mul;
 	}
 	default:
-		return nullptr;
+        assert(0);
 	}
+    return ret;
 }
 
 }
@@ -216,10 +229,12 @@ TEST_CASE("shape2d") {
 
 	// frag
 	auto frag_node = init_frag(ST_SHAPE, cache_nodes);
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ frag_node, 0 }, { frag_end, 0 });
 
 	// end
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ frag_node }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -248,11 +263,14 @@ TEST_CASE("sprite") {
 	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTransOld::ID_PROJ });
 	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTransOld::ID_MODELVIEW });
 	sw::make_connecting({ position,   0 }, { pos_trans, sw::node::PositionTransOld::ID_POS });
-	vert_nodes.push_back(pos_trans);
+    cache_nodes.push_back(projection);
+    cache_nodes.push_back(modelview);
+    cache_nodes.push_back(position);
+    cache_nodes.push_back(pos_trans);
 
-	cache_nodes.push_back(projection);
-	cache_nodes.push_back(modelview);
-	cache_nodes.push_back(position);
+    auto vert_end = std::make_shared<sw::node::VertexShader>();
+    sw::make_connecting({ pos_trans, 0 }, { vert_end, 0 });
+	vert_nodes.push_back(vert_end);
 
 	add_vert_varying(vert_nodes, cache_nodes, "texcoord", sw::t_uv);
 
@@ -262,15 +280,17 @@ TEST_CASE("sprite") {
 	auto frag_in_uv = std::make_shared<sw::node::Input>("v_texcoord", sw::t_uv);
 	sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::SampleTex2D::ID_TEX });
 	sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::SampleTex2D::ID_UV });
-
 	cache_nodes.push_back(tex_sample);
 	cache_nodes.push_back(frag_in_tex);
 	cache_nodes.push_back(frag_in_uv);
 
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ tex_sample, 0 }, { frag_end, 0 });
+
 	// end
 
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ tex_sample }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -292,11 +312,13 @@ TEST_CASE("sprite with color") {
 
 	// frag
 	auto frag_node = init_frag(ST_SPRITE, cache_nodes);
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ frag_node, 0 }, { frag_end, 0 });
 
 	// end
 
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ frag_node }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -385,10 +407,14 @@ TEST_CASE("gray") {
 
 	auto gray = std::make_shared<sw::node::Gray>();
 	sw::make_connecting({ frag_node,  0 }, { gray, 0 });
+    cache_nodes.push_back(gray);
+
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ gray, 0 }, { frag_end, 0 });
 
 	// end
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ gray }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -424,11 +450,13 @@ TEST_CASE("rename") {
 
 	// frag
 	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ frag_in_col, 0 }, { frag_end, 0 });
 
 	// end
 
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ frag_in_col }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -455,11 +483,13 @@ TEST_CASE("type conv") {
 
 	// frag
 	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ frag_in_col, 0 }, { frag_end, 0 });
 
 	// end
 
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ frag_in_col }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
@@ -490,7 +520,7 @@ TEST_CASE("phong") {
 	sw::make_connecting({ view, 0 },       { pos_trans, sw::node::PositionTrans::ID_VIEW });
 	sw::make_connecting({ model, 0 },      { pos_trans, sw::node::PositionTrans::ID_MODEL });
 	sw::make_connecting({ position, 0 },   { pos_trans, sw::node::PositionTrans::ID_POS });
-	vert_nodes.push_back(pos_trans);
+    cache_nodes.push_back(pos_trans);
 
 	auto frag_pos_trans = std::make_shared<sw::node::FragPosTrans>();
 	sw::make_connecting({ model, 0 },    { frag_pos_trans, sw::node::FragPosTrans::ID_MODEL });
@@ -498,13 +528,17 @@ TEST_CASE("phong") {
 	vert_nodes.push_back(frag_pos_trans);
 
 	auto norm_trans = std::make_shared<sw::node::NormalTrans>();
-	sw::make_connecting({ model, 0 }, { norm_trans, sw::node::NormalTrans::ID_MODEL });
-	sw::make_connecting({ normal, 0 }, { norm_trans, sw::node::NormalTrans::ID_NORM });
+	sw::make_connecting({ model, 0 },  { norm_trans, sw::node::NormalTrans::ID_NORMAL_MAT });
+	sw::make_connecting({ normal, 0 }, { norm_trans, sw::node::NormalTrans::ID_NORMAL });
 	vert_nodes.push_back(norm_trans);
 
 	add_vert_varying(vert_nodes, cache_nodes, "frag_pos", sw::t_flt3);
 	add_vert_varying(vert_nodes, cache_nodes, "normal",   sw::t_nor3);
 	add_vert_varying(vert_nodes, cache_nodes, "texcoord", sw::t_uv);
+
+    auto vert_end = std::make_shared<sw::node::VertexShader>();
+    sw::make_connecting({ pos_trans, 0 }, { vert_end, 0 });
+    vert_nodes.push_back(vert_end);
 
 	// frag
 	auto phong = std::make_shared<sw::node::Phong>();
@@ -518,26 +552,29 @@ TEST_CASE("phong") {
 	auto mat_specular  = std::make_shared<sw::node::Vector3>("mat_specular", sm::vec3(0.2f, 0.2f, 0.2f));
 	auto mat_emission  = std::make_shared<sw::node::Vector3>("mat_emission", sm::vec3(0.3f, 0.3f, 0.3f));
 	auto mat_shininess = std::make_shared<sw::node::Vector1>("mat_shininess", 0.4f);
-	sw::make_connecting({ mat_diffuse, 0 },   { phong, sw::node::Phong::ID_MATERIAL_DIFFUSE });
-	sw::make_connecting({ mat_specular, 0 },  { phong, sw::node::Phong::ID_MATERIAL_SPECULAR });
-	sw::make_connecting({ mat_emission, 0 },  { phong, sw::node::Phong::ID_MATERIAL_EMISSION });
-	sw::make_connecting({ mat_shininess, 0 }, { phong, sw::node::Phong::ID_MATERIAL_SHININESS });
+	sw::make_connecting({ mat_diffuse, 0 },   { phong, sw::node::Phong::ID_MAT_DIFFUSE });
+	sw::make_connecting({ mat_specular, 0 },  { phong, sw::node::Phong::ID_MAT_SPECULAR });
+	sw::make_connecting({ mat_emission, 0 },  { phong, sw::node::Phong::ID_MAT_EMISSION });
+	sw::make_connecting({ mat_shininess, 0 }, { phong, sw::node::Phong::ID_MAT_SHININESS });
 
 	auto lit_pos      = std::make_shared<sw::node::Vector3>("lit_pos", sm::vec3(0.5f, 0.5f, 0.5f));
 	auto lit_ambient  = std::make_shared<sw::node::Vector1>("lit_ambient", 0.6f);
 	auto lit_diffuse  = std::make_shared<sw::node::Vector1>("lit_diffuse", 0.7f);
 	auto lit_specular = std::make_shared<sw::node::Vector1>("lit_specular", 0.8f);
-	sw::make_connecting({ lit_pos, 0 },      { phong, sw::node::Phong::ID_LIGHT_POSITION });
-	sw::make_connecting({ lit_ambient, 0 },  { phong, sw::node::Phong::ID_LIGHT_AMBIENT });
-	sw::make_connecting({ lit_diffuse, 0 },  { phong, sw::node::Phong::ID_LIGHT_DIFFUSE });
-	sw::make_connecting({ lit_specular, 0 }, { phong, sw::node::Phong::ID_LIGHT_SPECULAR });
+	sw::make_connecting({ lit_pos, 0 },      { phong, sw::node::Phong::ID_LIT_POSITION });
+	sw::make_connecting({ lit_ambient, 0 },  { phong, sw::node::Phong::ID_LIT_AMBIENT });
+	sw::make_connecting({ lit_diffuse, 0 },  { phong, sw::node::Phong::ID_LIT_DIFFUSE });
+	sw::make_connecting({ lit_specular, 0 }, { phong, sw::node::Phong::ID_LIT_SPECULAR });
 
 	auto view_pos = std::make_shared<sw::node::Vector3>("view_pos", sm::vec3(0.5f, 0.5f, 0.5f));
 	sw::make_connecting({ view_pos, 0 }, { phong, sw::node::Phong::ID_VIEW_POS });
 
+    auto frag_end = std::make_shared<sw::node::FragmentShader>();
+    sw::make_connecting({ phong, 0 }, { frag_end, 0 });
+
 	// end
-	sw::Evaluator vert(vert_nodes, sw::ST_VERT);
-	sw::Evaluator frag({ phong }, sw::ST_FRAG);
+	sw::Evaluator vert(vert_nodes);
+	sw::Evaluator frag({ frag_end });
 
 	//debug_print(vert, frag);
 	int shader = create_shader(vert, frag);
