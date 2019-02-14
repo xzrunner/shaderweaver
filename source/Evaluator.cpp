@@ -6,6 +6,8 @@
 
 #include <cpputil/StringHelper.h>
 
+#include <stack>
+
 #include <assert.h>
 
 namespace
@@ -95,6 +97,7 @@ void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
 	}
     assert(m_st != ST_NONE);
     std::copy(cache.body.begin(), cache.body.end(), std::back_inserter(m_body_nodes));
+    TopologicalSorting(m_body_nodes);
     std::copy(cache.head.begin(), cache.head.end(), std::back_inserter(m_head_nodes));
     std::copy(cache.func.begin(), cache.func.end(), std::back_inserter(m_func_nodes));
 }
@@ -152,6 +155,54 @@ void Evaluator::InsertNodeRecursive(const sw::NodePtr& node, NodesUnique& unique
 		}
 		InsertNodeRecursive(pair, unique, cache);
 	}
+}
+
+void Evaluator::TopologicalSorting(std::vector<NodePtr>& nodes) const
+{
+    // prepare
+    std::vector<int> in_deg(nodes.size(), 0);
+    std::vector<std::vector<int>> out_nodes(nodes.size());
+    for (int i = 0, n = nodes.size(); i < n; ++i)
+    {
+        auto& node = nodes[i];
+        for (auto& port : node->GetImports())
+        {
+            assert(port.conns.size() == 1);
+            auto from = port.conns[0].node.lock();
+            assert(from);
+            for (int j = 0, m = nodes.size(); j < m; ++j) {
+                if (from == nodes[j]) {
+                    in_deg[i]++;
+                    out_nodes[j].push_back(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    // sort
+    std::stack<int> st;
+    std::vector<NodePtr> sorted;
+    for (int i = 0, n = in_deg.size(); i < n; ++i) {
+        if (in_deg[i] == 0) {
+            st.push(i);
+        }
+    }
+    while (!st.empty())
+    {
+        int v = st.top();
+        st.pop();
+        sorted.push_back(nodes[v]);
+        for (auto& i : out_nodes[v]) {
+            assert(in_deg[i] > 0);
+            in_deg[i]--;
+            if (in_deg[i] == 0) {
+                st.push(i);
+            }
+        }
+    }
+
+    nodes = sorted;
 }
 
 void Evaluator::Rename()
@@ -312,7 +363,7 @@ std::string Evaluator::EvalHeader(std::set<NodePtr>& created) const
 
 	ret += "\n";
 
-	for (auto& itr = m_head_nodes.rbegin(); itr != m_head_nodes.rend(); ++itr) {
+	for (auto& itr = m_head_nodes.begin(); itr != m_head_nodes.end(); ++itr) {
         if (created.find(*itr) == created.end()) {
             ret += (*itr)->GetHeaderStr();
             ret += "\n";
@@ -322,12 +373,12 @@ std::string Evaluator::EvalHeader(std::set<NodePtr>& created) const
 
     ret += "\n";
 
-	for (auto& itr = m_func_nodes.rbegin(); itr != m_func_nodes.rend(); ++itr) {
+	for (auto& itr = m_func_nodes.begin(); itr != m_func_nodes.end(); ++itr) {
 		ret += EvalFunc(itr->first, itr->second, created);
 	}
 
 	ret += "\n";
-	for (auto& itr = m_body_nodes.rbegin(); itr != m_body_nodes.rend(); ++itr)
+	for (auto& itr = m_body_nodes.begin(); itr != m_body_nodes.end(); ++itr)
 	{
         if (created.find(*itr) != created.end()) {
             continue;
@@ -364,7 +415,7 @@ std::string Evaluator::EvalBody() const
 	}
 
 	ret += "\n";
-	for (auto& itr = m_body_nodes.rbegin(); itr != m_body_nodes.rend(); ++itr)
+	for (auto& itr = m_body_nodes.begin(); itr != m_body_nodes.end(); ++itr)
 	{
 		auto str = (*itr)->GetBodyStr();
 		if (!str.empty()) {

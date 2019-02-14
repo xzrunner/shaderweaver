@@ -47,6 +47,7 @@ private:
     };
 	void InitNodes(const std::vector<NodePtr>& nodes);
 	void InsertNodeRecursive(const sw::NodePtr& node, NodesUnique& unique, NodesCache& cache) const;
+    void TopologicalSorting(std::vector<NodePtr>& nodes) const;
 	// 2. pepare vars
 	void Rename();
 	static void InsertVar(const Node& node, const Variable& var,
