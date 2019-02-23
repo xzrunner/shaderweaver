@@ -95,7 +95,7 @@ void Evaluator::InitNodes(const std::vector<NodePtr>& nodes)
         cache.body.push_back(node);
 		InsertNodeRecursive(node, unique, cache);
 	}
-    assert(m_st != ST_NONE);
+
     std::copy(cache.body.begin(), cache.body.end(), std::back_inserter(m_body_nodes));
     TopologicalSorting(m_body_nodes);
     std::copy(cache.head.begin(), cache.head.end(), std::back_inserter(m_head_nodes));
