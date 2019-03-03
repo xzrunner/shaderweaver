@@ -37,6 +37,7 @@ public:
 public:
 	struct PortAddr
 	{
+        PortAddr() {}
 		PortAddr(const std::shared_ptr<Node>& node, int idx)
 			: node(node), idx(idx) {}
 		PortAddr(const PortAddr& addr)

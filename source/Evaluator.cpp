@@ -167,6 +167,10 @@ void Evaluator::TopologicalSorting(std::vector<NodePtr>& nodes) const
         auto& node = nodes[i];
         for (auto& port : node->GetImports())
         {
+            if (port.conns.empty()) {
+                continue;
+            }
+
             assert(port.conns.size() == 1);
             auto from = port.conns[0].node.lock();
             assert(from);
@@ -252,9 +256,12 @@ void Evaluator::Concatenate() const
 		for (auto& port : node->GetImports())
 		{
 			auto in_port = port.GetPair(0);
-			if (!in_port && port.var.GetType().interp == VT_FUNC) {
-				continue;
-			}
+			//if (!in_port && port.var.GetType().interp == VT_FUNC) {
+			//	continue;
+			//}
+            if (!in_port) {
+                continue;
+            }
 			assert(in_port);
 			Concatenate(const_cast<Node::Port&>(*in_port),
 				        const_cast<Node::Port&>(port));
