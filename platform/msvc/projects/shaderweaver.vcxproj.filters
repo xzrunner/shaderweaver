@@ -139,6 +139,9 @@
     <Filter Include="nodes\anim">
       <UniqueIdentifier>{5f91d5f4-d043-4e7f-b6b8-37f73d753b8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\math\complex">
+      <UniqueIdentifier>{c9ab524a-cfa6-4229-997c-874e779d7073}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
@@ -573,6 +576,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Skin.h">
       <Filter>nodes\anim</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ScaleAndOffset.h">
+      <Filter>nodes\math\complex</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -99,6 +99,7 @@
 #include "shaderweaver/node/DotProduct.h"
 #include "shaderweaver/node/Projection.h"
 #include "shaderweaver/node/Rejection.h"
+#include "shaderweaver/node/ScaleAndOffset.h"
 // procedural
 #include "shaderweaver/node/Checkerboard.h"
 #include "shaderweaver/node/Ellipse.h"
@@ -313,6 +314,7 @@ REGIST_NODE_TYPE(Distance)
 REGIST_NODE_TYPE(DotProduct)
 REGIST_NODE_TYPE(Projection)
 REGIST_NODE_TYPE(Rejection)
+REGIST_NODE_TYPE(ScaleAndOffset)
 // procedural
 REGIST_NODE_TYPE2(Checkerboard, (                                                            \
 	rttr::metadata((int)(sw::node::Checkerboard::ID_COLOR_A),   sm::vec3(0.2f, 0.2f, 0.2f)), \

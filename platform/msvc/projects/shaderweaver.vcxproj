@@ -119,6 +119,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTex3D.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Saturation.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ScaleAndOffset.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SDF.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Skin.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Sphere.h" />
