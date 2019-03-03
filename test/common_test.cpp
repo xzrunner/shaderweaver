@@ -151,8 +151,7 @@ void init_layout(ShaderType type)
 		va_list.push_back(ur::VertexAttrib("texcoord", 2, 4, 32, 24));
 		break;
 	}
-	auto layout_id = RC->CreateVertexLayout(va_list);
-	RC->BindVertexLayout(layout_id);
+	RC->CreateVertexLayout(va_list);
 }
 
 void init_vert(ShaderType type, std::vector<sw::NodePtr>& vert_nodes, std::vector<sw::NodePtr>& cache_nodes)
@@ -249,8 +248,7 @@ TEST_CASE("sprite") {
 	std::vector<ur::VertexAttrib> va_list;
 	va_list.push_back(ur::VertexAttrib("position", 2, sizeof(float), 16, 0));
 	va_list.push_back(ur::VertexAttrib("texcoord", 2, sizeof(float), 16, 8));
-	auto layout_id = RC->CreateVertexLayout(va_list);
-	RC->BindVertexLayout(layout_id);
+	RC->CreateVertexLayout(va_list);
 
 	// vert
 	std::vector<sw::NodePtr> cache_nodes;
@@ -338,8 +336,7 @@ TEST_CASE("sprite with color") {
 //	va_list.push_back(ur::VertexAttrib("color",         4, sizeof(uint8_t), sz, 24));
 //	va_list.push_back(ur::VertexAttrib("additive",      4, sizeof(uint8_t), sz, 28));
 //
-//	auto layout_id = RC->CreateVertexLayout(va_list);
-//	RC->BindVertexLayout(layout_id);
+//	RC->CreateVertexLayout(va_list);
 //
 //	// vert
 //
