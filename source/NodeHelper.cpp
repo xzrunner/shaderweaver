@@ -7,7 +7,7 @@
 namespace sw
 {
 
-void NodeHelper::TypePropote(const Node::PortAddr& from, const Node::PortAddr& to)
+void NodeHelper::TypePromote(const Node::PortAddr& from, const Node::PortAddr& to)
 {
 	auto f_node = from.node.lock();
 	assert(f_node && from.idx >= 0 && from.idx < static_cast<int>(f_node->GetExports().size()));

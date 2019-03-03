@@ -163,7 +163,7 @@ void make_connecting(const Node::PortAddr& from, const Node::PortAddr& to)
 		const_cast<Node::Port&>(ports[to.idx]).conns.push_back(from);
 	}
 
-	NodeHelper::TypePropote(from, to);
+	NodeHelper::TypePromote(from, to);
 }
 
 }
