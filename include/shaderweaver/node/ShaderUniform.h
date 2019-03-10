@@ -8,11 +8,11 @@ namespace sw
 namespace node
 {
 
-class Uniform : public sw::Node
+class ShaderUniform : public sw::Node
 {
 public:
-	Uniform(const std::string& name = "", uint32_t type = 0)
-		: Node("Uniform")
+	ShaderUniform(const std::string& name = "", uint32_t type = 0)
+		: Node("ShaderUniform")
 	{
 		SetNameAndType(name, type);
 	}
@@ -33,7 +33,7 @@ protected:
 
 	RTTR_ENABLE(Node)
 
-}; // Uniform
+}; // ShaderUniform
 
 }
 }

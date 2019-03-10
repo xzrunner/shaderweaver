@@ -127,9 +127,9 @@
 #include "shaderweaver/node/Or.h"
 #include "shaderweaver/node/FragmentShader.h"
 #include "shaderweaver/node/VertexShader.h"
-#include "shaderweaver/node/Input.h"
-#include "shaderweaver/node/Output.h"
-#include "shaderweaver/node/Uniform.h"
+#include "shaderweaver/node/ShaderInput.h"
+#include "shaderweaver/node/ShaderOutput.h"
+#include "shaderweaver/node/ShaderUniform.h"
 #include "shaderweaver/node/FragPosTrans.h"
 #include "shaderweaver/node/NormalTrans.h"
 #include "shaderweaver/node/PositionTrans.h"
@@ -373,9 +373,9 @@ REGIST_NODE_TYPE(Not)
 REGIST_NODE_TYPE(Or)
 REGIST_NODE_TYPE(FragmentShader)
 REGIST_NODE_TYPE(VertexShader)
-REGIST_NODE_TYPE(Input)
-REGIST_NODE_TYPE(Output)
-REGIST_NODE_TYPE(Uniform)
+REGIST_NODE_TYPE(ShaderInput)
+REGIST_NODE_TYPE(ShaderOutput)
+REGIST_NODE_TYPE(ShaderUniform)
 REGIST_NODE_TYPE(FragPosTrans)
 REGIST_NODE_TYPE(NormalTrans)
 REGIST_NODE_TYPE(PositionTrans)

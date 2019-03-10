@@ -8,11 +8,11 @@ namespace sw
 namespace node
 {
 
-class Input : public sw::Node
+class ShaderInput : public sw::Node
 {
 public:
-	Input(const std::string& name = "", uint32_t type = 0)
-		: Node("Input")
+	ShaderInput(const std::string& name = "", uint32_t type = 0)
+		: Node("ShaderInput")
 	{
 		SetNameAndType(name, type);
 	}
@@ -33,7 +33,7 @@ protected:
 
 	RTTR_ENABLE(Node)
 
-}; // Input
+}; // ShaderInput
 
 }
 }

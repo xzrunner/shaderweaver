@@ -3,9 +3,9 @@
 #include <unirender/gl/RenderContext.h>
 #include <shaderweaver/Evaluator.h>
 
-#include <shaderweaver/node/Uniform.h>
-#include <shaderweaver/node/Input.h>
-#include <shaderweaver/node/Output.h>
+#include <shaderweaver/node/ShaderUniform.h>
+#include <shaderweaver/node/ShaderInput.h>
+#include <shaderweaver/node/ShaderOutput.h>
 #include <shaderweaver/node/PositionTransOld.h>
 #include <shaderweaver/node/SampleTex2D.h>
 #include <shaderweaver/node/ColorAddMul.h>
@@ -95,9 +95,9 @@ void debug_print(const sw::Evaluator& vert, const sw::Evaluator& frag)
 
 void add_vert_pos_trans(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr>& cache_nodes)
 {
-	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
-	auto modelview  = std::make_shared<sw::node::Uniform>("u_modelview",  sw::t_mat4);
-	auto position   = std::make_shared<sw::node::Input>  ("position",     sw::t_pos2);
+	auto projection = std::make_shared<sw::node::ShaderUniform>("u_projection", sw::t_mat4);
+	auto modelview  = std::make_shared<sw::node::ShaderUniform>("u_modelview",  sw::t_mat4);
+	auto position   = std::make_shared<sw::node::ShaderInput>  ("position",     sw::t_pos2);
     cache_nodes.push_back(projection);
     cache_nodes.push_back(modelview);
     cache_nodes.push_back(position);
@@ -115,8 +115,8 @@ void add_vert_pos_trans(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr
 
 void add_vert_varying(std::vector<sw::NodePtr>& nodes, std::vector<sw::NodePtr>& cache_nodes, const std::string& name, uint32_t type)
 {
-	auto vert_in  = std::make_shared<sw::node::Input> (name, type);
-	auto vert_out = std::make_shared<sw::node::Output>("v_" + name, type);
+	auto vert_in  = std::make_shared<sw::node::ShaderInput> (name, type);
+	auto vert_out = std::make_shared<sw::node::ShaderOutput>("v_" + name, type);
 	sw::make_connecting({ vert_in, 0 }, { vert_out, 0 });
 	nodes.push_back(vert_out);
 
@@ -178,7 +178,7 @@ sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
 	{
 	case ST_SHAPE:
     {
-        auto color = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+        auto color = std::make_shared<sw::node::ShaderInput>("v_color", sw::t_col4);
         cache_nodes.push_back(color);
         ret = color;
     }
@@ -186,8 +186,8 @@ sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
 	case ST_SPRITE:
 	{
 		auto tex_sample  = std::make_shared<sw::node::SampleTex2D>();
-		auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
-		auto frag_in_uv  = std::make_shared<sw::node::Input>  ("v_texcoord", sw::t_uv);
+		auto frag_in_tex = std::make_shared<sw::node::ShaderUniform>("u_texture0", sw::t_tex2d);
+		auto frag_in_uv  = std::make_shared<sw::node::ShaderInput>  ("v_texcoord", sw::t_uv);
 		sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::SampleTex2D::ID_TEX });
 		sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::SampleTex2D::ID_UV });
         cache_nodes.push_back(tex_sample);
@@ -195,8 +195,8 @@ sw::NodePtr init_frag(ShaderType type, std::vector<sw::NodePtr>& cache_nodes)
         cache_nodes.push_back(frag_in_uv);
 
 		auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
-		auto frag_in_mul = std::make_shared<sw::node::Input>("v_color",    sw::t_col4);
-		auto frag_in_add = std::make_shared<sw::node::Input>("v_additive", sw::t_col4);
+		auto frag_in_mul = std::make_shared<sw::node::ShaderInput>("v_color",    sw::t_col4);
+		auto frag_in_add = std::make_shared<sw::node::ShaderInput>("v_additive", sw::t_col4);
 		sw::make_connecting({ tex_sample,  0 }, { col_add_mul, sw::node::ColorAddMul::ID_COL });
 		sw::make_connecting({ frag_in_mul, 0 }, { col_add_mul, sw::node::ColorAddMul::ID_MUL });
 		sw::make_connecting({ frag_in_add, 0 }, { col_add_mul, sw::node::ColorAddMul::ID_ADD });
@@ -254,9 +254,9 @@ TEST_CASE("sprite") {
 	std::vector<sw::NodePtr> cache_nodes;
 	std::vector<sw::NodePtr> vert_nodes;
 
-	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
-	auto modelview  = std::make_shared<sw::node::Uniform>("u_modelview",  sw::t_mat4);
-	auto position   = std::make_shared<sw::node::Input>  ("position",     sw::t_pos2);
+	auto projection = std::make_shared<sw::node::ShaderUniform>("u_projection", sw::t_mat4);
+	auto modelview  = std::make_shared<sw::node::ShaderUniform>("u_modelview",  sw::t_mat4);
+	auto position   = std::make_shared<sw::node::ShaderInput>  ("position",     sw::t_pos2);
 	auto pos_trans  = std::make_shared<sw::node::PositionTransOld>(2);
 	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTransOld::ID_PROJ });
 	sw::make_connecting({ modelview,  0 }, { pos_trans, sw::node::PositionTransOld::ID_MODELVIEW });
@@ -274,8 +274,8 @@ TEST_CASE("sprite") {
 
 	// frag
 	auto tex_sample = std::make_shared<sw::node::SampleTex2D>();
-	auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
-	auto frag_in_uv = std::make_shared<sw::node::Input>("v_texcoord", sw::t_uv);
+	auto frag_in_tex = std::make_shared<sw::node::ShaderUniform>("u_texture0", sw::t_tex2d);
+	auto frag_in_uv = std::make_shared<sw::node::ShaderInput>("v_texcoord", sw::t_uv);
 	sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::SampleTex2D::ID_TEX });
 	sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::SampleTex2D::ID_UV });
 	cache_nodes.push_back(tex_sample);
@@ -352,26 +352,26 @@ TEST_CASE("sprite with color") {
 //	// frag
 //
 //	auto tex_sample  = std::make_shared<sw::node::SampleTex2D>();
-//	auto frag_in_tex = std::make_shared<sw::node::Uniform>("u_texture0", sw::t_tex2d);
-//	auto frag_in_uv  = std::make_shared<sw::node::Input>  ("v_texcoord", sw::t_uv);
+//	auto frag_in_tex = std::make_shared<sw::node::ShaderUniform>("u_texture0", sw::t_tex2d);
+//	auto frag_in_uv  = std::make_shared<sw::node::ShaderInput>  ("v_texcoord", sw::t_uv);
 //	sw::make_connecting({ frag_in_tex, 0 }, { tex_sample, sw::node::SampleTex2D::ID_TEX });
 //	sw::make_connecting({ frag_in_uv,  0 }, { tex_sample, sw::node::SampleTex2D::ID_UV });
 //
 //	auto col_add_mul = std::make_shared<sw::node::ColorAddMul>();
-//	auto frag_in_mul = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
-//	auto frag_in_add = std::make_shared<sw::node::Input>("v_additive", sw::t_col4);
+//	auto frag_in_mul = std::make_shared<sw::node::ShaderInput>("v_color", sw::t_col4);
+//	auto frag_in_add = std::make_shared<sw::node::ShaderInput>("v_additive", sw::t_col4);
 //	sw::make_connecting({ tex_sample,  0 }, { col_add_mul, sw::node::ColorAddMul::ID_COL });
 //	sw::make_connecting({ frag_in_mul, 0 }, { col_add_mul, sw::node::ColorAddMul::ID_MUL });
 //	sw::make_connecting({ frag_in_add, 0 }, { col_add_mul, sw::node::ColorAddMul::ID_ADD });
 //
 //	auto base_tex_sample  = std::make_shared<sw::node::SampleTex2D>();
-//	auto frag_in_base_tex = std::make_shared<sw::node::Uniform>("u_texture1",      sw::t_tex2d);
-//	auto frag_in_bae_uv   = std::make_shared<sw::node::Input>  ("v_texcoord_base", sw::t_uv);
+//	auto frag_in_base_tex = std::make_shared<sw::node::ShaderUniform>("u_texture1",      sw::t_tex2d);
+//	auto frag_in_bae_uv   = std::make_shared<sw::node::ShaderInput>  ("v_texcoord_base", sw::t_uv);
 //	sw::make_connecting({ frag_in_base_tex, 0 }, { base_tex_sample, sw::node::SampleTex2D::ID_TEX });
 //	sw::make_connecting({ frag_in_bae_uv,  0 },  { base_tex_sample, sw::node::SampleTex2D::ID_UV });
 //
 //	auto blend = std::make_shared<sw::node::Blend>();
-//	auto blend_mode = std::make_shared<sw::node::Uniform>("u_mode", sw::t_int1);
+//	auto blend_mode = std::make_shared<sw::node::ShaderUniform>("u_mode", sw::t_int1);
 //	sw::make_connecting({ base_tex_sample,  0 }, { blend, sw::node::Blend::ID_BASE4 });
 //	sw::make_connecting({ col_add_mul,  0 },     { blend, sw::node::Blend::ID_BLEND4 });
 //	sw::make_connecting({ blend_mode,  0 },      { blend, sw::node::Blend::ID_MODE });
@@ -429,7 +429,7 @@ TEST_CASE("rename") {
 	std::vector<sw::NodePtr> vert_nodes;
 	add_vert_pos_trans(vert_nodes, vert_nodes);
 
-	auto vert_color_in  = std::make_shared<sw::node::Input>("color", sw::t_col4);
+	auto vert_color_in  = std::make_shared<sw::node::ShaderInput>("color", sw::t_col4);
 
 	auto add0 = std::make_shared<sw::node::Add>();
 	auto add0_a = std::make_shared<sw::node::Vector4>("", sm::vec4(0, 1, 2, 3));
@@ -441,12 +441,12 @@ TEST_CASE("rename") {
 	sw::make_connecting({ add0, 0 }, { add1, sw::node::Add::ID_A });
 	sw::make_connecting({ add1_b, 0 }, { add1, sw::node::Add::ID_B });
 
-	auto vert_color_out = std::make_shared<sw::node::Output>("v_color", sw::t_col4);
+	auto vert_color_out = std::make_shared<sw::node::ShaderOutput>("v_color", sw::t_col4);
 	sw::make_connecting({ add1, 0 }, { vert_color_out, 0 });
 	vert_nodes.push_back(vert_color_out);
 
 	// frag
-	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+	auto frag_in_col = std::make_shared<sw::node::ShaderInput>("v_color", sw::t_col4);
     auto frag_end = std::make_shared<sw::node::FragmentShader>();
     sw::make_connecting({ frag_in_col, 0 }, { frag_end, 0 });
 
@@ -471,15 +471,15 @@ TEST_CASE("type conv") {
 	std::vector<sw::NodePtr> vert_nodes;
 	add_vert_pos_trans(vert_nodes, vert_nodes);
 
-	auto vert_color_in  = std::make_shared<sw::node::Input>("color", sw::t_col4);
+	auto vert_color_in  = std::make_shared<sw::node::ShaderInput>("color", sw::t_col4);
 
 	auto vec3 = std::make_shared<sw::node::Vector3>("", sm::vec3(0.1f, 0.1f, 0.1f));
-	auto vert_color_out = std::make_shared<sw::node::Output>("v_color", sw::t_col4);
+	auto vert_color_out = std::make_shared<sw::node::ShaderOutput>("v_color", sw::t_col4);
 	sw::make_connecting({ vec3, 0 }, { vert_color_out, 0 });
 	vert_nodes.push_back(vert_color_out);
 
 	// frag
-	auto frag_in_col = std::make_shared<sw::node::Input>("v_color", sw::t_col4);
+	auto frag_in_col = std::make_shared<sw::node::ShaderInput>("v_color", sw::t_col4);
     auto frag_end = std::make_shared<sw::node::FragmentShader>();
     sw::make_connecting({ frag_in_col, 0 }, { frag_end, 0 });
 
@@ -505,12 +505,12 @@ TEST_CASE("phong") {
 
 	std::vector<sw::NodePtr> vert_nodes;
 
-	auto projection = std::make_shared<sw::node::Uniform>("u_projection", sw::t_mat4);
-	auto view       = std::make_shared<sw::node::Uniform>("u_view",       sw::t_mat4);
-	auto model      = std::make_shared<sw::node::Uniform>("u_model",      sw::t_mat4);
+	auto projection = std::make_shared<sw::node::ShaderUniform>("u_projection", sw::t_mat4);
+	auto view       = std::make_shared<sw::node::ShaderUniform>("u_view",       sw::t_mat4);
+	auto model      = std::make_shared<sw::node::ShaderUniform>("u_model",      sw::t_mat4);
 
-	auto position = std::make_shared<sw::node::Input>("position", sw::t_flt4);
-	auto normal   = std::make_shared<sw::node::Input>("normal",   sw::t_nor3);
+	auto position = std::make_shared<sw::node::ShaderInput>("position", sw::t_flt4);
+	auto normal   = std::make_shared<sw::node::ShaderInput>("normal",   sw::t_nor3);
 
 	auto pos_trans = std::make_shared<sw::node::PositionTrans>(4);
 	sw::make_connecting({ projection, 0 }, { pos_trans, sw::node::PositionTrans::ID_PROJ });
@@ -540,8 +540,8 @@ TEST_CASE("phong") {
 	// frag
 	auto phong = std::make_shared<sw::node::Phong>();
 
-	auto frag_in_pos = std::make_shared<sw::node::Input>("v_frag_pos", sw::t_flt3);
-	auto frag_in_nor = std::make_shared<sw::node::Input>("v_normal",   sw::t_nor3);
+	auto frag_in_pos = std::make_shared<sw::node::ShaderInput>("v_frag_pos", sw::t_flt3);
+	auto frag_in_nor = std::make_shared<sw::node::ShaderInput>("v_normal",   sw::t_nor3);
 	sw::make_connecting({ frag_in_pos, 0 }, { phong, sw::node::Phong::ID_FRAG_POS });
 	sw::make_connecting({ frag_in_nor, 0 }, { phong, sw::node::Phong::ID_NORMAL });
 

@@ -10,11 +10,11 @@ namespace sw
 namespace node
 {
 
-class Output : public sw::Node
+class ShaderOutput : public sw::Node
 {
 public:
-	Output(const std::string& name = "", uint32_t type = 0)
-		: Node("Output")
+	ShaderOutput(const std::string& name = "", uint32_t type = 0)
+		: Node("ShaderOutput")
 		, m_var_name(name)
 	{
 		SetNameAndType(name, type);
@@ -45,7 +45,7 @@ private:
 
 	RTTR_ENABLE(Node)
 
-}; // Output
+}; // ShaderOutput
 
 }
 }
