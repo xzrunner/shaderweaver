@@ -12,31 +12,6 @@ Custom::Custom()
 {
 }
 
-void Custom::SetParams(const std::vector<Variable>& params)
-{
-    m_imports.clear();
-    m_imports.reserve(params.size());
-    for (auto& var : params)
-    {
-        auto v = var;
-        auto type = v.GetType();
-        type.region = VT_NODE_IN;
-        v.SetType(type);
-        m_imports.push_back(v);
-    }
-}
-
-void Custom::SetReturn(const Variable& ret)
-{
-    m_exports.clear();
-
-    auto v = ret;
-    auto type = v.GetType();
-    type.region = VT_NODE_OUT;
-    v.SetType(type);
-    m_exports.push_back(v);
-}
-
 void Custom::SetHeadStr(const std::string& str)
 {
     m_head_str = FormatString(str);

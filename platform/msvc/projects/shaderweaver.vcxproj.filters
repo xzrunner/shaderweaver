@@ -144,15 +144,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h">
-      <Filter>nodes\utility\value</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Input.h">
-      <Filter>nodes\utility\value</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Output.h">
-      <Filter>nodes\utility\value</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
       <Filter>dataset</Filter>
     </ClInclude>
@@ -580,6 +571,24 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ScaleAndOffset.h">
       <Filter>nodes\math\complex</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Function.h">
+      <Filter>nodes\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderInput.h">
+      <Filter>nodes\utility\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderOutput.h">
+      <Filter>nodes\utility\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderUniform.h">
+      <Filter>nodes\utility\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FuncInput.h">
+      <Filter>nodes\utility\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FuncOutput.h">
+      <Filter>nodes\utility\value</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">
@@ -603,6 +612,9 @@
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
     <ClCompile Include="..\..\..\source\ShaderWeaver.cpp" />
     <ClCompile Include="..\..\..\source\node\Custom.cpp">
+      <Filter>nodes\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\node\Function.cpp">
       <Filter>nodes\tools</Filter>
     </ClCompile>
   </ItemGroup>

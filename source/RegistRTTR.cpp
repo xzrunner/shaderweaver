@@ -130,6 +130,8 @@
 #include "shaderweaver/node/ShaderInput.h"
 #include "shaderweaver/node/ShaderOutput.h"
 #include "shaderweaver/node/ShaderUniform.h"
+#include "shaderweaver/node/FuncInput.h"
+#include "shaderweaver/node/FuncOutput.h"
 #include "shaderweaver/node/FragPosTrans.h"
 #include "shaderweaver/node/NormalTrans.h"
 #include "shaderweaver/node/PositionTrans.h"
@@ -144,6 +146,7 @@
 #include "shaderweaver/node/Twirl.h"
 // tools
 #include "shaderweaver/node/Custom.h"
+#include "shaderweaver/node/Function.h"
 // anim
 #include "shaderweaver/node/Skin.h"
 
@@ -376,6 +379,8 @@ REGIST_NODE_TYPE(VertexShader)
 REGIST_NODE_TYPE(ShaderInput)
 REGIST_NODE_TYPE(ShaderOutput)
 REGIST_NODE_TYPE(ShaderUniform)
+REGIST_NODE_TYPE(FuncInput)
+REGIST_NODE_TYPE(FuncOutput)
 REGIST_NODE_TYPE(FragPosTrans)
 REGIST_NODE_TYPE(NormalTrans)
 REGIST_NODE_TYPE(PositionTrans)
@@ -411,6 +416,7 @@ REGIST_NODE_TYPE2(Twirl, (                                                     \
 ))
 // tools
 REGIST_NODE_TYPE(Custom)
+REGIST_NODE_TYPE(Function)
 // anim
 REGIST_NODE_TYPE(Skin)
 

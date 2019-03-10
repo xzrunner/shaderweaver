@@ -39,10 +39,10 @@ private:
 
 	// 1. topologically sort nodes
     struct NodesUnique {
-        std::set<sw::NodePtr> body, head, func;
+        std::set<sw::NodePtr> body, head, func, func2;
     };
     struct NodesCache {
-        std::vector<NodePtr> body, head;
+        std::vector<NodePtr> body, head, func2;
         std::vector<std::pair<NodePtr, NodePtr>> func;
     };
 	void InitNodes(const std::vector<NodePtr>& nodes);
@@ -62,6 +62,7 @@ private:
 
 	std::string EvalFunc(const NodePtr& src, const NodePtr& dst,
         std::set<NodePtr>& created) const;
+    std::string EvalFunc2(const NodePtr& node, std::set<NodePtr>& created) const;
 
 private:
 	ShaderType m_st = ST_NONE;
@@ -69,6 +70,7 @@ private:
 	std::vector<NodePtr> m_body_nodes;
     std::vector<NodePtr> m_head_nodes;
 	std::vector<std::pair<NodePtr, NodePtr>> m_func_nodes;
+    std::vector<NodePtr> m_func2_nodes;
 
 	std::map<std::string, VariableType> m_vars_name2type;
 

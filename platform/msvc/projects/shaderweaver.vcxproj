@@ -56,6 +56,9 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Fraction.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FuncInput.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FuncOutput.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Function.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\EstimateNormal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Gray.h" />
@@ -96,8 +99,8 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Input.h" />
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Output.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderInput.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderOutput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Posterize.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Power.h" />
@@ -141,7 +144,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Truncate.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Twirl.h" />
-    <ClInclude Include="..\..\..\include\shaderweaver\node\Uniform.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderUniform.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Union.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\UV.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector1.h" />
@@ -164,6 +167,7 @@
     <ClCompile Include="..\..\..\source\NodeHelper.cpp" />
     <ClCompile Include="..\..\..\source\NodeIDMgr.cpp" />
     <ClCompile Include="..\..\..\source\node\Custom.cpp" />
+    <ClCompile Include="..\..\..\source\node\Function.cpp" />
     <ClCompile Include="..\..\..\source\RegistRTTR.cpp" />
     <ClCompile Include="..\..\..\source\ShaderWeaver.cpp" />
     <ClCompile Include="..\..\..\source\Variable.cpp" />

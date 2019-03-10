@@ -64,6 +64,8 @@ enum VarQualifiers
 	VT_SHADER_IN,
 	VT_SHADER_OUT,
 	VT_SHADER_END,
+    VT_FUNC_IN,
+    VT_FUNC_OUT,
 };
 
 enum VarRegion
@@ -133,6 +135,8 @@ static const uint32_t t_unif      = VariableType{ 0, 0, 0, 0, 0, VT_UNIF }.u32;
 static const uint32_t t_s_in      = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_IN }.u32;
 static const uint32_t t_s_out     = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_OUT }.u32;
 static const uint32_t t_s_end     = VariableType{ 0, 0, 0, 0, 0, VT_SHADER_END }.u32;
+static const uint32_t t_f_in      = VariableType{ 0, 0, 0, 0, 0, VT_FUNC_IN }.u32;
+static const uint32_t t_f_out     = VariableType{ 0, 0, 0, 0, 0, VT_FUNC_OUT }.u32;
 
 static const uint32_t t_read      = VariableType{ 0, 0, 0, 0, 0, 0, 0, VT_ONLY_READ }.u32;
 

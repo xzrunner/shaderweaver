@@ -58,4 +58,38 @@ void NodeHelper::TypePromote(const Node::PortAddr& from, const Node::PortAddr& t
 	}
 }
 
+void NodeHelper::SetImports(Node& node, const std::vector<Variable>& vars)
+{
+    std::vector<Node::Port> imports;
+
+    imports.reserve(vars.size());
+    for (auto& var : vars)
+    {
+        auto v = var;
+        auto type = v.GetType();
+        type.region = VT_NODE_IN;
+        v.SetType(type);
+        imports.push_back(v);
+    }
+
+    node.SetImports(imports);
+}
+
+void NodeHelper::SetExports(Node& node, const std::vector<Variable>& vars)
+{
+    std::vector<Node::Port> exports;
+
+    exports.reserve(vars.size());
+    for (auto& var : vars)
+    {
+        auto v = var;
+        auto type = v.GetType();
+        type.region = VT_NODE_OUT;
+        v.SetType(type);
+        exports.push_back(v);
+    }
+
+    node.SetExports(exports);
+}
+
 }

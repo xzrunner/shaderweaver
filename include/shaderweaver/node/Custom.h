@@ -12,9 +12,6 @@ class Custom : public sw::Node
 public:
     Custom();
 
-    void SetParams(const std::vector<Variable>& params);
-    void SetReturn(const Variable& ret);
-
     void SetHeadStr(const std::string& str);
     void SetBodyStr(const std::string& str);
 

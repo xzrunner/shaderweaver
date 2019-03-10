@@ -27,6 +27,10 @@ public:
 	auto& GetExports() const { return m_exports; }
 	auto& GetInternal() const { return m_internal; }
 
+    struct Port;
+    void SetImports(const std::vector<Port>& imports) { m_imports = imports; }
+    void SetExports(const std::vector<Port>& exports) { m_exports = exports; }
+
 	auto& GetDimGroup() const { return m_dim_group; }
 
 	void AddNesting(const std::string& name, const std::string& cls_name);
