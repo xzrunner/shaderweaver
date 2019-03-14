@@ -17,8 +17,10 @@ public:
 	{
 		InitVariables({
 			{ 0, "_in" },
-			{ t_flt2, "from" },
-			{ t_flt2, "to" },
+            { t_flt1, "min_old" },
+            { t_flt1, "max_old" },
+            { t_flt1, "min_new" },
+            { t_flt1, "max_new" },
 		}, {
 			{ 0, "_out" },
 		}, {
@@ -38,39 +40,39 @@ public:
 protected:
 	virtual std::string GetBody() const override
 	{
-		// (_in - from.x) / (from.y - from.x) == (x - to.x) / (to.y - to.x);
-		// x = (_in - from.x) / (from.y - from.x) * (to.y - to.x) + to.x;
+		// (_in - min_old) / (max_old - min_old) == (x - min_new) / (max_new - min_new);
+		// x = (_in - min_old) / (max_old - min_old) * (max_new - min_new) + min_new;
 		auto& val = GetImports()[ID_IN];
 		switch (val.var.GetType().dim)
 		{
 		case VT_1:
 			return R"(
-#t# = (#to#.y - #to#.x) / (#from#.y - #from#.x);
-#_out# = #to#.x + (#_in# - #from#.x) * #t#;
+#t# = (#max_new# - #min_new#) / (#max_old# - #min_old#);
+#_out# = #min_new# + (#_in# - #min_old#) * #t#;
 )" + 1;
 			break;
 		case VT_2:
 			return R"(
-#t# = (#to#.y - #to#.x) / (#from#.y - #from#.x);
-#_out#.x = #to#.x + (#_in#.x - #from#.x) * #t#;
-#_out#.y = #to#.x + (#_in#.y - #from#.x) * #t#;
+#t# = (#max_new# - #min_new#) / (#max_old# - #min_old#);
+#_out#.x = #min_new# + (#_in#.x - #min_old#) * #t#;
+#_out#.y = #min_new# + (#_in#.y - #min_old#) * #t#;
 )" + 1;
 			break;
 		case VT_3:
 			return R"(
-#t# = (#to#.y - #to#.x) / (#from#.y - #from#.x);
-#_out#.x = #to#.x + (#_in#.x - #from#.x) * #t#;
-#_out#.y = #to#.x + (#_in#.y - #from#.x) * #t#;
-#_out#.z = #to#.x + (#_in#.z - #from#.x) * #t#;
+#t# = (#max_new# - #min_new#) / (#max_old# - #min_old#);
+#_out#.x = #min_new# + (#_in#.x - #min_old#) * #t#;
+#_out#.y = #min_new# + (#_in#.y - #min_old#) * #t#;
+#_out#.z = #min_new# + (#_in#.z - #min_old#) * #t#;
 )" + 1;
 			break;
 		case VT_4:
 			return R"(
-#t# = (#to#.y - #to#.x) / (#from#.y - #from#.x);
-#_out#.x = #to#.x + (#_in#.x - #from#.x) * #t#;
-#_out#.y = #to#.x + (#_in#.y - #from#.x) * #t#;
-#_out#.z = #to#.x + (#_in#.z - #from#.x) * #t#;
-#_out#.w = #to#.x + (#_in#.w - #from#.x) * #t#;
+#t# = (#max_new# - #min_new#) / (#max_old# - #min_old#);
+#_out#.x = #min_new# + (#_in#.x - #min_old#) * #t#;
+#_out#.y = #min_new# + (#_in#.y - #min_old#) * #t#;
+#_out#.z = #min_new# + (#_in#.z - #min_old#) * #t#;
+#_out#.w = #min_new# + (#_in#.w - #min_old#) * #t#;
 )" + 1;
 			break;
 		default:
