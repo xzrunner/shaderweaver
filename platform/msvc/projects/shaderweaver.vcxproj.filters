@@ -142,6 +142,12 @@
     <Filter Include="nodes\math\complex">
       <UniqueIdentifier>{c9ab524a-cfa6-4229-997c-874e779d7073}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\input\light">
+      <UniqueIdentifier>{d91a86e4-62e2-4a55-87c7-a5d4c1d3f79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\utility\matrix">
+      <UniqueIdentifier>{1c73b7f6-d3d0-4270-9bfe-26a14dbc4447}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
@@ -588,6 +594,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\FuncOutput.h">
       <Filter>nodes\utility\value</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RGBToHSV.h">
+      <Filter>nodes\artistic\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\HSVToRGB.h">
+      <Filter>nodes\artistic\utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ViewDirection.h">
+      <Filter>nodes\input\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldSpaceLightDir.h">
+      <Filter>nodes\input\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ViewMatrix.h">
+      <Filter>nodes\utility\matrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -62,6 +62,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\EstimateNormal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Gray.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\HSVToRGB.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Hue.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicSine.h" />
@@ -99,6 +100,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\RGBToHSV.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderInput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderOutput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTrans.h" />
@@ -152,8 +154,11 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector3.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Vector4.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\VertexShader.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ViewDirection.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\ViewMatrix.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Voronoi.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\WhiteBalance.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldSpaceLightDir.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\predef.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderWeaver.h" />

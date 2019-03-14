@@ -17,6 +17,8 @@
 #include "shaderweaver/node/ColorAddMul.h"
 #include "shaderweaver/node/ColorMap.h"
 #include "shaderweaver/node/ColorspaceConversion.h"
+#include "shaderweaver/node/RGBToHSV.h"
+#include "shaderweaver/node/HSVToRGB.h"
 // channel
 #include "shaderweaver/node/Combine.h"
 #include "shaderweaver/node/Flip.h"
@@ -31,6 +33,8 @@
 #include "shaderweaver/node/Vector4.h"
 #include "shaderweaver/node/CameraPos.h"
 #include "shaderweaver/node/UV.h"
+#include "shaderweaver/node/ViewDirection.h"
+#include "shaderweaver/node/WorldSpaceLightDir.h"
 #include "shaderweaver/node/Matrix2.h"
 #include "shaderweaver/node/Matrix3.h"
 #include "shaderweaver/node/Matrix4.h"
@@ -125,6 +129,7 @@
 #include "shaderweaver/node/Comparison.h"
 #include "shaderweaver/node/Not.h"
 #include "shaderweaver/node/Or.h"
+#include "shaderweaver/node/ViewMatrix.h"
 #include "shaderweaver/node/FragmentShader.h"
 #include "shaderweaver/node/VertexShader.h"
 #include "shaderweaver/node/ShaderInput.h"
@@ -208,6 +213,8 @@ REGIST_NODE_TYPE2(ColorMap, (                                              \
 	rttr::metadata((int)(sw::node::ColorMap::ID_BMAP), sm::vec3(0, 0, 1))  \
 ))
 REGIST_NODE_TYPE(ColorspaceConversion)
+REGIST_NODE_TYPE(RGBToHSV)
+REGIST_NODE_TYPE(HSVToRGB)
 // channel
 REGIST_NODE_TYPE(Combine)
 REGIST_NODE_TYPE(Flip)
@@ -221,6 +228,8 @@ REGIST_NODE_TYPE(Vector2)
 REGIST_NODE_TYPE(Vector3)
 REGIST_NODE_TYPE(Vector4)
 REGIST_NODE_TYPE(UV)
+REGIST_NODE_TYPE(ViewDirection)
+REGIST_NODE_TYPE(WorldSpaceLightDir)
 REGIST_NODE_TYPE(CameraPos)
 REGIST_NODE_TYPE(Matrix2)
 REGIST_NODE_TYPE(Matrix3)
@@ -374,6 +383,7 @@ REGIST_NODE_TYPE(Branch)
 REGIST_NODE_TYPE(Comparison)
 REGIST_NODE_TYPE(Not)
 REGIST_NODE_TYPE(Or)
+REGIST_NODE_TYPE(ViewMatrix)
 REGIST_NODE_TYPE(FragmentShader)
 REGIST_NODE_TYPE(VertexShader)
 REGIST_NODE_TYPE(ShaderInput)
