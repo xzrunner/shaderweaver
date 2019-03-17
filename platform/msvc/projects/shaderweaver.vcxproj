@@ -67,11 +67,14 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicSine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicTangent.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\IndirectDiffuseLighting.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\IndirectSpecularLight.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Intersection.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\InverseLerp.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\InvertColors.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Length.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Lerp.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\LightColor.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Log.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Matrix2.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Matrix3.h" />
@@ -141,6 +144,8 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Subtraction.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Swizzle.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Tangent.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TexCoords.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TextureTransform.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h" />
@@ -158,6 +163,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ViewMatrix.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Voronoi.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\WhiteBalance.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldNormalVector.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\WorldSpaceLightDir.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\predef.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h" />

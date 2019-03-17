@@ -148,6 +148,9 @@
     <Filter Include="nodes\utility\matrix">
       <UniqueIdentifier>{1c73b7f6-d3d0-4270-9bfe-26a14dbc4447}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\utility\surface">
+      <UniqueIdentifier>{12ae053c-0fef-48a7-b58a-dbfed7de9ada}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
@@ -609,6 +612,24 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\ViewMatrix.h">
       <Filter>nodes\utility\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldNormalVector.h">
+      <Filter>nodes\utility\surface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TexCoords.h">
+      <Filter>nodes\input\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\IndirectSpecularLight.h">
+      <Filter>nodes\input\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\LightColor.h">
+      <Filter>nodes\input\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\IndirectDiffuseLighting.h">
+      <Filter>nodes\input\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TextureTransform.h">
+      <Filter>nodes\input\geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

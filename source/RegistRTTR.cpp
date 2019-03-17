@@ -32,8 +32,13 @@
 #include "shaderweaver/node/Vector3.h"
 #include "shaderweaver/node/Vector4.h"
 #include "shaderweaver/node/CameraPos.h"
+#include "shaderweaver/node/TexCoords.h"
+#include "shaderweaver/node/TextureTransform.h"
 #include "shaderweaver/node/UV.h"
 #include "shaderweaver/node/ViewDirection.h"
+#include "shaderweaver/node/IndirectDiffuseLighting.h"
+#include "shaderweaver/node/IndirectSpecularLight.h"
+#include "shaderweaver/node/LightColor.h"
 #include "shaderweaver/node/WorldSpaceLightDir.h"
 #include "shaderweaver/node/Matrix2.h"
 #include "shaderweaver/node/Matrix3.h"
@@ -132,6 +137,7 @@
 #include "shaderweaver/node/ViewMatrix.h"
 #include "shaderweaver/node/FragmentShader.h"
 #include "shaderweaver/node/VertexShader.h"
+#include "shaderweaver/node/WorldNormalVector.h"
 #include "shaderweaver/node/ShaderInput.h"
 #include "shaderweaver/node/ShaderOutput.h"
 #include "shaderweaver/node/ShaderUniform.h"
@@ -227,8 +233,13 @@ REGIST_NODE_TYPE(Vector1)
 REGIST_NODE_TYPE(Vector2)
 REGIST_NODE_TYPE(Vector3)
 REGIST_NODE_TYPE(Vector4)
+REGIST_NODE_TYPE(TexCoords)
+REGIST_NODE_TYPE(TextureTransform)
 REGIST_NODE_TYPE(UV)
 REGIST_NODE_TYPE(ViewDirection)
+REGIST_NODE_TYPE(IndirectDiffuseLighting)
+REGIST_NODE_TYPE(IndirectSpecularLight)
+REGIST_NODE_TYPE(LightColor)
 REGIST_NODE_TYPE(WorldSpaceLightDir)
 REGIST_NODE_TYPE(CameraPos)
 REGIST_NODE_TYPE(Matrix2)
@@ -386,6 +397,7 @@ REGIST_NODE_TYPE(Or)
 REGIST_NODE_TYPE(ViewMatrix)
 REGIST_NODE_TYPE(FragmentShader)
 REGIST_NODE_TYPE(VertexShader)
+REGIST_NODE_TYPE(WorldNormalVector)
 REGIST_NODE_TYPE(ShaderInput)
 REGIST_NODE_TYPE(ShaderOutput)
 REGIST_NODE_TYPE(ShaderUniform)
