@@ -62,7 +62,7 @@ protected:
 			return cpputil::StringHelper::Format("#_out# = vec2(#_in#.%s, #_in#.%s);\n",
 				COL[m_channels[0]], COL[m_channels[1]]);
 		case 1:
-			return cpputil::StringHelper::Format("#_out# = #_in#;\n", COL[m_channels[0]]);
+			return cpputil::StringHelper::Format("#_out# = #_in#;\n");
 		default:
 			return "";
 		}
