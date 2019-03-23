@@ -103,6 +103,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\PolarCoordinates.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Polygon.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Relay.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RGBToHSV.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderInput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderOutput.h" />

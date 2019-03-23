@@ -158,6 +158,7 @@
 // tools
 #include "shaderweaver/node/Custom.h"
 #include "shaderweaver/node/Function.h"
+#include "shaderweaver/node/Relay.h"
 // anim
 #include "shaderweaver/node/Skin.h"
 
@@ -439,6 +440,7 @@ REGIST_NODE_TYPE2(Twirl, (                                                     \
 // tools
 REGIST_NODE_TYPE(Custom)
 REGIST_NODE_TYPE(Function)
+REGIST_NODE_TYPE(Relay)
 // anim
 REGIST_NODE_TYPE(Skin)
 

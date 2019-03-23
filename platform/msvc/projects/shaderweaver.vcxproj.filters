@@ -631,6 +631,9 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\TextureTransform.h">
       <Filter>nodes\input\geometry</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Relay.h">
+      <Filter>nodes\tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">
