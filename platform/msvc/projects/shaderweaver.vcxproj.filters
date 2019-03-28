@@ -151,6 +151,18 @@
     <Filter Include="nodes\utility\surface">
       <UniqueIdentifier>{12ae053c-0fef-48a7-b58a-dbfed7de9ada}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\input\const">
+      <UniqueIdentifier>{6d6925a6-f709-4282-8606-7526b548671e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\input\vertex">
+      <UniqueIdentifier>{49c851c0-190b-48b1-b4a8-3e536265fa38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\input\surface">
+      <UniqueIdentifier>{7424eb7d-d2c9-4832-878b-4c0f0bdc92d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="nodes\utility\vector">
+      <UniqueIdentifier>{c8d0c345-1251-42c8-97a1-c8c4888705fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
@@ -633,6 +645,57 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\Relay.h">
       <Filter>nodes\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTriplanar.h">
+      <Filter>nodes\input\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\UnpackScaleNormal.h">
+      <Filter>nodes\input\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\TransformDirection.h">
+      <Filter>nodes\math\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PI.h">
+      <Filter>nodes\input\const</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\LightAttenuation.h">
+      <Filter>nodes\input\light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Color.h">
+      <Filter>nodes\input\const</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FWidth.h">
+      <Filter>nodes\math\derivative</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\VertexNormal.h">
+      <Filter>nodes\input\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\VertexToFragment.h">
+      <Filter>nodes\utility\vert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\VertexTangent.h">
+      <Filter>nodes\input\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\VertexBitangent.h">
+      <Filter>nodes\input\vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldPosition.h">
+      <Filter>nodes\input\surface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\EncodeFloatRGBA.h">
+      <Filter>nodes\utility\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\DecodeFloatRGBA.h">
+      <Filter>nodes\utility\vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixInverse.h">
+      <Filter>nodes\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldTangent.h">
+      <Filter>nodes\input\surface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\WorldBitangent.h">
+      <Filter>nodes\input\surface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

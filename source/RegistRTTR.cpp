@@ -38,6 +38,7 @@
 #include "shaderweaver/node/ViewDirection.h"
 #include "shaderweaver/node/IndirectDiffuseLighting.h"
 #include "shaderweaver/node/IndirectSpecularLight.h"
+#include "shaderweaver/node/LightAttenuation.h"
 #include "shaderweaver/node/LightColor.h"
 #include "shaderweaver/node/WorldSpaceLightDir.h"
 #include "shaderweaver/node/Matrix2.h"
@@ -45,6 +46,16 @@
 #include "shaderweaver/node/Matrix4.h"
 #include "shaderweaver/node/SampleTex2D.h"
 #include "shaderweaver/node/SampleTex3D.h"
+#include "shaderweaver/node/SampleTriplanar.h"
+#include "shaderweaver/node/UnpackScaleNormal.h"
+#include "shaderweaver/node/PI.h"
+#include "shaderweaver/node/Color.h"
+#include "shaderweaver/node/WorldBitangent.h"
+#include "shaderweaver/node/WorldPosition.h"
+#include "shaderweaver/node/WorldTangent.h"
+#include "shaderweaver/node/VertexBitangent.h"
+#include "shaderweaver/node/VertexNormal.h"
+#include "shaderweaver/node/VertexTangent.h"
 // master
 #include "shaderweaver/node/PBR.h"
 #include "shaderweaver/node/Phong.h"
@@ -70,11 +81,13 @@
 #include "shaderweaver/node/DDX.h"
 #include "shaderweaver/node/DDXY.h"
 #include "shaderweaver/node/DDY.h"
+#include "shaderweaver/node/FWidth.h"
 #include "shaderweaver/node/InverseLerp.h"
 #include "shaderweaver/node/Lerp.h"
 #include "shaderweaver/node/Smoothstep.h"
 #include "shaderweaver/node/MatrixConstruction.h"
 #include "shaderweaver/node/MatrixDeterminant.h"
+#include "shaderweaver/node/MatrixInverse.h"
 #include "shaderweaver/node/MatrixSplit.h"
 #include "shaderweaver/node/MatrixTranspose.h"
 #include "shaderweaver/node/Clamp.h"
@@ -108,6 +121,7 @@
 #include "shaderweaver/node/DotProduct.h"
 #include "shaderweaver/node/Projection.h"
 #include "shaderweaver/node/Rejection.h"
+#include "shaderweaver/node/TransformDirection.h"
 #include "shaderweaver/node/ScaleAndOffset.h"
 // procedural
 #include "shaderweaver/node/Checkerboard.h"
@@ -147,6 +161,9 @@
 #include "shaderweaver/node/NormalTrans.h"
 #include "shaderweaver/node/PositionTrans.h"
 #include "shaderweaver/node/PositionTransOld.h"
+#include "shaderweaver/node/VertexToFragment.h"
+#include "shaderweaver/node/EncodeFloatRGBA.h"
+#include "shaderweaver/node/DecodeFloatRGBA.h"
 // uv
 #include "shaderweaver/node/Flipbook.h"
 #include "shaderweaver/node/PolarCoordinates.h"
@@ -240,6 +257,7 @@ REGIST_NODE_TYPE(UV)
 REGIST_NODE_TYPE(ViewDirection)
 REGIST_NODE_TYPE(IndirectDiffuseLighting)
 REGIST_NODE_TYPE(IndirectSpecularLight)
+REGIST_NODE_TYPE(LightAttenuation)
 REGIST_NODE_TYPE(LightColor)
 REGIST_NODE_TYPE(WorldSpaceLightDir)
 REGIST_NODE_TYPE(CameraPos)
@@ -248,6 +266,16 @@ REGIST_NODE_TYPE(Matrix3)
 REGIST_NODE_TYPE(Matrix4)
 REGIST_NODE_TYPE(SampleTex2D)
 REGIST_NODE_TYPE(SampleTex3D)
+REGIST_NODE_TYPE(SampleTriplanar)
+REGIST_NODE_TYPE(UnpackScaleNormal)
+REGIST_NODE_TYPE(PI)
+REGIST_NODE_TYPE(Color)
+REGIST_NODE_TYPE(WorldBitangent)
+REGIST_NODE_TYPE(WorldPosition)
+REGIST_NODE_TYPE(WorldTangent)
+REGIST_NODE_TYPE(VertexBitangent)
+REGIST_NODE_TYPE(VertexNormal)
+REGIST_NODE_TYPE(VertexTangent)
 // master
 #ifdef SW_PBR_TEXTURE
 REGIST_NODE_TYPE(PBR)
@@ -291,11 +319,13 @@ REGIST_NODE_TYPE(Subtract)
 REGIST_NODE_TYPE(DDX)
 REGIST_NODE_TYPE(DDXY)
 REGIST_NODE_TYPE(DDY)
+REGIST_NODE_TYPE(FWidth)
 REGIST_NODE_TYPE(InverseLerp)
 REGIST_NODE_TYPE(Lerp)
 REGIST_NODE_TYPE(Smoothstep)
 REGIST_NODE_TYPE(MatrixConstruction)
 REGIST_NODE_TYPE(MatrixDeterminant)
+REGIST_NODE_TYPE(MatrixInverse)
 REGIST_NODE_TYPE(MatrixSplit)
 REGIST_NODE_TYPE(MatrixTranspose)
 REGIST_NODE_TYPE(Clamp)
@@ -338,6 +368,7 @@ REGIST_NODE_TYPE(Distance)
 REGIST_NODE_TYPE(DotProduct)
 REGIST_NODE_TYPE(Projection)
 REGIST_NODE_TYPE(Rejection)
+REGIST_NODE_TYPE(TransformDirection)
 REGIST_NODE_TYPE(ScaleAndOffset)
 // procedural
 REGIST_NODE_TYPE2(Checkerboard, (                                                            \
@@ -408,6 +439,9 @@ REGIST_NODE_TYPE(FragPosTrans)
 REGIST_NODE_TYPE(NormalTrans)
 REGIST_NODE_TYPE(PositionTrans)
 REGIST_NODE_TYPE(PositionTransOld)
+REGIST_NODE_TYPE(VertexToFragment)
+REGIST_NODE_TYPE(EncodeFloatRGBA)
+REGIST_NODE_TYPE(DecodeFloatRGBA)
 // uv
 REGIST_NODE_TYPE2(Flipbook, (                                \
 	rttr::metadata((int)(sw::node::Flipbook::ID_WIDTH),  1), \
