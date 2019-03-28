@@ -19,6 +19,8 @@
 #include "shaderweaver/node/ColorspaceConversion.h"
 #include "shaderweaver/node/RGBToHSV.h"
 #include "shaderweaver/node/HSVToRGB.h"
+#include "shaderweaver/node/Tonemap.h"
+#include "shaderweaver/node/GammaCorrect.h"
 // channel
 #include "shaderweaver/node/Combine.h"
 #include "shaderweaver/node/Flip.h"
@@ -239,6 +241,8 @@ REGIST_NODE_TYPE2(ColorMap, (                                              \
 REGIST_NODE_TYPE(ColorspaceConversion)
 REGIST_NODE_TYPE(RGBToHSV)
 REGIST_NODE_TYPE(HSVToRGB)
+REGIST_NODE_TYPE(GammaCorrect)
+REGIST_NODE_TYPE(Tonemap)
 // channel
 REGIST_NODE_TYPE(Combine)
 REGIST_NODE_TYPE(Flip)

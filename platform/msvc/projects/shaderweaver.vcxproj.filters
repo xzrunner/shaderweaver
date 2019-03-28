@@ -163,6 +163,9 @@
     <Filter Include="nodes\utility\vector">
       <UniqueIdentifier>{c8d0c345-1251-42c8-97a1-c8c4888705fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\hdr">
+      <UniqueIdentifier>{eda910d5-5fc6-4af1-b705-f879bcef34a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
@@ -696,6 +699,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\WorldBitangent.h">
       <Filter>nodes\input\surface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Tonemap.h">
+      <Filter>nodes\hdr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\GammaCorrect.h">
+      <Filter>nodes\hdr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

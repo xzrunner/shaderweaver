@@ -63,6 +63,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\FuncOutput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Function.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FWidth.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\GammaCorrect.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\GradientNoise.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\EstimateNormal.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Gray.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\TextureTransform.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\TilingAndOffset.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Time.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\Tonemap.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Torus.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\TransformDirection.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Truncate.h" />
