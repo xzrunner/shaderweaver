@@ -48,6 +48,7 @@
 #include "shaderweaver/node/Matrix4.h"
 #include "shaderweaver/node/SampleTex2D.h"
 #include "shaderweaver/node/SampleTex3D.h"
+#include "shaderweaver/node/SampleCube.h"
 #include "shaderweaver/node/SampleTriplanar.h"
 #include "shaderweaver/node/UnpackScaleNormal.h"
 #include "shaderweaver/node/PI.h"
@@ -90,6 +91,7 @@
 #include "shaderweaver/node/MatrixConstruction.h"
 #include "shaderweaver/node/MatrixDeterminant.h"
 #include "shaderweaver/node/MatrixInverse.h"
+#include "shaderweaver/node/MatrixOnlyRot.h"
 #include "shaderweaver/node/MatrixSplit.h"
 #include "shaderweaver/node/MatrixTranspose.h"
 #include "shaderweaver/node/Clamp.h"
@@ -270,6 +272,7 @@ REGIST_NODE_TYPE(Matrix3)
 REGIST_NODE_TYPE(Matrix4)
 REGIST_NODE_TYPE(SampleTex2D)
 REGIST_NODE_TYPE(SampleTex3D)
+REGIST_NODE_TYPE(SampleCube)
 REGIST_NODE_TYPE(SampleTriplanar)
 REGIST_NODE_TYPE(UnpackScaleNormal)
 REGIST_NODE_TYPE(PI)
@@ -330,6 +333,7 @@ REGIST_NODE_TYPE(Smoothstep)
 REGIST_NODE_TYPE(MatrixConstruction)
 REGIST_NODE_TYPE(MatrixDeterminant)
 REGIST_NODE_TYPE(MatrixInverse)
+REGIST_NODE_TYPE(MatrixOnlyRot)
 REGIST_NODE_TYPE(MatrixSplit)
 REGIST_NODE_TYPE(MatrixTranspose)
 REGIST_NODE_TYPE(Clamp)

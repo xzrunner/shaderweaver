@@ -126,6 +126,7 @@ static const uint32_t t_unit      = VariableType{ 0, VT_UNIT }.u32;
 
 static const uint32_t t_tex2d     = VariableType{ 0, 0, 0, VT_T2D }.u32;
 static const uint32_t t_tex3d     = VariableType{ 0, 0, 0, VT_T3D }.u32;
+static const uint32_t t_tex_cube  = VariableType{ 0, 0, 0, VT_TCUBE }.u32;
 static const uint32_t t_func      = VariableType{ 0, 0, 0, VT_FUNC }.u32;
 
 static const uint32_t t_flt       = VariableType{ 0, 0, 0, 0, VT_FLT }.u32;

@@ -37,6 +37,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorMask.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ColorspaceConversion.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Combine.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\CombineTwo.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Comparison.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Contrast.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Cosine.h" />
@@ -88,6 +89,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixConstruction.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixDeterminant.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixInverse.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixOnlyRot.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixSplit.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixTranspose.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Maximum.h" />
@@ -113,6 +115,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\PositionTransOld.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Relay.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\RGBToHSV.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SampleCube.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\SampleTriplanar.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderInput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\ShaderOutput.h" />

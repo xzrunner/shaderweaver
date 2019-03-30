@@ -706,6 +706,15 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\GammaCorrect.h">
       <Filter>nodes\hdr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\MatrixOnlyRot.h">
+      <Filter>nodes\math\matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\SampleCube.h">
+      <Filter>nodes\input\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\CombineTwo.h">
+      <Filter>nodes\channel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">
