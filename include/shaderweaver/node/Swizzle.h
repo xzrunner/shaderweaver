@@ -6,6 +6,8 @@
 
 #include <cpputil/StringHelper.h>
 
+#include <assert.h>
+
 namespace sw
 {
 namespace node
