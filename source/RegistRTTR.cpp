@@ -61,6 +61,9 @@
 #include "shaderweaver/node/VertexTangent.h"
 // master
 #include "shaderweaver/node/PBR.h"
+#include "shaderweaver/node/IBL.h"
+#include "shaderweaver/node/FresnelSchlick.h"
+#include "shaderweaver/node/FresnelSchlickRoughness.h"
 #include "shaderweaver/node/Phong.h"
 #include "shaderweaver/node/Raymarching.h"
 // math
@@ -294,6 +297,9 @@ REGIST_NODE_TYPE2(PBR, (                                                        
     rttr::metadata((int)(sw::node::PBR::ID_AO), 1.0f)                              \
 ))
 #endif // SW_PBR_TEXTURE
+REGIST_NODE_TYPE(IBL)
+REGIST_NODE_TYPE(FresnelSchlick)
+REGIST_NODE_TYPE(FresnelSchlickRoughness)
 REGIST_NODE_TYPE2(Phong, (                                                                \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_POSITION),  sm::vec3(1.2f, 1.0f, 2.0f)), \
 	rttr::metadata((int)(sw::node::Phong::ID_LIT_AMBIENT),   sm::vec3(0.2f, 0.2f, 0.2f)), \

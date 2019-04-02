@@ -60,6 +60,8 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Fraction.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragmentShader.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FragPosTrans.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FresnelSchlick.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FresnelSchlickRoughness.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FuncInput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\FuncOutput.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Function.h" />
@@ -73,6 +75,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicCosine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicSine.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\HyperbolicTangent.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\IBL.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\IndirectDiffuseLighting.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\IndirectSpecularLight.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Intersection.h" />

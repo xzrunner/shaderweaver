@@ -166,6 +166,9 @@
     <Filter Include="nodes\hdr">
       <UniqueIdentifier>{eda910d5-5fc6-4af1-b705-f879bcef34a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="nodes\master\pbr">
+      <UniqueIdentifier>{a3304e21-fd5b-49a7-8860-cd0f49422e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\shaderweaver\ShaderType.h">
@@ -583,9 +586,6 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Custom.h">
       <Filter>nodes\tools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\shaderweaver\node\PBR.h">
-      <Filter>nodes\master</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\CameraPos.h">
       <Filter>nodes\input\camera</Filter>
     </ClInclude>
@@ -714,6 +714,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\shaderweaver\node\CombineTwo.h">
       <Filter>nodes\channel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\PBR.h">
+      <Filter>nodes\master\pbr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FresnelSchlick.h">
+      <Filter>nodes\master\pbr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\FresnelSchlickRoughness.h">
+      <Filter>nodes\master\pbr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\IBL.h">
+      <Filter>nodes\master\pbr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
