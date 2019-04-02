@@ -26,16 +26,23 @@ public:
             { t_tex2d, "roughness_map" },
             { t_tex2d, "ao_map" },
 #else
-            { t_flt3, "albedo" },
-            { t_flt1, "metallic" },
-            { t_flt1, "roughness" },
-            { t_flt1, "ao" },
+            //{ t_flt3, "albedo" },
+            //{ t_flt1, "metallic" },
+            //{ t_flt1, "roughness" },
+            //{ t_flt1, "ao" },
 #endif // SW_PBR_TEXTURE
             { t_flt3, "light_positions" },
             { t_flt3, "light_colors" },
             { t_flt3, "cam_pos", false },
 		}, {
-			{ t_col3, "_out" },
+            { t_col3, "Lo" },
+            { t_flt3, "N" },
+            { t_flt3, "V" },
+            { t_flt3, "F0" },
+            { t_flt3, "albedo" },
+            { t_flt1, "metallic" },
+            { t_flt1, "roughness" },
+            { t_flt1, "ao" },
 		}, {
 #ifdef SW_PBR_TEXTURE
             { t_flt3, "albedo" },
@@ -61,14 +68,26 @@ public:
         ID_ROUGHNESS_MAP,
         ID_AO_MAP,
 #else
-        ID_ALBEDO,
-        ID_METALLIC,
-        ID_ROUGHNESS,
-        ID_AO,
+        //ID_ALBEDO,
+        //ID_METALLIC,
+        //ID_ROUGHNESS,
+        //ID_AO,
 #endif // SW_PBR_TEXTURE
         ID_LIGHT_POSITIONS,
         ID_LIGHT_COLORS,
         ID_CAM_POS,
+    };
+
+    enum OutputID
+    {
+        ID_Lo,
+        ID_N,
+        ID_V,
+        ID_F0,
+        ID_ALBEDO,
+        ID_METALLIC,
+        ID_ROUGHNESS,
+        ID_AO,
     };
 
 protected:
@@ -171,35 +190,35 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
 #endif // PBR_TEXTURE
 
 #ifdef PBR_TEXTURE
-vec3 N = GetNormalFromMap();
+#N# = GetNormalFromMap();
 #else
-vec3 N = normalize(#normal#);
+#N# = normalize(#normal#);
 #endif // PBR_TEXTURE
-vec3 V = normalize(#cam_pos# - #world_pos#);
+#V# = normalize(#cam_pos# - #world_pos#);
 
-// calculate reflectance at normal incidence; if dia-electric (like plastic) use F0
+// calculate reflectance at normal incidence; if dia-electric (like plastic) use #F0#
 // of 0.04 and if it's a metal, use the albedo color as F0 (metallic workflow)
-vec3 F0 = vec3(0.04);
-F0 = mix(F0, #albedo#, #metallic#);
+#F0# = vec3(0.04);
+#F0# = mix(#F0#, #albedo#, #metallic#);
 
 // reflectance equation
-vec3 Lo = vec3(0.0);
+#Lo# = vec3(0.0);
 for(int i = 0; i < 4; ++i)
 {
     // calculate per-light radiance
     vec3 L = normalize(light_positions[i] - #world_pos#);
-    vec3 H = normalize(V + L);
+    vec3 H = normalize(#V# + L);
     float distance = length(light_positions[i] - #world_pos#);
     float attenuation = 1.0 / (distance * distance);
     vec3 radiance = light_colors[i] * attenuation;
 
     // Cook-Torrance BRDF
-    float NDF = DistributionGGX(N, H, #roughness#);
-    float G   = GeometrySmith(N, V, L, #roughness#);
-    vec3 F    = fresnelSchlick(clamp(dot(H, V), 0.0, 1.0), F0);
+    float NDF = DistributionGGX(#N#, H, #roughness#);
+    float G   = GeometrySmith(#N#, #V#, L, #roughness#);
+    vec3 F    = fresnelSchlick(clamp(dot(H, #V#), 0.0, 1.0), #F0#);
 
     vec3 nominator    = NDF * G * F;
-    float denominator = 4 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0);
+    float denominator = 4 * max(dot(#N#, #V#), 0.0) * max(dot(#N#, L), 0.0);
     vec3 specular = nominator / max(denominator, 0.001); // prevent divide by zero for NdotV=0.0 or NdotL=0.0
 
     // kS is equal to Fresnel
@@ -214,24 +233,11 @@ for(int i = 0; i < 4; ++i)
     kD *= 1.0 - #metallic#;
 
     // scale light by NdotL
-    float NdotL = max(dot(N, L), 0.0);
+    float NdotL = max(dot(#N#, L), 0.0);
 
     // add to outgoing radiance Lo
-    Lo += (kD * #albedo# / PI + specular) * radiance * NdotL;  // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
+    #Lo# += (kD * #albedo# / PI + specular) * radiance * NdotL;  // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
 }
-
-// ambient lighting (note that the next IBL tutorial will replace
-// this ambient lighting with environment lighting).
-vec3 ambient = vec3(0.03) * #albedo# * #ao#;
-
-vec3 color = ambient + Lo;
-
-// HDR tonemapping
-color = color / (color + vec3(1.0));
-// gamma correct
-color = pow(color, vec3(1.0/2.2));
-
-#_out# = color;
 
 )" + 1;
     }
