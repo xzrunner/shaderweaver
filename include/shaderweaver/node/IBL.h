@@ -33,10 +33,16 @@ public:
             { t_flt3, "kD" },
             { t_flt3, "irradiance" },
             { t_flt3, "diffuse" },
+            { t_flt3, "R" },
+            { t_flt3, "prefiltered_color" },
+            { t_flt2, "brdf" },
+            { t_flt3, "specular" },
 		});
 	}
 
     static const char* IrradianceMapName() { return "irradiance_map"; }
+    static const char* PrefilterMapName()  { return "prefilter_map"; }
+    static const char* BrdfLutName()       { return "brdf_lut"; }
 
     enum InputID
     {
@@ -75,16 +81,15 @@ vec3 FresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
 #irradiance# = textureCube(#irradiance_map#, #N#).rgb;
 #diffuse# = #irradiance# * #albedo#;
 
-//// sample both the pre-filter map and the BRDF lut and combine them together as per the Split-Sum approximation to get the IBL specular part.
-//const float MAX_REFLECTION_LOD = 4.0;
-//vec3 prefilteredColor = textureLod(prefilterMap, R,  roughness * MAX_REFLECTION_LOD).rgb;
-//vec2 brdf  = texture(brdfLUT, vec2(max(dot(N, V), 0.0), roughness)).rg;
-//vec3 specular = prefilteredColor * (F * brdf.x + brdf.y);
+// sample both the pre-filter map and the BRDF lut and combine them together as per the Split-Sum approximation to get the IBL specular part.
+const float MAX_REFLECTION_LOD = 4.0;
+#R# = reflect(-#V#, #N#);
+#prefiltered_color# = textureCubeLod(#prefilter_map#, R, #roughness# * MAX_REFLECTION_LOD).rgb;
+#brdf# = texture2D(#brdf_lut#, vec2(max(dot(#N#, #V#), 0.0), #roughness#)).rg;
+#specular# = #prefiltered_color# * (#F# * #brdf#.x + #brdf#.y);
 
-//// ambient
-//#_out# = (kD * diffuse + specular) * ao;
-
-#_out# = (kD * diffuse) * ao;
+// ambient
+#_out# = (#kD# * #diffuse# + #specular#) * #ao#;
 )" + 1;
 	}
 
