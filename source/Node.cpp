@@ -78,7 +78,7 @@ std::string Node::GetBodyStr() const
 	if (!m_exports.empty()) {
 		str += "//! @return " + VarsToString(m_exports) + "\n";
 	}
-	str += GetBody();
+	str += body;
 	str += "//! END " + m_name + "\n";
 	return str;
 }
