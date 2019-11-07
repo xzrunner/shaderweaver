@@ -727,6 +727,9 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\IBL.h">
       <Filter>nodes\master\pbr</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\shaderweaver\node\EdgeDetect.h">
+      <Filter>nodes\artistic\filter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\source\Node.cpp">

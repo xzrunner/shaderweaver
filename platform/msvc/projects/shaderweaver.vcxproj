@@ -51,6 +51,7 @@
     <ClInclude Include="..\..\..\include\shaderweaver\node\Distance.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Divide.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\DotProduct.h" />
+    <ClInclude Include="..\..\..\include\shaderweaver\node\EdgeDetect.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Ellipse.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\EncodeFloatRGBA.h" />
     <ClInclude Include="..\..\..\include\shaderweaver\node\Exponential.h" />

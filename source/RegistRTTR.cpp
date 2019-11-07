@@ -7,6 +7,7 @@
 #include "shaderweaver/node/Saturation.h"
 #include "shaderweaver/node/WhiteBalance.h"
 #include "shaderweaver/node/Blend.h"
+#include "shaderweaver/node/EdgeDetect.h"
 #include "shaderweaver/node/Gray.h"
 #include "shaderweaver/node/ChannelMask.h"
 #include "shaderweaver/node/ColorMask.h"
@@ -216,6 +217,7 @@ REGIST_NODE_TYPE(WhiteBalance)
 REGIST_NODE_TYPE2(Blend, (                                \
 	rttr::metadata((int)(sw::node::Blend::ID_OPACITY), 1) \
 ))
+REGIST_NODE_TYPE(EdgeDetect)
 REGIST_NODE_TYPE(Gray)
 REGIST_NODE_TYPE(ChannelMask)
 REGIST_NODE_TYPE(ColorMask)
