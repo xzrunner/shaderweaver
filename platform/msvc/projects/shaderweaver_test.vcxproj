@@ -23,9 +23,6 @@
     <ProjectReference Include="..\..\..\..\logger\platform\msvc\projects\logger.vcxproj">
       <Project>{4031b66e-39a3-401e-918a-e1424a4af944}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\unirender\platform\msvc\projects\unirender.vcxproj">
-      <Project>{637a0e9c-1867-459d-8611-65a064e3b2c2}</Project>
-    </ProjectReference>
     <ProjectReference Include="shaderweaver.vcxproj">
       <Project>{cb558c48-c50c-433b-acf6-4ab1c306a11a}</Project>
     </ProjectReference>
@@ -73,7 +70,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\unirender2\include;..\..\..\..\external\catch\include;..\..\..\..\external\boost\include;..\..\..\..\external\gl\include;..\..\..\..\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\unirender\include;..\..\..\..\external\catch\include;..\..\..\..\external\boost\include;..\..\..\..\external\gl\include;..\..\..\..\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -92,7 +89,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\unirender2\include;..\..\..\..\external\catch\include;..\..\..\..\external\boost\include;..\..\..\..\external\gl\include;..\..\..\..\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\include;..\..\..\..\cu\src;..\..\..\..\sm\src\sm;..\..\..\..\cpputil\include;..\..\..\..\unirender\include;..\..\..\..\external\catch\include;..\..\..\..\external\boost\include;..\..\..\..\external\gl\include;..\..\..\..\external\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__STDC_LIMIT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
