@@ -1,7 +1,5 @@
 #include "shaderweaver/node/Custom.h"
 
-#include <cpputil/StringHelper.h>
-
 namespace sw
 {
 namespace node
@@ -10,24 +8,6 @@ namespace node
 Custom::Custom()
     : Node("Custom")
 {
-}
-
-void Custom::SetHeadStr(const std::string& str)
-{
-    m_head_str = FormatString(str);
-}
-
-void Custom::SetBodyStr(const std::string& str)
-{
-    m_body_str = FormatString(str);
-}
-
-std::string Custom::FormatString(const std::string& str)
-{
-    std::string ret = str;
-    cpputil::StringHelper::ReplaceAll(ret, "\\n", "\n");
-    cpputil::StringHelper::ReplaceAll(ret, "\\t", "\t");
-    return ret;
 }
 
 std::string Custom::GetHeader() const

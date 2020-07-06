@@ -12,15 +12,12 @@ class Custom : public sw::Node
 public:
     Custom();
 
-    void SetHeadStr(const std::string& str);
-    void SetBodyStr(const std::string& str);
+    void SetHeadStr(const std::string& str) { m_head_str = str; }
+    void SetBodyStr(const std::string& str) { m_body_str = str; }
 
 protected:
     virtual std::string GetHeader() const;
     virtual std::string GetBody() const;
-
-private:
-    static std::string FormatString(const std::string& str);
 
 private:
     std::string m_head_str;
